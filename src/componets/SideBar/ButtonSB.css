@@ -1,0 +1,22 @@
+.bodyButton{
+    width:15vw;
+    height: 5vh;
+    display: flex;
+    align-items: center;
+   padding: 2vh 1vw 2vh 1vw;
+   border: none;
+   border-radius: 0.7em;
+   background-color: white;
+   margin-bottom: 1vh;
+   border: 0.8em solid white;
+}
+.bodyButton:hover{
+    background-color: #6DF7F6;
+    font-weight: bold;
+    border: 0.8em solid #6DF7F6;
+}
+
+.icon{
+    margin-right: 2vw;
+}
+

@@ -1,0 +1,19 @@
+.bodySideBar{
+height: 100vh;
+width: 15vw;
+margin: 0px;
+padding:0px 1.5vw 0px 1.5vw;
+border-right: 1.5px solid #6DF7F6;
+
+}
+
+.logo{
+    padding-top: 9vh;
+    padding-bottom: 9vh;
+    padding-left: 2vw;
+}
+
+
+.menuTop{
+    margin-bottom: 25vh;
+}
