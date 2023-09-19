@@ -1,13 +1,19 @@
 
 import './App.css'
-import { SideBar } from './componets/SideBar/SideBar'
+import { Header } from './componets/Header/Header'
+
+
 
 
 function App() {
   
 
   return (
-    <SideBar />
+    
+    
+    <Header pathUserImg={'src/componets/Header/assets/userImg.png'} userName={'Carlos Eduardo L.'} />
+    
+    
   )
 }
 
