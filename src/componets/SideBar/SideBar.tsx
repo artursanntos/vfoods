@@ -1,15 +1,14 @@
 import { ButtonSB } from './ButtonSB';
-import './SideBar.css'
 
 
 export function SideBar(){
     return (
-        <div className="bodySideBar">
-            <div className="logo">
+        <div className="h-[100vh] w-[15vw] m-0 py-0 px-[1.5vw] border-r border-azul-400">
+            <div className="py-[9vh] pl-[2vw]">
                 <img src="src\componets\SideBar\assets\logo.png" alt="V-Foods Logo"></img>
             </div>
             <div className="menu">
-                <div className="menuTop">
+                <div className="mb-[25vh]">
                     
                     <div className="SideBarItem">
                         <ButtonSB pathIcon={"src/componets/SideBar/assets/IconHome.png"} buttonText={'Home'} />
