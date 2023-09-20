@@ -21,7 +21,7 @@ export function Header({ pathUserImg, userName }: HeaderProps){
                 
                 <div className="flex pl-[3vw] text-[1.2vw] items-center gap-4">
                     <div >
-                        <img className="rounded-full" src={ pathUserImg } alt="Imagem de perfil"></img>
+                        <img className="rounded-full w-[2.75rem] max-w-[2.75rem]" src={ pathUserImg } alt="Imagem de perfil"></img>
                     </div>
                     
                     <div className="font-bold">
