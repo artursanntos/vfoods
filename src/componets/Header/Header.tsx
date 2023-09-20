@@ -7,7 +7,7 @@ type HeaderProps = {
     
 }
 
-export function Header(props:HeaderProps){
+export function Header({ pathUserImg, userName }: HeaderProps){
     return (
         <div className="flex pl-[10vw]">
             <div className="">
@@ -21,11 +21,11 @@ export function Header(props:HeaderProps){
                 
                 <div className="flex pl-[3vw] text-[1.2vw] items-center gap-4">
                     <div >
-                        <img className="rounded-full" src={props.pathUserImg} alt="Imagem de perfil"></img>
+                        <img className="rounded-full" src={ pathUserImg } alt="Imagem de perfil"></img>
                     </div>
                     
                     <div className="font-bold">
-                        {props.userName}
+                        { userName }
                     </div>
 
                 </div>

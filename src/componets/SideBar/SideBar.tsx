@@ -3,12 +3,14 @@ import { ButtonSB } from './ButtonSB';
 
 export function SideBar(){
     return (
-        <div className="h-[100vh] w-[15vw] m-0 py-0 px-[1.5vw] border-r border-azul-400">
-            <div className="py-[9vh] pl-[2vw]">
-                <img src="src\componets\SideBar\assets\logo.png" alt="V-Foods Logo"></img>
+        <div className="flex flex-col items-center h-screen sticky w-[15rem] max-w-[15rem] border-r border-azul-400">
+            <div className="pt-16">
+                <a href="/" >
+                    <img src="src\componets\SideBar\assets\logo.png" alt="V-Foods Logo"/>
+                </a>
             </div>
-            <div className="menu">
-                <div className="mb-[25vh]">
+            <div className="flex flex-col items-center justify-between h-full pt-24">
+                <div className="flex flex-col gap-5">
                     
                     <div className="SideBarItem">
                         <ButtonSB pathIcon={"src/componets/SideBar/assets/IconHome.png"} buttonText={'Home'} />
@@ -25,7 +27,7 @@ export function SideBar(){
                     
                 </div>
 
-                <div className="menuBottom">
+                <div className="flex flex-col gap-5 mb-14">
                     <div className="SideBarItem">
                         <ButtonSB pathIcon={"src/componets/SideBar/assets/IconConfiguracoes.png"} buttonText={'Configurações'} />
                     </div>
