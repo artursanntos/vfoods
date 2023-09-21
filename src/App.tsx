@@ -1,20 +1,16 @@
-
-import './App.css'
-import { Header } from './componets/Header/Header'
-
-
-
+import Base from "./pages/Base"
 
 function App() {
   
 
-  return (
-    
-    
-    <Header pathUserImg={'src/componets/Header/assets/userImg.png'} userName={'Carlos Eduardo L.'} />
-    
-    
-  )
+    return (
+
+        <>
+            <Base/>
+        </>
+
+
+    )
 }
 
 export default App

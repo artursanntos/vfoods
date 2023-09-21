@@ -1,5 +1,3 @@
-import './ButtonSB.css'
-
 type ButtonSBProps = {
     pathIcon:string;
     buttonText:string;
@@ -9,12 +7,11 @@ type ButtonSBProps = {
 
 export function ButtonSB(props:ButtonSBProps){
     return (
-        <div>
-            <button className="bodyButton">
-            <img src={props.pathIcon} className="icon"></img>
-            <span className="button-text">{props.buttonText}</span>
-            </button>
-        </div>
+        
+        <button className="flex w-48 items-center py-2 px-2 border border-white rounded-10 bg-white hover:bg-azul hover:border-azul hover:font-semibold ease-in-out duration-150">
+            <img src={props.pathIcon} className="mr-6 w-6"></img>
+            <span className="button-text text-base">{props.buttonText}</span>
+        </button>
         
     );
 }
