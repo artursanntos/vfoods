@@ -1,4 +1,5 @@
 import { SearchBar } from './SearchBar';
+import { Link } from 'react-router-dom';
 
 type HeaderProps = {
     pathUserImg:string;
@@ -19,16 +20,20 @@ export function Header({ pathUserImg, userName }: HeaderProps){
                     <img src="src\componets\Header\assets\IconNotification.png" alt="Notificações"></img>
                 </div>
                 
-                <div className="flex pr-[6.25rem] pl-[3.25rem] text-[0.95rem] items-center gap-4">
-                    <div >
-                        <img className="rounded-full w-[2.75rem] max-w-[2.75rem]" src={ pathUserImg } alt="Imagem de perfil"></img>
-                    </div>
-                    
-                    <div className="font-bold w-[8.25rem]">
-                        { userName }
-                    </div>
+                <Link to={"/profile"}>
 
-                </div>
+                    <div className="flex pr-[6.25rem] pl-[3.25rem] text-[0.95rem] items-center gap-4 hover:scale-105 duration-300 ease-in-out">
+                        <div >
+                            <img className="rounded-full w-[2.75rem] max-w-[2.75rem]" src={ pathUserImg } alt="Imagem de perfil"></img>
+                        </div>
+                        
+                        <div className="font-bold w-[8.25rem]">
+                            { userName }
+                        </div>
+
+                    </div>
+                
+                </Link>
             </div>
         </div>
     );
