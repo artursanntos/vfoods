@@ -1,14 +1,18 @@
-//import Base from "./pages/Base"
-import NewIndicator from "./pages/New_Indicator"
-//import { Route, Routes } from "react-router-dom"
+import Base from "./pages/Base"
+import Indicators from "./pages/Indicators"
+import { Route, Routes } from "react-router-dom"
 
 function App() {
   
 
     return (
         <>
-        
-            <NewIndicator/>
+            <Routes>
+                
+                <Route path="/" element={<Base/>}/>
+                <Route path="/indicators" element={<Indicators/>}/>
+
+            </Routes>
             
         </>
 

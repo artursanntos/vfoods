@@ -1,7 +1,7 @@
 import { Header } from '../componets/Header/Header'
 import { SideBar } from '../componets/SideBar/SideBar'
 
-function NewIndicator() {
+function Indicators() {
   
 
     return (
@@ -39,4 +39,4 @@ function NewIndicator() {
     )
 }
 
-export default NewIndicator
+export default Indicators
