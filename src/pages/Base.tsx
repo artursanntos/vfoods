@@ -15,14 +15,6 @@ function Base() {
                     <Header pathUserImg={'src/componets/Header/assets/userImg.png'} userName={'Carlos Eduardo L.'} />
 
                 </div>
-
-                <div className='pt-[100rem] pb-[100rem]'>
-                    .
-                </div>
-
-                <div className='pt-[100rem] pb-[100rem]'>
-                    .
-                </div>
    
             </div>
         </>
