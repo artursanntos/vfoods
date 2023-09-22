@@ -1,7 +1,7 @@
 import { createContext, SetStateAction, useState, Dispatch, ReactNode } from 'react';
 import { collaboratorType, indicatorType, managerType } from '../types';
 
-interface CartContextType {
+interface VfoodsContextType {
   collaborator: collaboratorType[];
   setCollab: Dispatch<SetStateAction<collaboratorType[]>>
   indicator: indicatorType[];
@@ -10,21 +10,21 @@ interface CartContextType {
   setManager: Dispatch<SetStateAction<managerType[]>>
 }
 
-interface CartProviderProps {
+interface VfoodsProviderProps {
   children: ReactNode
 }
 
-export const CartContext = createContext({} as CartContextType);
+export const VfoodsContext = createContext({} as VfoodsContextType);
 
-export function CartProvider({ children }: CartProviderProps) {
+export function VfoodsProvider({ children }: VfoodsProviderProps) {
   const [collaborator, setCollab] = useState<collaboratorType[]>([])
   const [indicator, setIndicator] = useState<indicatorType[]>([])
   const [manager, setManager] = useState<managerType[]>([])
   
   return (
-      <CartContext.Provider value={{ collaborator, setCollab, indicator, setIndicator, manager, setManager }}>
+      <VfoodsContext.Provider value={{ collaborator, setCollab, indicator, setIndicator, manager, setManager }}>
           {children}
-      </CartContext.Provider>
+      </VfoodsContext.Provider>
   )
 
 }
