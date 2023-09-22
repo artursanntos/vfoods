@@ -10,10 +10,18 @@ function Base() {
             <div className='flex'>
                 
                 <SideBar/>
-                <div className='pt-12'>
+                <div className='flex flex-col items-center pt-12 ml-[15rem] w-full'>
 
                     <Header pathUserImg={'src/componets/Header/assets/userImg.png'} userName={'Carlos Eduardo L.'} />
 
+                </div>
+
+                <div className='pt-[100rem] pb-[100rem]'>
+                    .
+                </div>
+
+                <div className='pt-[100rem] pb-[100rem]'>
+                    .
                 </div>
    
             </div>
