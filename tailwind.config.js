@@ -20,6 +20,7 @@ export default {
                 'preto': '#181818',
                 'branco': '#FBFBFB',
                 'cinza': {
+                    100: 'ECECEC',
                     300: '#D9D9D9',
                     500: '#797979',
                     DEFAULT: '#797979',
