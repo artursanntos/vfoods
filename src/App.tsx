@@ -8,27 +8,30 @@ import IndicatorPage from "./pages/IndicatorPage"
 import NewCollaborator from "./pages/NewCollaborator"
 import Collaborator from "./pages/Collaborator"
 import { Route, Routes } from "react-router-dom"
+import { VfoodsProvider } from "./context/context"
 
 function App() {
   
 
     return (
         <>
-            <Routes>
-            
-                <Route path="/login" element={<Login/>}/>
-                <Route path="/" element={<Home/>}/>
-                <Route path="/indicators" element={<Indicators/>}/>
-                <Route path="/indicators/new_indicator" element={<NewIndicator/>}/>
-                <Route path="/indicators/:id"  element={<IndicatorPage/>}/>
-                <Route path="/ranking" element={<Ranking/>}/>
-                <Route path="/profile" element={<Profile/>}/>
-                <Route path="/profile/pdf"/>
-                <Route path="/profile/new_collaborator" element={<NewCollaborator/>}/>
-                <Route path="/collaborators/:id" element={<Collaborator/>}/>
-                <Route path="/collabotarors/:id/pdf"/>
+            <VfoodsProvider>
+                <Routes>
+                
+                    <Route path="/login" element={<Login/>}/>
+                    <Route path="/" element={<Home/>}/>
+                    <Route path="/indicators" element={<Indicators/>}/>
+                    <Route path="/indicators/new_indicator" element={<NewIndicator/>}/>
+                    <Route path="/indicators/:id"  element={<IndicatorPage/>}/>
+                    <Route path="/ranking" element={<Ranking/>}/>
+                    <Route path="/profile" element={<Profile/>}/>
+                    <Route path="/profile/pdf"/>
+                    <Route path="/profile/new_collaborator" element={<NewCollaborator/>}/>
+                    <Route path="/collaborators/:id" element={<Collaborator/>}/>
+                    <Route path="/collabotarors/:id/pdf"/>
 
-            </Routes>
+                </Routes>
+            </VfoodsProvider>
             
         </>
 
