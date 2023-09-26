@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Header } from '../componets/Header/Header'
 import { SideBar } from '../componets/SideBar/SideBar'
 import Modal from 'react-modal';
+import { EditIndicator } from '../componets/Indicator/EditIndicator';
 
 const customStyles = {
     content: {
@@ -69,6 +70,9 @@ export default function Indicators() {
                         <p>Meta</p>
                     </div>
 
+                    <EditIndicator colaborador={{ nome: 'Ana Mendes Alves', email: 'Amale@gmail.com', foto: 'https://img.freepik.com/fotos-premium/imagem-de-closeup-de-coelho-fofo_691560-332.jpg' }} />
+                    <EditIndicator colaborador={{ nome: 'Luis Otavio Freitas', email: 'lof@hotmail.com', foto: 'https://img.freepik.com/fotos-gratis/coelhinho-de-desenho-animado-gerado-por-ai_23-2150288874.jpg' }} />
+                    <EditIndicator colaborador={{ nome: 'João Pedro Silva', email: 'joaojoao@yahoo.com.br', foto: 'https://i.pinimg.com/1200x/39/d6/14/39d614acff25d8b7fedbea20e37be942.jpg' }} />
                 </div>
                 
             </Modal>
