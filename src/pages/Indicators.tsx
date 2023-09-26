@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { MouseEventHandler, useState } from 'react';
 import { Header } from '../componets/Header/Header'
 import { SideBar } from '../componets/SideBar/SideBar'
 import Modal from 'react-modal';
@@ -18,6 +18,7 @@ const customStyles = {
 export default function Indicators() {
   
     const [indicatorModalIsOpen, setIndicatorModalIsOpen] = useState(false);
+    const [modalPage, setModalPage] = useState(0); // 0 = Dados, 1 = Colaboradores, 2 = Meta
 
     function openIndicatorModal() {
         setIndicatorModalIsOpen(true);
@@ -25,6 +26,34 @@ export default function Indicators() {
 
     function closeModal() {
         setIndicatorModalIsOpen(false);
+    }
+
+    const handleChangePage = (event: React.MouseEvent<HTMLButtonElement>, page: number) => {
+        event.preventDefault();
+
+        setModalPage(page);
+    }
+
+    function dadosPage() {
+        return (
+            <p>Página de dados</p>
+        )
+    }
+
+    function colaboraPage() {
+        return (
+            <p>Página de adicionar os colaboradores</p>
+        )
+    }
+
+    function metasPage() {
+        return (
+            <div className='flex flex-col gap-3'>
+                <EditIndicator colaborador={{ nome: 'Ana Mendes Alves', email: 'Amale@gmail.com', foto: 'https://img.freepik.com/fotos-premium/imagem-de-closeup-de-coelho-fofo_691560-332.jpg' }} />
+                <EditIndicator colaborador={{ nome: 'Luis Otavio Freitas', email: 'lof@hotmail.com', foto: 'https://img.freepik.com/fotos-gratis/coelhinho-de-desenho-animado-gerado-por-ai_23-2150288874.jpg' }} />
+                <EditIndicator colaborador={{ nome: 'João Pedro Silva', email: 'joaojoao@yahoo.com.br', foto: 'https://i.pinimg.com/1200x/39/d6/14/39d614acff25d8b7fedbea20e37be942.jpg' }} />
+            </div>
+        )
     }
 
     return (        
@@ -61,18 +90,39 @@ export default function Indicators() {
             style={customStyles}
             contentLabel="Example Modal"
             >
-                <div className='flex flex-col gap-12 pt-6 pl-6'>
+                <div className='flex flex-col gap-12'>
 
                     <button onClick={closeModal}><img src="/src/assets/back-arrow.svg" alt="Voltar" /></button>
-                    <div className='flex justify-around w-[35rem] text-3xl ml-8'>   
-                        <p>Dados</p>
-                        <p>Colaboradores</p>
-                        <p>Meta</p>
+                    <div className='flex justify-around text-3xl border-b-2 mt-8 w-full font-bold static'>   
+                        
+                        <button onClick={(event) => handleChangePage(event, 0)}>
+                            <p className={modalPage == 0 ? 'border-b-2 border-vermelho pb-2 absolute top-[5.1rem] left-20' : 'text-cinza-300 pb-2 absolute top-[5.1rem] left-20'}>
+                                Dados
+                            </p>
+                        </button>
+                        
+                        <button onClick={(event) => handleChangePage(event, 1)}>
+                            <p className={modalPage == 1 ? 'border-b-2 border-vermelho pb-2 absolute top-[5.1rem] left-[15.62rem]' : 'text-cinza-300 pb-2 absolute top-[5.1rem] left-[15.62rem]'}>
+                                Colaboradores
+                            </p>
+                        </button>
+                        
+                        <button onClick={(event) => handleChangePage(event, 2)}>
+                            <p className={modalPage == 2 ? 'border-b-2 border-vermelho pb-2 absolute top-[5.1rem] right-20' : 'text-cinza-300 pb-2 absolute top-[5.1rem] right-20'}>
+                                Meta
+                            </p>
+                        </button>
+                        
                     </div>
-
-                    <EditIndicator colaborador={{ nome: 'Ana Mendes Alves', email: 'Amale@gmail.com', foto: 'https://img.freepik.com/fotos-premium/imagem-de-closeup-de-coelho-fofo_691560-332.jpg' }} />
-                    <EditIndicator colaborador={{ nome: 'Luis Otavio Freitas', email: 'lof@hotmail.com', foto: 'https://img.freepik.com/fotos-gratis/coelhinho-de-desenho-animado-gerado-por-ai_23-2150288874.jpg' }} />
-                    <EditIndicator colaborador={{ nome: 'João Pedro Silva', email: 'joaojoao@yahoo.com.br', foto: 'https://i.pinimg.com/1200x/39/d6/14/39d614acff25d8b7fedbea20e37be942.jpg' }} />
+                    
+                    <div className='px-14'>
+                        {modalPage == 0 && dadosPage()}
+                        {modalPage == 1 && colaboraPage()}
+                        {modalPage == 2 && metasPage()}
+                    </div>
+                        
+                    
+                    
                 </div>
                 
             </Modal>

@@ -19,7 +19,7 @@ export function EditIndicator({ colaborador }: EditIndicatorProps) {
     }, [editIsOpen])
 
     return (
-        <div className='flex flex-col min-h-max w-[90%] my-5 mx-25'>
+        <div className='flex flex-col min-h-max my-5'>
             <div className='flex flex-row justify-between'>
                 <div className='flex flex-row'>
                     <img width={50} height={50} src={colaborador.foto} alt="Foto do colaborador" className='rounded-full mr-2' />
@@ -34,7 +34,7 @@ export function EditIndicator({ colaborador }: EditIndicatorProps) {
                     </div>
                 </div>
 
-                <button onClick={openCloseEdit} className={`flex justify-center ${editIsOpen ? "bg-[#6DF7F6]" : "bg-[#232222]"} font-bold py-2 px-4 mx-8 rounded items-center w-[3.4rem] h-[1.8rem]`}>
+                <button onClick={openCloseEdit} className={`flex justify-center ${editIsOpen ? "bg-[#6DF7F6]" : "bg-[#232222]"} font-bold py-2 px-4 rounded items-center w-[3.4rem] h-[1.8rem]`}>
                     <img
                         width={24}
                         height={24}
