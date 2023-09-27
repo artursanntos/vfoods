@@ -19,7 +19,11 @@ export default {
                     800: '#1C274C',
                 },
                 'roxo': '#D05BFA',
-                'vermelho': '#E51110',
+                'vermelho':{
+                    500: '#E51110',
+                    DEFAULT: '#E51110',
+                    700: '#B00F0F',
+                },
                 'preto': '#181818',
                 'branco': '#FBFBFB',
                 'cinza': {
@@ -39,7 +43,10 @@ export default {
                 '10': '10px',
                 '17': '17px',
                 '19': '19px',
-            }
+            },
+            dropShadow: {
+                'modal': '0 2px 1px rgba(0, 0, 0, 0.8)'
+            },
         },
     },
     plugins: [],
