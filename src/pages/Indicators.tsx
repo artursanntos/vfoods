@@ -4,6 +4,7 @@ import { SideBar } from '../componets/SideBar/SideBar'
 import Textbox from '../componets/Atomos/Textbox';
 import Modal from 'react-modal';
 import { EditIndicator } from '../componets/Indicator/EditIndicator';
+import Button from '../componets/Atomos/Button';
 
 
 export default function Indicators() {
@@ -26,12 +27,35 @@ export default function Indicators() {
         setModalPage(page);
     }
 
+    // Função que muda a página do modal para a próxima
+    const handleNextPage = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
+
+        setModalPage(modalPage + 1);
+    }
+
+    // Função que muda a página do modal para a anterior
+    const handlePreviousPage = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
+
+        setModalPage(modalPage - 1);
+    }
+
     // Páginas do modal abaixo:
 
     function dadosPage() {
         return (
-            <div className='flex mt-6 gap-2 w-full'>
-                <Textbox label="Nome do indicador"/>
+            <div className='flex flex-col mt-6 gap-7 w-full'>
+                <Textbox label="Nome do indicador" type="text"/>
+                <div className='grid grid-cols-7 gap-3'>
+                    <div className="col-span-4">
+                        <Textbox label="Data" type="date"/>
+                    </div>
+                    <div className="col-span-3">
+                        <Textbox label="Unidade de medida" type="number"/>
+                    </div>
+                </div>
+                <Textbox label='Descrição do indicador' type='descricao'/>
             </div>
         )
     }
@@ -39,7 +63,7 @@ export default function Indicators() {
     function colaboraPage() {
         return (
             <div className='flex mt-6 gap-2 w-full'>
-                <Textbox label="Pesquisar"/>
+                <Textbox label="Pesquisar" type="search"/>
             </div>
         )
     }
@@ -117,11 +141,22 @@ export default function Indicators() {
                         {modalPage == 0 && dadosPage()}
                         {modalPage == 1 && colaboraPage()}
                         {modalPage == 2 && metasPage()}
-                    </div>
-                        
-                    
-                    
+                    </div>                    
                 </div>
+                
+                <div className='fixed bottom-14 right-[5.5rem]'>
+                    <button onClick={modalPage == 2 ? closeModal : handleNextPage}>
+                        <Button label={modalPage == 2 ? 'Criar' : 'Próxima'} color='vermelho'/>
+                    </button>
+                </div>
+                
+                {modalPage > 0 && 
+                    <div className='fixed bottom-14 left-[5.5rem]'>
+                        <button onClick={handlePreviousPage}>
+                            <Button label='Voltar' color='vermelho'/>
+                        </button>
+                    </div>
+                }
                 
             </Modal>
 
