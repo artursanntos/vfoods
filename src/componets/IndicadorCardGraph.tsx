@@ -28,7 +28,7 @@ export default function IndicadorCardGraph({ indicador }: IndicadorCardGraphProp
                                 y: indicador.meta,
                                 type: 'scatter',
                                 mode: 'lines+markers',
-                                marker: { color: 'red' },
+                                marker: { color: '#E51110' },
                                 name: "Meta",
                             },
                             {
@@ -36,7 +36,7 @@ export default function IndicadorCardGraph({ indicador }: IndicadorCardGraphProp
                                 y: indicador.supermeta,
                                 type: 'scatter',
                                 mode: 'lines+markers',
-                                marker: { color: 'blue' },
+                                marker: { color: '#7D55EF' },
                                 name: "Supermeta",
                             },
                             {
@@ -44,7 +44,7 @@ export default function IndicadorCardGraph({ indicador }: IndicadorCardGraphProp
                                 y: indicador.desafio,
                                 type: 'scatter',
                                 mode: 'lines+markers',
-                                marker: { color: 'purple' },
+                                marker: { color: '#5EE0F1' },
                                 name: "Desafio",
                             },
                         ]}
