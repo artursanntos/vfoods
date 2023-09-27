@@ -48,7 +48,7 @@ export default function NewCollaborator() {
                             </div>
 
                             <div className="border border-vermelho rounded-19 h-[3.5rem] w-[13.5rem]">
-                                <input type="text" className="float-left bg-transparent pl-[2.25rem] pt-4 mr-[3rem] italic text-lg border-none w-[24rem] placeholder:text-cinza-400 focus:shadow-none outline-none" placeholder="CEP"/>
+                                <input type="text" className="float-left bg-transparent pl-[2.25rem] pt-4 mr-[3rem] italic text-lg border-none w-[24rem] placeholder:text-cinza-400 focus:shadow-none outline-none" placeholder="Cargo"/>
                             </div>
 
                         </div>
@@ -58,7 +58,7 @@ export default function NewCollaborator() {
                         </div>
 
                         <div className="border ml-[4rem] border-vermelho rounded-19 h-[3.5rem] w-[24.5rem]">
-                            <input type="text" className="float-left bg-transparent pl-[2.25rem] pt-4 mr-[3rem] italic text-lg border-none w-[24rem] placeholder:text-cinza-400 focus:shadow-none outline-none" placeholder="Cargo"/>
+                            <input type="text" className="float-left bg-transparent pl-[2.25rem] pt-4 mr-[3rem] italic text-lg border-none w-[24rem] placeholder:text-cinza-400 focus:shadow-none outline-none" placeholder="Senha"/>
                         </div>
 
                         <div className="border ml-[4rem] border-vermelho rounded-19 h-[3.5rem] w-[14rem]">
