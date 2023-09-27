@@ -14,6 +14,12 @@ export default function Indicators() {
     const [indicatorModalIsOpen, setIndicatorModalIsOpen] = useState(false);
     const [modalPage, setModalPage] = useState(0); // 0 = Dados, 1 = Colaboradores, 2 = Meta
 
+    const colaboradores = [
+        {nome: 'Ana Mendes Alves', email: 'Amale@gmail.com', foto: 'https://img.freepik.com/fotos-premium/imagem-de-closeup-de-coelho-fofo_691560-332.jpg' },
+        {nome: 'Luis Otavio Freitas', email: 'lof@hotmail.com', foto: 'https://img.freepik.com/fotos-gratis/coelhinho-de-desenho-animado-gerado-por-ai_23-2150288874.jpg' },
+        {nome: 'João Pedro Silva', email: 'joaojoao@yahoo.com.br', foto: 'https://i.pinimg.com/1200x/39/d6/14/39d614acff25d8b7fedbea20e37be942.jpg' }
+    ];
+            
     function openIndicatorModal() {
         setIndicatorModalIsOpen(true);
     }
@@ -73,9 +79,9 @@ export default function Indicators() {
     function metasPage() {
         return (
             <div className='flex flex-col gap-3'>
-                <EditIndicator colaborador={{ nome: 'Ana Mendes Alves', email: 'Amale@gmail.com', foto: 'https://img.freepik.com/fotos-premium/imagem-de-closeup-de-coelho-fofo_691560-332.jpg' }} />
-                <EditIndicator colaborador={{ nome: 'Luis Otavio Freitas', email: 'lof@hotmail.com', foto: 'https://img.freepik.com/fotos-gratis/coelhinho-de-desenho-animado-gerado-por-ai_23-2150288874.jpg' }} />
-                <EditIndicator colaborador={{ nome: 'João Pedro Silva', email: 'joaojoao@yahoo.com.br', foto: 'https://i.pinimg.com/1200x/39/d6/14/39d614acff25d8b7fedbea20e37be942.jpg' }} />
+                { colaboradores.map((colaborador, index) => (
+                    <EditIndicator key={index} colaborador={colaborador} />
+                ))}
             </div>
         )
     }
@@ -85,7 +91,7 @@ export default function Indicators() {
 
         if (modalPage < 2) {
             return (
-                <div className='fixed bottom-14 right-[5.5rem]'>
+                <div className='mr-3'>
                     <button onClick={ handleNextPage }>
                         <Button label='Próxima' color='vermelho'/>
                     </button>
@@ -94,7 +100,7 @@ export default function Indicators() {
         }
 
         return (
-            <div className='fixed bottom-14 right-[5.5rem]'>
+            <div className='mr-3'>
                         <Link to="/indicators/new_indicator">
                             <Button label='Criar' color='vermelho'/>
                         </Link>
@@ -136,6 +142,8 @@ export default function Indicators() {
             className="fixed top-0 right-0 bottom-0 w-[43.75rem] bg-white p-8 rounded-[25px] drop-shadow-modal"
             contentLabel="Criar indicador"
             >
+                <div className='flex flex-col min-h-screen'>
+                    <div className='flex-grow'>
                 <div className='flex flex-col gap-12'>
 
                     <button onClick={closeModal}><img src="/src/assets/back-arrow.svg" alt="Voltar" /></button>
@@ -167,16 +175,20 @@ export default function Indicators() {
                         {modalPage == 2 && metasPage()}
                     </div>                    
                 </div>
-                
-                {nextButton()}
-                
-                {modalPage > 0 && 
-                    <div className='fixed bottom-14 left-[5.5rem]'>
+                </div>
+
+                <div className='flex flex-row justify-between items-center my-14 w-full'>
+                    {modalPage > 0 && (
+                    <div className='ml-3'>
                         <button onClick={handlePreviousPage}>
                             <Button label='Voltar' color='vermelho'/>
                         </button>
                     </div>
-                }
+                    )}
+                    
+                    {nextButton()}
+                </div>
+                </div>
                 
             </Modal>
 
