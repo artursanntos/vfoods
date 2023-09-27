@@ -20,7 +20,7 @@ export default {
                 'preto': '#181818',
                 'branco': '#FBFBFB',
                 'cinza': {
-                    100: 'ECECEC',
+                    100: '#ECECEC',
                     300: '#D9D9D9',
                     500: '#797979',
                     DEFAULT: '#797979',
@@ -34,7 +34,10 @@ export default {
                 '10': '10px',
                 '17': '17px',
                 '19': '19px',
-            }
+            },
+            dropShadow: {
+                'modal': '0 3px 1px rgba(0, 0, 0, 0.8)'
+            },
         },
     },
     plugins: [],

@@ -1,19 +1,10 @@
 import { MouseEventHandler, useState } from 'react';
 import { Header } from '../componets/Header/Header'
 import { SideBar } from '../componets/SideBar/SideBar'
+import Textbox from '../componets/Atomos/Textbox';
 import Modal from 'react-modal';
 import { EditIndicator } from '../componets/Indicator/EditIndicator';
 
-const customStyles = {
-    content: {
-        width: "43.75rem",
-        height: "61rem",
-        top: "30.5rem",
-        left: "74rem",
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
-    },
-  };
 
 export default function Indicators() {
   
@@ -28,21 +19,28 @@ export default function Indicators() {
         setIndicatorModalIsOpen(false);
     }
 
+    // Função que muda a página do modal
     const handleChangePage = (event: React.MouseEvent<HTMLButtonElement>, page: number) => {
         event.preventDefault();
 
         setModalPage(page);
     }
 
+    // Páginas do modal abaixo:
+
     function dadosPage() {
         return (
-            <p>Página de dados</p>
+            <div className='flex mt-6 gap-2 w-full'>
+                <Textbox label="Nome do indicador"/>
+            </div>
         )
     }
 
     function colaboraPage() {
         return (
-            <p>Página de adicionar os colaboradores</p>
+            <div className='flex mt-6 gap-2 w-full'>
+                <Textbox label="Pesquisar"/>
+            </div>
         )
     }
 
@@ -58,7 +56,7 @@ export default function Indicators() {
 
     return (        
         <>
-            <div className='flex'>
+            <div className='flex w-screen'>
                 
                 <SideBar/>
                 
@@ -87,8 +85,8 @@ export default function Indicators() {
             <Modal
             isOpen={indicatorModalIsOpen}
             onRequestClose={closeModal}
-            style={customStyles}
-            contentLabel="Example Modal"
+            className="fixed top-0 right-0 bottom-0 w-[43.75rem] bg-white p-8 rounded-[25px] drop-shadow-modal"
+            contentLabel="Criar indicador"
             >
                 <div className='flex flex-col gap-12'>
 
@@ -96,19 +94,19 @@ export default function Indicators() {
                     <div className='flex justify-around text-3xl border-b-2 mt-8 w-full font-bold static'>   
                         
                         <button onClick={(event) => handleChangePage(event, 0)}>
-                            <p className={modalPage == 0 ? 'border-b-2 border-vermelho pb-2 absolute top-[5.1rem] left-20' : 'text-cinza-300 pb-2 absolute top-[5.1rem] left-20'}>
+                            <p className={modalPage == 0 ? 'border-b-2 border-vermelho pb-2 absolute top-[5.9rem] left-20' : 'text-cinza-300 pb-2 absolute top-[5.9rem] left-20'}>
                                 Dados
                             </p>
                         </button>
                         
                         <button onClick={(event) => handleChangePage(event, 1)}>
-                            <p className={modalPage == 1 ? 'border-b-2 border-vermelho pb-2 absolute top-[5.1rem] left-[15.62rem]' : 'text-cinza-300 pb-2 absolute top-[5.1rem] left-[15.62rem]'}>
+                            <p className={modalPage == 1 ? 'border-b-2 border-vermelho pb-2 absolute top-[5.9rem] left-[15.62rem]' : 'text-cinza-300 pb-2 absolute top-[5.9rem] left-[15.62rem]'}>
                                 Colaboradores
                             </p>
                         </button>
                         
                         <button onClick={(event) => handleChangePage(event, 2)}>
-                            <p className={modalPage == 2 ? 'border-b-2 border-vermelho pb-2 absolute top-[5.1rem] right-20' : 'text-cinza-300 pb-2 absolute top-[5.1rem] right-20'}>
+                            <p className={modalPage == 2 ? 'border-b-2 border-vermelho pb-2 absolute top-[5.9rem] right-20' : 'text-cinza-300 pb-2 absolute top-[5.9rem] right-20'}>
                                 Meta
                             </p>
                         </button>
