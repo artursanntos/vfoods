@@ -38,31 +38,31 @@ export default function NewCollaborator() {
                         </div>
 
                         <div className="border ml-[4rem] border-vermelho rounded-19 h-[3.5rem] w-[34rem]">
-                            <input type="text" className="float-left bg-transparent pl-[2.25rem] pt-4 mr-[3rem] italic text-lg border-none w-[24rem] placeholder:text-cinza-400 focus:shadow-none outline-none" placeholder="Nome Completo"/>
+                            <input type="text" className="float-left bg-transparent pl-[2.25rem] pt-4 mr-[3rem] italic text-lg border-none w-[30rem] placeholder:text-cinza-400 focus:shadow-none outline-none" placeholder="Nome Completo"/>
                         </div>
 
                         <div className="flex ml-[4rem] gap-[4.5rem]">
 
                             <div className="border border-vermelho rounded-19 h-[3.5rem] w-[16.5rem]">
-                                <input type="text" className="float-left bg-transparent pl-[2.25rem] pt-4 mr-[3rem] italic text-lg border-none w-[24rem] placeholder:text-cinza-400 focus:shadow-none outline-none" placeholder="Endereço"/>
+                                <input type="text" className="float-left bg-transparent pl-[2.25rem] pt-4 mr-[3rem] italic text-lg border-none w-[14rem] placeholder:text-cinza-400 focus:shadow-none outline-none" placeholder="Endereço"/>
                             </div>
 
                             <div className="border border-vermelho rounded-19 h-[3.5rem] w-[13.5rem]">
-                                <input type="text" className="float-left bg-transparent pl-[2.25rem] pt-4 mr-[3rem] italic text-lg border-none w-[24rem] placeholder:text-cinza-400 focus:shadow-none outline-none" placeholder="Cargo"/>
+                                <input type="text" className="float-left bg-transparent pl-[2.25rem] pt-4 mr-[3rem] italic text-lg border-none w-[14rem] placeholder:text-cinza-400 focus:shadow-none outline-none" placeholder="Cargo"/>
                             </div>
 
                         </div>
 
                         <div className="border ml-[4rem] border-vermelho rounded-19 h-[3.5rem] w-[24.5rem]">
-                            <input type="text" className="float-left bg-transparent pl-[2.25rem] pt-4 mr-[3rem] italic text-lg border-none w-[24rem] placeholder:text-cinza-400 focus:shadow-none outline-none" placeholder="Email"/>
+                            <input type="text" className="float-left bg-transparent pl-[2.25rem] pt-4 mr-[3rem] italic text-lg border-none w-[21rem] placeholder:text-cinza-400 focus:shadow-none outline-none" placeholder="Email"/>
                         </div>
 
                         <div className="border ml-[4rem] border-vermelho rounded-19 h-[3.5rem] w-[24.5rem]">
-                            <input type="text" className="float-left bg-transparent pl-[2.25rem] pt-4 mr-[3rem] italic text-lg border-none w-[24rem] placeholder:text-cinza-400 focus:shadow-none outline-none" placeholder="Senha"/>
+                            <input type="text" className="float-left bg-transparent pl-[2.25rem] pt-4 mr-[3rem] italic text-lg border-none w-[21rem] placeholder:text-cinza-400 focus:shadow-none outline-none" placeholder="Senha"/>
                         </div>
 
                         <div className="border ml-[4rem] border-vermelho rounded-19 h-[3.5rem] w-[14rem]">
-                            <input type="text" className="float-left bg-transparent pl-[2.25rem] pt-4 mr-[3rem] italic text-lg border-none w-[24rem] placeholder:text-cinza-400 focus:shadow-none outline-none" placeholder="Telefone"/>
+                            <input type="text" className="float-left bg-transparent pl-[2.25rem] pt-4 mr-[3rem] italic text-lg border-none w-[11rem] placeholder:text-cinza-400 focus:shadow-none outline-none" placeholder="Telefone"/>
                         </div>
 
 
