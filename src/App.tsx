@@ -25,8 +25,8 @@ function App() {
                     <Route path="/indicators/:id"  element={<IndicatorPage/>}/>
                     <Route path="/ranking" element={<Ranking/>}/>
                     <Route path="/profile" element={<Profile/>}/>
+                    <Route path="/new_collaborator" element={<NewCollaborator/>}/>
                     <Route path="/profile/pdf"/>
-                    <Route path="/profile/new_collaborator" element={<NewCollaborator/>}/>
                     <Route path="/collaborators/:id" element={<Collaborator/>}/>
                     <Route path="/collabotarors/:id/pdf"/>
 
