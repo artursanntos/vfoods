@@ -5,6 +5,8 @@ import Textbox from '../componets/Atomos/Textbox';
 import Modal from 'react-modal';
 import { EditIndicator } from '../componets/Indicator/EditIndicator';
 import Button from '../componets/Atomos/Button';
+import { Link, redirect } from 'react-router-dom';
+import NewIndicator from './NewIndicator';
 
 
 export default function Indicators() {
@@ -78,6 +80,28 @@ export default function Indicators() {
         )
     }
 
+    // Função que define qual o botão de ação do modal se é "Próxima" ou "Criar"
+    function nextButton() {
+
+        if (modalPage < 2) {
+            return (
+                <div className='fixed bottom-14 right-[5.5rem]'>
+                    <button onClick={ handleNextPage }>
+                        <Button label='Próxima' color='vermelho'/>
+                    </button>
+                    </div>
+            )
+        }
+
+        return (
+            <div className='fixed bottom-14 right-[5.5rem]'>
+                        <Link to="/indicators/new_indicator">
+                            <Button label='Criar' color='vermelho'/>
+                        </Link>
+                    </div>
+        )
+    }
+
     return (        
         <>
             <div className='flex w-screen'>
@@ -144,11 +168,7 @@ export default function Indicators() {
                     </div>                    
                 </div>
                 
-                <div className='fixed bottom-14 right-[5.5rem]'>
-                    <button onClick={modalPage == 2 ? closeModal : handleNextPage}>
-                        <Button label={modalPage == 2 ? 'Criar' : 'Próxima'} color='vermelho'/>
-                    </button>
-                </div>
+                {nextButton()}
                 
                 {modalPage > 0 && 
                     <div className='fixed bottom-14 left-[5.5rem]'>
