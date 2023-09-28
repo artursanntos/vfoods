@@ -1,24 +1,26 @@
 interface TextboxProps {
     type: string;
     label: string | undefined;
+    parentCallback: (data: string) => void;
 }
 
-export default function Textbox({ label, type }: TextboxProps) {
+export default function Textbox({ label, type, parentCallback }: TextboxProps) {
 
     if (type == "descricao") {
         return (
             <textarea placeholder={label}
-            rows={8}
-            className="w-full px-5 py-3 rounded-17 border border-vermelho placeholder:text-cinza-300 placeholder:font-bold placeholder:self-star"
+                rows={8}
+                className="w-full px-5 py-3 rounded-17 border border-vermelho placeholder:text-cinza-300 placeholder:font-bold placeholder:self-star"
             />
         )
     } else {
         return (
             <input placeholder={label}
-            type={type}
-            className="w-full px-5 py-3 rounded-17 border border-vermelho placeholder:text-cinza-300 placeholder:font-bold"
+                type={type}
+                className="w-full px-5 py-3 rounded-17 border border-vermelho placeholder:text-cinza-300 placeholder:font-bold"
+                onChange={(e) => parentCallback(e.target.value)}
             />
         )
     }
-    
+
 }
