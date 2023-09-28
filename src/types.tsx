@@ -1,23 +1,23 @@
 export interface collaboratorType {
-    idColab: string
-    nameColab: string
+    id: string
+    name: string
     image:string
     email: string
     phone: string
     position: string
-    adress: string
+    address: string
     cep: string
-    admissioDate: Date
-    managerColab: string
+    admissionDate: Date
+    manager: string
   }
   
   export interface indicatorType {
-    idInd: string
-    nameInd: string
+    id: string
+    name: string
     measure: string
     description: string
     deadline: Date
-    managerInd: string
+    manager: string
   }
   
   export interface managerType {

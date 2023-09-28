@@ -2,10 +2,10 @@ import { createContext, SetStateAction, useState, Dispatch, ReactNode } from 're
 import { collaboratorType, indicatorType, managerType } from '../types';
 
 interface VfoodsContextType {
-  collaborator: collaboratorType[];
-  setCollab: Dispatch<SetStateAction<collaboratorType[]>>
-  indicator: indicatorType[];
-  setIndicator: Dispatch<SetStateAction<indicatorType[]>>
+  allCollaborators: collaboratorType[];
+  setAllCollab: Dispatch<SetStateAction<collaboratorType[]>>
+  allIndicators: indicatorType[];
+  setAllIndicators: Dispatch<SetStateAction<indicatorType[]>>
   manager: managerType[];
   setManager: Dispatch<SetStateAction<managerType[]>>
 }
@@ -17,12 +17,12 @@ interface VfoodsProviderProps {
 export const VfoodsContext = createContext({} as VfoodsContextType);
 
 export function VfoodsProvider({ children }: VfoodsProviderProps) {
-  const [collaborator, setCollab] = useState<collaboratorType[]>([])
-  const [indicator, setIndicator] = useState<indicatorType[]>([])
+  const [allCollaborators, setAllCollab] = useState<collaboratorType[]>([])
+  const [allIndicators, setAllIndicators] = useState<indicatorType[]>([])
   const [manager, setManager] = useState<managerType[]>([])
   
   return (
-      <VfoodsContext.Provider value={{ collaborator, setCollab, indicator, setIndicator, manager, setManager }}>
+      <VfoodsContext.Provider value={{ allCollaborators, setAllCollab, allIndicators, setAllIndicators, manager, setManager }}>
           {children}
       </VfoodsContext.Provider>
   )
