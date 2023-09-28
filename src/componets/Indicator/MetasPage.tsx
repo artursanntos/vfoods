@@ -6,11 +6,10 @@ type MetasPageProps = {
 
 export default function MetasPage({ colaboradores }: MetasPageProps) {
     return (
-        <div className='flex flex-col gap-3'>
+        <ul className='flex flex-col gap-4 divide-y divide-gray-200 dark:divide-gray-700'>
             {colaboradores.map((colaborador, index) => (
                 <EditIndicator key={index} colaborador={colaborador} />
             ))}
-        </div>
-
+        </ul>
     )
 }

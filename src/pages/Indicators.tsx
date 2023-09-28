@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import DadosPage from '../componets/Indicator/DadosPage';
 import ColaboradoresPage from '../componets/Indicator/ColaboradoresPage';
 import MetasPage from '../componets/Indicator/MetasPage';
+import { IndicatorProvider } from '../contexts/IndicatorContext';
 
 
 export default function Indicators() {
@@ -73,6 +74,7 @@ export default function Indicators() {
 
     return (
         <>
+            <IndicatorProvider>
             <div className='flex w-screen'>
 
                 <SideBar />
@@ -154,6 +156,7 @@ export default function Indicators() {
                 </div>
 
             </Modal>
+            </IndicatorProvider>
         </>
     )
 }
