@@ -1,9 +1,10 @@
+import { collaboratorType } from '../../types';
 import editIconB from './assets/edit-b.svg'
 import editIconW from './assets/edit-w.svg'
 import { useState, useEffect } from 'react';
 
 type EditIndicatorProps = {
-    colaborador: { nome: string, email: string, foto: string };
+    colaborador: collaboratorType;
 }
 
 export function EditIndicator({ colaborador }: EditIndicatorProps) {
@@ -44,7 +45,7 @@ export function EditIndicator({ colaborador }: EditIndicatorProps) {
             <div className='flex flex-col min-h-max'>
                 <div className='flex flex-row justify-between items-center space-x-4'>
                     <div className="flex-shrink-0">
-                        <img className="w-14 h-14 rounded-full" src={colaborador.foto} alt="Foto do colaborador" />
+                        <img className="w-14 h-14 rounded-full" src={colaborador.imagem} alt="Foto do colaborador" />
                     </div>
                     <div className='flex-1 flex-col'>
                         <p className='font-bold'>
