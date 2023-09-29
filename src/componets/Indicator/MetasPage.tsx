@@ -5,6 +5,9 @@ type MetasPageProps = {
 }
 
 export default function MetasPage({ colaboradores }: MetasPageProps) {
+
+    
+
     return (
         <ul className='flex flex-col gap-4 divide-y divide-gray-200 dark:divide-gray-700'>
             {colaboradores.map((colaborador, index) => (

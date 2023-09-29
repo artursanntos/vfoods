@@ -1,19 +1,20 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Header } from '../componets/Header/Header'
 import { SideBar } from '../componets/SideBar/SideBar'
 import Modal from 'react-modal';
 import Button from '../componets/Atomos/Button';
-import { Link } from 'react-router-dom';
 import DadosPage from '../componets/Indicator/DadosPage';
 import ColaboradoresPage from '../componets/Indicator/ColaboradoresPage';
 import MetasPage from '../componets/Indicator/MetasPage';
-import { IndicatorProvider } from '../contexts/IndicatorContext';
+import { IndicatorContext } from '../contexts/IndicatorContext';
+import { Link } from 'react-router-dom';
 
 
 export default function Indicators() {
 
     const [indicatorModalIsOpen, setIndicatorModalIsOpen] = useState(false);
     const [modalPage, setModalPage] = useState(0); // 0 = Dados, 1 = Colaboradores, 2 = Meta
+    const { createIndicator } = useContext(IndicatorContext);
 
     const colaboradores = [
         { nome: 'Ana Mendes Alves', email: 'Amale@gmail.com', foto: 'https://img.freepik.com/fotos-premium/imagem-de-closeup-de-coelho-fofo_691560-332.jpg' },
@@ -65,16 +66,17 @@ export default function Indicators() {
 
         return (
             <div className='mr-3'>
-                <Link to="/indicators/new_indicator">
+                <Link onClick={createIndicator} to="/indicators/new_indicator">
                     <Button label='Criar' color='vermelho' />
                 </Link>
+                
             </div>
         )
     }
 
     return (
         <>
-            <IndicatorProvider>
+            
             <div className='flex w-screen'>
 
                 <SideBar />
@@ -83,7 +85,7 @@ export default function Indicators() {
 
                     <div className='flex flex-col items-center pb-16'>
 
-                        <Header pathUserImg={'src/componets/Header/assets/userImg.png'} userName={'Carlos Eduardo L.'} />
+                        <Header/>
 
                     </div>
 
@@ -156,7 +158,7 @@ export default function Indicators() {
                 </div>
 
             </Modal>
-            </IndicatorProvider>
+            
         </>
     )
 }
