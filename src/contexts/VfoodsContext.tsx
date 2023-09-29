@@ -10,6 +10,8 @@ interface VfoodsContextType {
   manager: managerType;
   setManager: Dispatch<SetStateAction<managerType>>
   getCurrentManager: (id: string) => void;
+  getCollaborators: (manager: managerType) => void;
+  getIndicators: (manager: managerType) => void;
 }
 
 interface VfoodsProviderProps {
@@ -27,29 +29,59 @@ export function VfoodsProvider({ children }: VfoodsProviderProps) {
     //  TODO: get manager id from backend
     const tempId = 'artur@gmail.com'
     try {
-        const url = 'http://localhost:3000/gestor/' + tempId
+      const url = 'http://localhost:3000/gestor/' + tempId
 
+      const response = axios.get(url)
 
-        const response = axios.get(url)
-        // make sure response is correct
-        // console.log(response) 
-        setManager((await response).data)
-        // make sure manager is updated
-        //console.log(manager);
-        
+      const man = (await response).data
+
+      setManager(man)
+      getCollaborators(man)
+      getIndicators(man)
+
     } catch (error) {
-        console.log(error)
+      console.log(error)
+    }
+  }
+
+  const getCollaborators = async (manager: managerType) => {
+    const urlEmail = manager.email
+    try {
+      const url = 'http://localhost:3000/gestor/colaborador/' + urlEmail
+      const response = axios.get(url)
+
+      const collab = (await response).data
+      setAllCollab(collab)
+      console.log(collab)
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const getIndicators = async (manager: managerType) => {
+    const urlID = manager.id
+    try {
+      const url = 'http://localhost:3000/indicador/' + urlID
+      const response = axios.get(url)
+
+      const ind = (await response).data
+      setAllIndicators(ind)
+      console.log(ind)
+
+    } catch (error) {
+      console.log(error)
     }
   }
 
   useEffect(() => {
     getCurrentManager()
   }, [])
-  
+
   return (
-      <VfoodsContext.Provider value={{ allCollaborators, setAllCollab, allIndicators, setAllIndicators, manager, setManager, getCurrentManager }}>
-          {children}
-      </VfoodsContext.Provider>
+    <VfoodsContext.Provider value={{ allCollaborators, setAllCollab, allIndicators, setAllIndicators, manager, setManager, getCurrentManager, getCollaborators, getIndicators }}>
+      {children}
+    </VfoodsContext.Provider>
   )
 
 }
