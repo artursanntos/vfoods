@@ -13,11 +13,11 @@ export interface collaboratorType {
   
   export interface indicatorType {
     id: string
-    name: string
-    measure: string
-    description: string
-    deadline: Date
-    manager: string
+    nome: string
+    unidade_medida: string
+    descricao: string
+    data_deadline: Date
+    idGestor: string
   }
   
   export interface managerType {
