@@ -10,6 +10,7 @@ import Collaborator from "./pages/Collaborator"
 import { Route, Routes } from "react-router-dom"
 import { VfoodsProvider } from "./contexts/VfoodsContext"
 import { IndicatorProvider } from "./contexts/IndicatorContext"
+import { CollaboratorProvider } from "./contexts/ColaboratorContext"
 
 function App() {
   
@@ -18,6 +19,7 @@ function App() {
         <>
             <VfoodsProvider>
             <IndicatorProvider>
+            <CollaboratorProvider>
                 <Routes>
                 
                     <Route path="/login" element={<Login/>}/>
@@ -27,12 +29,13 @@ function App() {
                     <Route path="/indicators/:id"  element={<IndicatorPage/>}/>
                     <Route path="/ranking" element={<Ranking/>}/>
                     <Route path="/profile" element={<Profile/>}/>
+                    <Route path="/new_collaborator" element={<NewCollaborator/>}/>
                     <Route path="/profile/pdf"/>
-                    <Route path="/profile/new_collaborator" element={<NewCollaborator/>}/>
                     <Route path="/collaborators/:id" element={<Collaborator/>}/>
                     <Route path="/collabotarors/:id/pdf"/>
 
                 </Routes>
+            </CollaboratorProvider>
             </IndicatorProvider>
             </VfoodsProvider>
             

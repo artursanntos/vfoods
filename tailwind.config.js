@@ -9,6 +9,9 @@ export default {
             fontFamily: {
                 'sans': ['Inter'],
             },
+            fontSize: {
+                '32': '2rem',
+            },
             colors: {
                 'azul': {
                     400: '#5EE0F1',
@@ -25,7 +28,9 @@ export default {
                 'branco': '#FBFBFB',
                 'cinza': {
                     100: '#ECECEC',
+                    200: '#F6F6F6',
                     300: '#D9D9D9',
+                    400: '#9E9E9E',
                     500: '#797979',
                     DEFAULT: '#797979',
                     700: '#363636',
