@@ -1,14 +1,16 @@
+import { useContext } from 'react';
 import { SearchBar } from './SearchBar';
 import { Link } from 'react-router-dom';
+import { VfoodsContext } from '../../contexts/VfoodsContext';
 
-type HeaderProps = {
-    pathUserImg:string;
-    userName:string;
-    //é possivel fazer tratamentos com o userName para reduzir a um valor máximo de caracteres
-    
-}
 
-export function Header({ pathUserImg, userName }: HeaderProps){
+
+export function Header(){
+
+    const { manager } = useContext(VfoodsContext);
+    const userNameManager = manager.nome;
+    const pathUserImgManager = manager.imagem;
+
     return (
         <div className="flex space-between pl-12 w-[69rem] max-w-[69rem] min-w[69rem]">
             <div className="flex">
@@ -24,11 +26,11 @@ export function Header({ pathUserImg, userName }: HeaderProps){
 
                     <div className="flex pr-[6.25rem] pl-[3.25rem] text-[0.95rem] items-center gap-4 hover:scale-105 duration-300 ease-in-out">
                         <div >
-                            <img className="rounded-full w-[2.75rem] max-w-[2.75rem]" src={ pathUserImg } alt="Imagem de perfil"></img>
+                            <img className="rounded-full w-[2.75rem] max-w-[2.75rem]" src={ pathUserImgManager } alt="Imagem de perfil"></img>
                         </div>
                         
                         <div className="font-bold w-[8.25rem]">
-                            { userName }
+                            { userNameManager }
                         </div>
 
                     </div>

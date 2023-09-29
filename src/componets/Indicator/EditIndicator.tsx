@@ -8,14 +8,35 @@ type EditIndicatorProps = {
 
 export function EditIndicator({ colaborador }: EditIndicatorProps) {
     const indicador = { meta: 100, supermeta: 300, desafio: 400, peso: 0.6 }
+    const [valoresIndicador, setValoresIndicador] = useState(indicador);
     const [editIsOpen, setEditIsOpen] = useState(false);
+
+    function handleMetaChanges(value: string) {
+        const newValue = parseInt(value);
+        setValoresIndicador({ ...valoresIndicador, meta: newValue });
+    }
+
+    function handleSupermetaChanges(value: string) {
+        const newValue = parseInt(value);
+        setValoresIndicador({ ...valoresIndicador, supermeta: newValue });
+    }
+
+    function handleDesafioChanges(value: string) {
+        const newValue = parseInt(value);
+        setValoresIndicador({ ...valoresIndicador, desafio: newValue });
+    }
+
+    function handlePesoChanges(value: string) {
+        const newValue = parseInt(value);
+        setValoresIndicador({ ...valoresIndicador, peso: newValue });
+    }
 
     function openCloseEdit() {
         setEditIsOpen(!editIsOpen);
     }
 
     useEffect(() => {
-        console.log(editIsOpen)
+        // console.log(editIsOpen)
     }, [editIsOpen])
 
     return (
@@ -60,28 +81,28 @@ export function EditIndicator({ colaborador }: EditIndicatorProps) {
                                 <label className='font-bold'>
                                     Meta
                                 </label>
-                                <input className='border rounded-md h-[1.5rem] w-[4rem] text-center' type='number' defaultValue={indicador.meta} onChange={(e) => console.log(e.target.value)} />
+                                <input className='border rounded-md h-[1.5rem] w-[4rem] text-center' type='number' defaultValue={indicador.meta} onChange={(e) => handleMetaChanges(e.target.value)} />
                             </div>
 
                             <div className='flex flex-col gap-2'>
                                 <label className='font-bold'>
                                     Supermeta
                                 </label>
-                                <input className='border rounded-md h-[1.5rem] w-[4rem] text-center' type='number' defaultValue={indicador.supermeta} onChange={(e) => console.log(e.target.value)} />
+                                <input className='border rounded-md h-[1.5rem] w-[4rem] text-center' type='number' defaultValue={indicador.supermeta} onChange={(e) => handleSupermetaChanges(e.target.value)} />
                             </div>
 
                             <div className='flex flex-col gap-2'>
                                 <label className='font-bold'>
                                     Desafio
                                 </label>
-                                <input className='border rounded-md h-[1.5rem] w-[4rem] text-center' type='number' defaultValue={indicador.desafio} onChange={(e) => console.log(e.target.value)} />
+                                <input className='border rounded-md h-[1.5rem] w-[4rem] text-center' type='number' defaultValue={indicador.desafio} onChange={(e) => handleDesafioChanges(e.target.value)} />
                             </div>
 
                             <div className='flex flex-col gap-2'>
                                 <label className='font-bold'>
                                     Peso
                                 </label>
-                                <input className='border rounded-md h-[1.5rem] w-[4rem] text-center' type='number' defaultValue={indicador.peso} onChange={(e) => console.log(e.target.value)} />
+                                <input className='border rounded-md h-[1.5rem] w-[4rem] text-center' type='number' defaultValue={indicador.peso} onChange={(e) => handlePesoChanges(e.target.value)}  />
                             </div>
                         </div>
 
