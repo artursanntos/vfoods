@@ -139,7 +139,7 @@ export default function Indicators() {
                             <div className='px-14'>
                                 {modalPage == 0 && < DadosPage />}
                                 {modalPage == 1 && < ColaboradoresPage />}
-                                {modalPage == 2 && < MetasPage colaboradores={colaboradores} />}
+                                {modalPage == 2 && < MetasPage />}
                             </div>
                         </div>
                     </div>

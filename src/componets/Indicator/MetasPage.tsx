@@ -1,16 +1,13 @@
 import { EditIndicator } from "./EditIndicator"
+import { useContext } from "react";
+import { IndicatorContext } from "../../contexts/IndicatorContext";
 
-type MetasPageProps = {
-    colaboradores: { nome: string, email: string, foto: string }[];
-}
-
-export default function MetasPage({ colaboradores }: MetasPageProps) {
-
-    
+export default function MetasPage() {
+    const { collaborator } = useContext(IndicatorContext);
 
     return (
         <ul className='flex flex-col gap-4 divide-y divide-gray-200 dark:divide-gray-700'>
-            {colaboradores.map((colaborador, index) => (
+            {collaborator.map((colaborador, index) => (
                 <EditIndicator key={index} colaborador={colaborador} />
             ))}
         </ul>
