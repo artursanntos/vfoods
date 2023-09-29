@@ -8,7 +8,7 @@ import IndicatorPage from "./pages/IndicatorPage"
 import NewCollaborator from "./pages/NewCollaborator"
 import Collaborator from "./pages/Collaborator"
 import { Route, Routes } from "react-router-dom"
-import { VfoodsProvider } from "./context/context"
+import { VfoodsProvider } from "./contexts/VfoodsContext"
 
 function App() {
   

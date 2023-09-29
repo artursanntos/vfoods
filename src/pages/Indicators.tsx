@@ -1,12 +1,13 @@
-import { MouseEventHandler, useState } from 'react';
+import { useState } from 'react';
 import { Header } from '../componets/Header/Header'
 import { SideBar } from '../componets/SideBar/SideBar'
-import Textbox from '../componets/Atomos/Textbox';
 import Modal from 'react-modal';
-import { EditIndicator } from '../componets/Indicator/EditIndicator';
 import Button from '../componets/Atomos/Button';
-import { Link, redirect } from 'react-router-dom';
-import NewIndicator from './NewIndicator';
+import { Link } from 'react-router-dom';
+import DadosPage from '../componets/Indicator/DadosPage';
+import ColaboradoresPage from '../componets/Indicator/ColaboradoresPage';
+import MetasPage from '../componets/Indicator/MetasPage';
+import { IndicatorProvider } from '../contexts/IndicatorContext';
 
 
 export default function Indicators() {
@@ -49,43 +50,6 @@ export default function Indicators() {
         setModalPage(modalPage - 1);
     }
 
-    // Páginas do modal abaixo:
-
-    function dadosPage() {
-        return (
-            <div className='flex flex-col mt-6 gap-7 w-full'>
-                <Textbox label="Nome do indicador" type="text" />
-                <div className='grid grid-cols-7 gap-3'>
-                    <div className="col-span-4">
-                        <Textbox label="Data" type="date" />
-                    </div>
-                    <div className="col-span-3">
-                        <Textbox label="Unidade de medida" type="number" />
-                    </div>
-                </div>
-                <Textbox label='Descrição do indicador' type='descricao' />
-            </div>
-        )
-    }
-
-    function colaboraPage() {
-        return (
-            <div className='flex mt-6 gap-2 w-full'>
-                <Textbox label="Pesquisar" type="search" />
-            </div>
-        )
-    }
-
-    function metasPage() {
-        return (
-            <div className='flex flex-col gap-3'>
-                {colaboradores.map((colaborador, index) => (
-                    <EditIndicator key={index} colaborador={colaborador} />
-                ))}
-            </div>
-        )
-    }
-
     // Função que define qual o botão de ação do modal se é "Próxima" ou "Criar"
     function nextButton() {
 
@@ -110,6 +74,7 @@ export default function Indicators() {
 
     return (
         <>
+            <IndicatorProvider>
             <div className='flex w-screen'>
 
                 <SideBar />
@@ -170,9 +135,9 @@ export default function Indicators() {
                             </div>
 
                             <div className='px-14'>
-                                {modalPage == 0 && dadosPage()}
-                                {modalPage == 1 && colaboraPage()}
-                                {modalPage == 2 && metasPage()}
+                                {modalPage == 0 && < DadosPage />}
+                                {modalPage == 1 && < ColaboradoresPage />}
+                                {modalPage == 2 && < MetasPage colaboradores={colaboradores} />}
                             </div>
                         </div>
                     </div>
@@ -191,6 +156,7 @@ export default function Indicators() {
                 </div>
 
             </Modal>
+            </IndicatorProvider>
         </>
     )
 }
