@@ -14,7 +14,7 @@ export default function IndicadorCardGraph({ indicador }: IndicadorCardGraphProp
     return (
         <button
             onClick={() => { console.log('clicou') }}
-            className='border rounded-10 bg-white border-cinza-100 h-[23.125rem] w-[29.75rem] hover:border-[#7D55EF] hover:border-2'>
+            className='border rounded-10 bg-white border-cinza-100 h-[23.125rem] w-[29.75rem]  hover:border-[#7D55EF] hover:border-2'>
 
             <div className='flex flex-col justify-center items-center'>
                 <h4 className='text-2xl font-bold mt-4'>

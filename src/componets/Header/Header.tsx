@@ -12,7 +12,7 @@ export function Header(){
     const pathUserImgManager = manager.imagem;
 
     return (
-        <div className="flex space-between pl-12 w-[69rem] max-w-[69rem] min-w[69rem]">
+        <div className="flex justify-center ml-[15rem] pl-12 w-[69rem] max-w-[69rem] min-w[69rem]">
             <div className="flex">
                 <SearchBar />
             </div>

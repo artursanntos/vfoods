@@ -6,6 +6,9 @@ import Button from '../componets/Atomos/Button';
 import DadosPage from '../componets/Indicator/DadosPage';
 import ColaboradoresPage from '../componets/Indicator/ColaboradoresPage';
 import MetasPage from '../componets/Indicator/MetasPage';
+
+import { VfoodsContext } from '../contexts/VfoodsContext';
+import IndicadorCardGraph from '../componets/IndicadorCardGraph';
 import { IndicatorContext } from '../contexts/IndicatorContext';
 import { Link } from 'react-router-dom';
 
@@ -14,14 +17,21 @@ export default function Indicators() {
 
     const [indicatorModalIsOpen, setIndicatorModalIsOpen] = useState(false);
     const [modalPage, setModalPage] = useState(0); // 0 = Dados, 1 = Colaboradores, 2 = Meta
-    const { createIndicator } = useContext(IndicatorContext);
+    const { createIndicator, indicator } = useContext(IndicatorContext);
+    const { allIndicators, setAllIndicators } = useContext(VfoodsContext);
 
     function openIndicatorModal() {
         setIndicatorModalIsOpen(true);
+        console.log(allIndicators)
     }
 
     function closeModal() {
         setIndicatorModalIsOpen(false);
+    }
+
+    function create() {
+        createIndicator();
+        setAllIndicators([...allIndicators, indicator]);
     }
 
     // Função que muda a página do modal
@@ -57,10 +67,10 @@ export default function Indicators() {
                 </div>
             )
         }
-
+        
         return (
             <div className='mr-3'>
-                <Link onClick={createIndicator} to="/indicators/new_indicator">
+                <Link onClick={create} to="/new_indicator">
                     <Button label='Criar' color='vermelho' />
                 </Link>
                 
@@ -71,11 +81,11 @@ export default function Indicators() {
     return (
         <>
             
-            <div className='flex w-screen'>
+            <div className='flex w-full'>
 
                 <SideBar />
 
-                <div className='flex flex-col pt-12 ml-[15rem] w-full'>
+                <div className='flex flex-col pt-12 ml-[15rem]'>
 
                     <div className='flex flex-col items-center pb-16'>
 
@@ -83,15 +93,25 @@ export default function Indicators() {
 
                     </div>
 
-                    <button onClick={openIndicatorModal} className='flex flex-col items-center justify-center border rounded-10 border-cinza-100 gap-8 h-[23.125rem] w-[29.75rem] ml-24'>
+                    <div className='grid grid-cols-2 gap-[4rem] ml-[8.25rem] items-center'>
+                        <button onClick={openIndicatorModal} className='border rounded-10 border-cinza-100 h-[23.125rem] w-[29.75rem] hover:border-[#7D55EF] hover:border-2'>
+                            
+                            <div className='flex flex-col items-center justify-center h-[23.125rem] gap-2'>
+                                <img src="src\assets\add.png" alt="add_button" />
+                                <h4 className=''>
+                                    Criar um novo Indicador
+                                </h4>
+                            </div>
 
-                        <img src="src\assets\add.png" alt="add_button" />
+                        </button>
 
-                        <h4 className=''>
-                            Criar um novo Indicador
-                        </h4>
+                        {allIndicators.map((indicator) => (
+                            
+                            <IndicadorCardGraph indicador={indicator}/>
+                        ))}
 
-                    </button>
+
+                    </div>
 
                 </div>
             </div>

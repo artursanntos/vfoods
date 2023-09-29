@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 export function SideBar(){
     return (
-        <div className="flex flex-col items-center h-screen fixed overflow-y-auto z-0 w-[15rem] max-w-[15rem] bg-white border-r border-azul-400">
+        <div className="flex flex-col items-center h-screen fixed overflow-y-auto z-0 w-[15rem] max-w-[15rem] bg-branco border-r border-azul-400">
             <div className="pt-16">
                 <Link to={"/"} >
                     <img src="src\componets\SideBar\assets\logo.png" alt="V-Foods Logo" className="hover:scale-105 duration-300 ease-in-out"/>

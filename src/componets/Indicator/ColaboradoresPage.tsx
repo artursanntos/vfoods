@@ -7,6 +7,16 @@ export default function ColaboradoresPage() {
     const { allCollaborators, setAllCollab } = useContext(VfoodsContext);
     const { collaborator, setCollab } = useContext(IndicatorContext);
     const [filteredCollab, setFilteredCollab] = useState(allCollaborators);
+    const iconStyles = ["h-6 w-6 text-vermelho", "h-6 w-6 text-vermelho rotate-[-45deg] ease-in-out duration-500"];
+
+
+    const isCollabAdded = (email: string) => {
+        // Verifica se o colaborador já foi adicionado no contexto do indicador
+        if (collaborator.filter((collab) => collab.email === email).length === 0) {
+            return false;
+        }
+        return true;
+    }
 
     const handleAddCollab = (email: string) => {
         // Pega os dados do colaborador a ser adicionado no contexto geral
@@ -39,35 +49,6 @@ export default function ColaboradoresPage() {
         }))
     }
 
-    // Simulação de dados (quando tiver o contexto pegando do gestor, remover)
-    useEffect(() => {
-        setAllCollab(
-            [
-                {
-                    id: "1",
-                    nome: "Ana Mendes Alves",
-                    senha: "123456",
-                    imagem: 'https://img.freepik.com/fotos-premium/imagem-de-closeup-de-coelho-fofo_691560-332.jpg',
-                    email: "Amale@gmail.com",
-                    telefone: "40028922",
-                    cargo: "Gerente",
-                    data_admissao: new Date(),
-                    idGestor: "1",
-                },
-                {
-                    id: "2",
-                    nome: "João Pedro",
-                    senha: "123456",
-                    imagem: 'https://img.freepik.com/fotos-premium/imagem-de-closeup-de-coelho-fofo_691560-332.jpg',
-                    email: "joao@gmail.com",
-                    telefone: "40028922",
-                    cargo: "Gerente",
-                    data_admissao: new Date(),
-                    idGestor: "1",
-                },
-            ])
-    }, [])
-
     useEffect(() => {
 
     }, [filteredCollab])
@@ -95,7 +76,7 @@ export default function ColaboradoresPage() {
                             </div>
 
                             <button className='rounded-full p-2 hover:bg-vermelho hover:bg-opacity-10' onClick={() => handleAddCollab(colaborador.email)}>
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-vermelho" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg xmlns="http://www.w3.org/2000/svg" className={ isCollabAdded(colaborador.email) ? iconStyles[1] : iconStyles[0] } fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                                 </svg>
                             </button>
