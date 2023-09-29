@@ -6,6 +6,7 @@ import Button from '../componets/Atomos/Button';
 import DadosPage from '../componets/Indicator/DadosPage';
 import ColaboradoresPage from '../componets/Indicator/ColaboradoresPage';
 import MetasPage from '../componets/Indicator/MetasPage';
+
 import { VfoodsContext } from '../contexts/VfoodsContext';
 import IndicadorCardGraph from '../componets/IndicadorCardGraph';
 import { IndicatorContext } from '../contexts/IndicatorContext';
@@ -66,10 +67,10 @@ export default function Indicators() {
                 </div>
             )
         }
-
+        
         return (
             <div className='mr-3'>
-                <Link onClick={create} to="/indicators/new_indicator">
+                <Link onClick={create} to="/new_indicator">
                     <Button label='Criar' color='vermelho' />
                 </Link>
                 
@@ -80,11 +81,11 @@ export default function Indicators() {
     return (
         <>
             
-            <div className='flex w-screen'>
+            <div className='flex w-full'>
 
                 <SideBar />
 
-                <div className='flex flex-col pt-12 ml-[15rem] w-full'>
+                <div className='flex flex-col pt-12 ml-[15rem]'>
 
                     <div className='flex flex-col items-center pb-16'>
 
@@ -93,7 +94,7 @@ export default function Indicators() {
                     </div>
 
                     <div className='grid grid-cols-2 gap-[4rem] ml-[8.25rem] items-center'>
-                        <button onClick={openIndicatorModal} className='border rounded-10 border-cinza-100 h-[23.125rem] w-[29.75rem] mb-10 hover:border-[#7D55EF] hover:border-2'>
+                        <button onClick={openIndicatorModal} className='border rounded-10 border-cinza-100 h-[23.125rem] w-[29.75rem] hover:border-[#7D55EF] hover:border-2'>
                             
                             <div className='flex flex-col items-center justify-center h-[23.125rem] gap-2'>
                                 <img src="src\assets\add.png" alt="add_button" />
@@ -105,6 +106,7 @@ export default function Indicators() {
                         </button>
 
                         {allIndicators.map((indicator) => (
+                            
                             <IndicadorCardGraph indicador={indicator}/>
                         ))}
 

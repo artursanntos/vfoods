@@ -13,7 +13,7 @@ export default function Profile () {
                         
                         <div className='flex flex-col items-center pb-16'>
 
-                            <Header pathUserImg={'src/componets/Header/assets/userImg.png'} userName={'Carlos Eduardo L.'} />
+                            <Header />
 
                         </div>
 

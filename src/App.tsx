@@ -25,7 +25,7 @@ function App() {
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/" element={<Home/>}/>
                     <Route path="/indicators" element={<Indicators/>}/>
-                    <Route path="/indicators/new_indicator" element={<NewIndicator/>}/>
+                    <Route path="/new_indicator" element={<NewIndicator/>}/>
                     <Route path="/indicators/:id"  element={<IndicatorPage/>}/>
                     <Route path="/ranking" element={<Ranking/>}/>
                     <Route path="/profile" element={<Profile/>}/>

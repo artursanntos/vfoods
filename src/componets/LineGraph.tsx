@@ -1,4 +1,6 @@
 import Plot from 'react-plotly.js';
+//import { metasMesIndicadorType } from '../types';
+
 
 type LineGraphProps = {
     indicador: {
