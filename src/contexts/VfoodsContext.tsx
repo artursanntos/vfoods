@@ -1,6 +1,7 @@
 import { createContext, SetStateAction, useState, Dispatch, ReactNode, useEffect } from 'react';
 import { collaboratorType, indicatorType, managerType } from '../types';
 import axios from 'axios';
+import Indicators from '../pages/Indicators';
 
 interface VfoodsContextType {
   allCollaborators: collaboratorType[];
@@ -47,12 +48,12 @@ export function VfoodsProvider({ children }: VfoodsProviderProps) {
   const getCollaborators = async (manager: managerType) => {
     const urlEmail = manager.email
     try {
-      const url = 'http://localhost:3000/gestor/colaborador/' + urlEmail
+      const url = 'http://localhost:3000/gestor/colaboradores/' + urlEmail
       const response = axios.get(url)
 
       const collab = (await response).data
       setAllCollab(collab)
-      console.log(collab)
+      console.log(allCollaborators)
 
     } catch (error) {
       console.log(error)
@@ -67,7 +68,7 @@ export function VfoodsProvider({ children }: VfoodsProviderProps) {
 
       const ind = (await response).data
       setAllIndicators(ind)
-      console.log(ind)
+      console.log(allIndicators)
 
     } catch (error) {
       console.log(error)
@@ -77,6 +78,7 @@ export function VfoodsProvider({ children }: VfoodsProviderProps) {
   useEffect(() => {
     getCurrentManager()
   }, [])
+  
 
   return (
     <VfoodsContext.Provider value={{ allCollaborators, setAllCollab, allIndicators, setAllIndicators, manager, setManager, getCurrentManager, getCollaborators, getIndicators }}>
