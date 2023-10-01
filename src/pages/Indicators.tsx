@@ -85,7 +85,7 @@ export default function Indicators() {
 
                 <SideBar />
 
-                <div className='flex flex-col pt-12 ml-[15rem]'>
+                <div className='flex flex-col pt-12 ml-[15rem] w-full'>
 
                     <div className='flex flex-col items-center pb-16'>
 
