@@ -28,11 +28,17 @@ export default function IndicadorCardGraph({ indicador }: IndicadorCardGraphProp
     const [cat, setCat] = useState<[][]>([]);
 
     useEffect(() => {
-        Api.get('metas-mes-indicador/'+indicador.id).then(res =>{
-            const aux = res.data;
-            setCat(aux); 
-            
-        })
+        
+        try{
+            Api.get('metas-mes-indicador/'+indicador.id).then(res =>{
+                const aux = res.data;
+                setCat(aux); 
+                
+            })
+        } catch (error) {
+            console.log(error)
+        }
+        
       }, [])
     
    
