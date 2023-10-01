@@ -1,17 +1,45 @@
+import Api from "../Api";
 import LineGraph from "./LineGraph";
+import { useState } from 'react';
 
 type IndicadorCardGraphProps = {
     indicador: {
+        id: string,
         nome: string,
-        meses: string[],
-        meta: number[],
-        supermeta: number[],
-        desafio: number[]
+        //eh recebido todas informacoes de indicador
+        //mas so essas sao usada
     }
 }
 
+//o tipo recebido é esse:
+/*
+export interface indicatorType {
+    id: string
+    nome: string
+    unidade_medida: string
+    descricao: string
+    data_deadline: Date
+    idGestor: string
+  }
+*/
+
 export default function IndicadorCardGraph({ indicador }: IndicadorCardGraphProps) {
+    
+    const [cat, setCat] = useState<[][]>([]);
+
+
+    
+   Api.get('metas-mes-indicador/'+indicador.id).then(res =>{
+        const aux = res.data;
+        setCat(aux); 
+        
+    })
+        
+    
+    
+
     return (
+        
         <button
             onClick={() => { console.log('clicou') }}
             className='border rounded-10 bg-white border-cinza-100 h-[23.125rem] w-[29.75rem]  hover:border-[#7D55EF] hover:border-2'>
@@ -21,7 +49,7 @@ export default function IndicadorCardGraph({ indicador }: IndicadorCardGraphProp
                     {indicador.nome}
                 </h4>
                 <div className='mb-4'>
-                    <LineGraph indicador={indicador} />
+                    <LineGraph mmsdInd={cat} />
                 </div>
             </div>
         </button>
