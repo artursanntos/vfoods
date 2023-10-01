@@ -1,6 +1,6 @@
 import Api from "../Api";
 import LineGraph from "./LineGraph";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 type IndicadorCardGraphProps = {
     indicador: {
@@ -27,13 +27,15 @@ export default function IndicadorCardGraph({ indicador }: IndicadorCardGraphProp
     
     const [cat, setCat] = useState<[][]>([]);
 
-
+    useEffect(() => {
+        Api.get('metas-mes-indicador/'+indicador.id).then(res =>{
+            const aux = res.data;
+            setCat(aux); 
+            
+        })
+      }, [])
     
-   Api.get('metas-mes-indicador/'+indicador.id).then(res =>{
-        const aux = res.data;
-        setCat(aux); 
-        
-    })
+   
         
     
     
