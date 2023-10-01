@@ -18,7 +18,7 @@ export default function NewIndicator() {
 
                     </div>
 
-                    <div className="flex justify-center items-center">
+                    <div className="flex justify-center items-center bg-white">
                         
                         <div className="flex flex-col justify-center items-center border rounded-17 border-cinza-300 gap-4 w-[34rem] h-[26.5rem]">
                             <img className="ml-4" src="https://cdn.discordapp.com/attachments/1130244004710195333/1157410547474632744/indicadornovo.png?ex=65188212&is=65173092&hm=0bf52d75be02f5fb12ae781ebee69b357443876afa795638742ff3d334653699&" alt="concluido" />
