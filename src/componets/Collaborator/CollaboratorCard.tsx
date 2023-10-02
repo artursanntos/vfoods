@@ -24,7 +24,7 @@ export default function CollaboratorCard({ nome, cargo, imagem, email, telefone 
     return (
         <>
             <div className="flex bg-white max-w-[33.875rem] w-[33.875rem] pr-6 pl-6 py-9 gap-7 rounded-17 border border-cinza-300 overflow-x-hidden">
-                <img src={imagem} alt="Foto de perfil" className="w-36 h-36 bg-cover rounded-full"/>
+                <img src={imagem} alt="Foto de perfil" className="w-36 h-36 object-cover rounded-full"/>
                 <div className="w-full">
                     <div className="mb-6">
                         <p className="font-bold text-32">{nome}</p>

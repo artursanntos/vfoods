@@ -10,13 +10,13 @@ import IndicatorsList from "../componets/Collaborator/IndicatorsList";
 export default function Collaborator() {
 
     const params = useParams();
-    const [colab, setColab] = useState<collaboratorType>({} as collaboratorType);
+    const [collab, setCollab] = useState<collaboratorType>({} as collaboratorType);
+    const collabId = params.id;
 
     const getCollaboratorData = () => {
-        const collabId = params.id;
         Api.get(`/colaborador/${collabId}`).then((response) => {
             // console.log(response.data);
-            setColab(response.data);
+            setCollab(response.data);
         })
     }
 
@@ -41,9 +41,9 @@ export default function Collaborator() {
                     <div className="pl-[8.25rem] pr-24 h-full">
                         <div className="flex gap-12 h-full">
                             <div>
-                                <CollaboratorCard nome={colab.nome} cargo={colab.cargo} imagem={colab.imagem} email={colab.email} telefone={colab.telefone}/>
+                                <CollaboratorCard nome={collab.nome} cargo={collab.cargo} imagem={collab.imagem} email={collab.email} telefone={collab.telefone}/>
                             </div>
-                            <IndicatorsList/>
+                            <IndicatorsList id={collabId}/>
                             
                         </div>
                     </div>

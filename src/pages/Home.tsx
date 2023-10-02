@@ -21,7 +21,7 @@ export default function Home() {
 
                     </div>
 
-                    <Link to='/collaborators/0b5ae6bd-c938-4bdb-8960-90a6e219de34'>
+                    <Link to='/collaborators/12b7e207-3917-4f5a-95c9-c5f8318fe91a'>
                         <Button label='Página de um colaborador' color='vermelho'/>
                     </Link>
 
