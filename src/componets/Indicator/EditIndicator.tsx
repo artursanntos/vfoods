@@ -1,35 +1,40 @@
-import { collaboratorType } from '../../types';
+import { colaboradorIndicadorType, collaboratorType } from '../../types';
 import editIconB from './assets/edit-b.svg'
 import editIconW from './assets/edit-w.svg'
 import { useState, useEffect } from 'react';
 
 type EditIndicatorProps = {
     colaborador: collaboratorType;
+    colab_ind: colaboradorIndicadorType;
 }
 
-export function EditIndicator({ colaborador }: EditIndicatorProps) {
+export function EditIndicator({ colaborador, colab_ind }: EditIndicatorProps) {
     const indicador = { meta: 100, supermeta: 300, desafio: 400, peso: 0.6 }
     const [valoresIndicador, setValoresIndicador] = useState(indicador);
     const [editIsOpen, setEditIsOpen] = useState(false);
 
     function handleMetaChanges(value: string) {
         const newValue = parseInt(value);
-        setValoresIndicador({ ...valoresIndicador, meta: newValue });
+        //setValoresIndicador({ ...valoresIndicador, meta: newValue });
+        colab_ind.meta = newValue;
     }
 
     function handleSupermetaChanges(value: string) {
         const newValue = parseInt(value);
-        setValoresIndicador({ ...valoresIndicador, supermeta: newValue });
+        //setValoresIndicador({ ...valoresIndicador, supermeta: newValue });
+        colab_ind.superMeta = newValue;
     }
 
     function handleDesafioChanges(value: string) {
         const newValue = parseInt(value);
-        setValoresIndicador({ ...valoresIndicador, desafio: newValue });
+        //setValoresIndicador({ ...valoresIndicador, desafio: newValue });
+        colab_ind.desafio = newValue;
     }
 
     function handlePesoChanges(value: string) {
         const newValue = parseInt(value);
-        setValoresIndicador({ ...valoresIndicador, peso: newValue });
+        //setValoresIndicador({ ...valoresIndicador, peso: newValue });
+        colab_ind.peso = newValue;
     }
 
     function openCloseEdit() {
@@ -37,7 +42,14 @@ export function EditIndicator({ colaborador }: EditIndicatorProps) {
     }
 
     useEffect(() => {
-        // console.log(editIsOpen)
+        //setando valores padrão, para caso o user não faça alterações não seja mandado -1 nas mestas
+        colab_ind.meta= 100;
+        colab_ind.superMeta= 300;
+        colab_ind.desafio= 400;
+        colab_ind.peso= 0.6;
+        //Dados mockados:
+        colab_ind.mes_ano = '2023-10-01T00:00:00.000Z'; 
+        //é preciso colocar o mes e ano atual, neste formato
     }, [editIsOpen])
 
     return (
