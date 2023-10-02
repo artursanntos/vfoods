@@ -39,3 +39,16 @@ export interface collaboratorType {
     totalColab: number;
     idIndicador: string;
   }
+
+  export interface colaboratorIndicatorType {
+    id: string;
+    mes_ano: Date;
+    meta: number;
+    superMeta: number;
+    desafio: number;
+    peso: number;
+    resultado: number;
+    notaIndicador: number;
+    idColaborador: string;
+    idIndicador: string;
+  }
