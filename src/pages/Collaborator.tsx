@@ -1,8 +1,54 @@
+import { useParams } from "react-router-dom";
+import { Header } from "../componets/Header/Header";
+import { SideBar } from "../componets/SideBar/SideBar";
+import { useEffect, useState } from "react";
+import Api from "../Api";
+import CollaboratorCard from "../componets/Collaborator/CollaboratorCard";
+import { collaboratorType } from "../types";
+
 export default function Collaborator() {
+
+    const params = useParams();
+    const [colab, setColab] = useState<collaboratorType>({} as collaboratorType);
+
+    const getCollaboratorData = () => {
+        const collabId = params.id;
+        Api.get(`/colaborador/${collabId}`).then((response) => {
+            // console.log(response.data);
+            setColab(response.data);
+        })
+    }
+
+    useEffect(() => {
+        getCollaboratorData();
+    }, []);
 
     return (
         <>
-            <div>Hello Collaborator</div>
+            <div className='flex'>
+                
+                <SideBar/>
+                
+                <div className='flex flex-col pt-12 ml-[15rem] w-full'>
+                    
+                    <div className='flex flex-col items-center pb-16'>
+
+                        <Header/>
+
+                    </div>
+
+                    <div className="pl-[8.25rem]">
+                        <div>
+                            <CollaboratorCard nome={colab.nome} cargo={colab.cargo} imagem={colab.imagem} email={colab.email} telefone={colab.telefone}/>
+                        </div>
+                    </div>
+
+                    
+
+                </div>
+                
+   
+            </div>
         </>
     )
 

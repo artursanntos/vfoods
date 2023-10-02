@@ -42,6 +42,7 @@ export function VfoodsProvider({ children }: VfoodsProviderProps) {
       setManager(man)
       getCollaborators(man)
       getIndicators(man)
+      
 
     } catch (error) {
       console.log(error)
