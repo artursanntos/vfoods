@@ -9,7 +9,7 @@ export default function Profile () {
                     
                     <SideBar/>
                     
-                    <div className='flex flex-col items-center pt-12 ml-[15rem] w-full'>
+                    <div className='flex flex-col pt-12 ml-[15rem] w-full'>
                         
                         <div className='flex flex-col items-center pb-16'>
 

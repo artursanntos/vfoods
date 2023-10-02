@@ -7,7 +7,7 @@ export default function Home() {
     return (
 
         <>
-            <div className='flex'>
+            <div className='flex w-full'>
                 
                 <SideBar/>
                 
