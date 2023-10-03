@@ -2,10 +2,11 @@ import Textbox from "../Atomos/Textbox";
 import { useContext, useEffect, useState } from "react";
 import { IndicatorContext } from "../../contexts/IndicatorContext";
 import { VfoodsContext } from "../../contexts/VfoodsContext";
+import { colaboradorIndicadorType } from "../../types";
 
 export default function ColaboradoresPage() {
     const { allCollaborators, setAllCollab } = useContext(VfoodsContext);
-    const { collaborator, setCollab } = useContext(IndicatorContext);
+    const { collaborator, setCollab, all_colab_ind, setAllColabInd } = useContext(IndicatorContext);
     const [filteredCollab, setFilteredCollab] = useState(allCollaborators);
     const iconStyles = ["h-6 w-6 text-vermelho", "h-6 w-6 text-vermelho rotate-[-45deg] ease-in-out duration-500"];
 
@@ -26,15 +27,30 @@ export default function ColaboradoresPage() {
             }
         })
 
+        //Cria um colab-indic padrão
+        const colabInd: colaboradorIndicadorType = {
+            mes_ano: "default",
+            meta: -1,
+            superMeta: -1,
+            desafio: -1,
+            peso: -1,
+            resultado: -1,
+            notaIndicador: -1,
+            idColaborador: collabToBeAdded[0].id,
+            idIndicador: "default"
+        }
+
         // Verifica se o colaborador já foi adicionado no contexto do indicador
         if (collaborator.filter((collab) => collab.email === collabToBeAdded[0].email).length === 0) {
             setCollab([...collaborator, collabToBeAdded[0]]);
+            setAllColabInd([...all_colab_ind, colabInd]);
             alert("Colaborador adicionado com sucesso!");
         }
 
         // Se já foi adicionado, remove do contexto do indicador
         else {
             setCollab(collaborator.filter((collab) => collab.email !== collabToBeAdded[0].email));
+            setAllColabInd(all_colab_ind.filter((colInd) => colInd.idColaborador !== colabInd.idColaborador))
             alert("Colaborador removido com sucesso!");
         }
     }
@@ -64,7 +80,7 @@ export default function ColaboradoresPage() {
                     <li className="py-3 sm:py-4">
                         <div className="flex flex-row items-center space-x-4">
                             <div className="flex-shrink-0">
-                                <img className="w-14 h-14 rounded-full" src={colaborador.imagem} alt="Foto do colaborador" />
+                                <img className="w-14 h-14 rounded-full object-cover" src={colaborador.imagem} alt="Foto do colaborador" />
                             </div>
                             <div className='flex-1 flex-col'>
                                 <p className='font-bold'>

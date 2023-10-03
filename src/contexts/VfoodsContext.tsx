@@ -34,6 +34,7 @@ export function VfoodsProvider({ children }: VfoodsProviderProps) {
     //  TODO: get manager id from backend
     const tempId = 'artur@gmail.com'
     try {
+
       const url = 'gestor/' + tempId
 
       // const response = axios.get(url)
