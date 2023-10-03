@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { colaboratorIndicatorType } from "../../types";
 import Api from "../../Api";
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
@@ -13,9 +13,9 @@ export default function IndicatorItem({indicator}: IndicatorItemProps) {
     const [indicatorName, setIndicatorName] = useState<string>('');
 
     const getIndicatorName = () => {
-        const url = `/indicador/${indicator.idIndicador}`
+        const url = `/indicador/info/byId/${indicator.idIndicador}`
         Api.get(url).then((response) => {
-            console.log(response.data)
+            //console.log(response.data)
             setIndicatorName(response.data.nome);
         })
     }
@@ -24,7 +24,7 @@ export default function IndicatorItem({indicator}: IndicatorItemProps) {
         const resultado = indicator.resultado;
         const total = indicator.desafio;
         const progresso = (resultado / total)*100;
-        console.log(progresso);
+        //console.log(progresso);
         return progresso;
     }
 
@@ -39,9 +39,13 @@ export default function IndicatorItem({indicator}: IndicatorItemProps) {
         }
     }
 
+    useEffect(() => {
+        getIndicatorName();
+    }, [])
+
     return (
         <div className="flex justify-between items-center px-2 py-1 cursor-pointer">
-            <p className="font-semibold text-xl text-cinza">Indicador X</p>
+            <p className="font-semibold text-xl text-cinza">{indicatorName}</p>
             <div className="w-[2.625rem] h-[2.625rem]">
                 <CircularProgressbar value={getProgressValue()}
                 styles={buildStyles({

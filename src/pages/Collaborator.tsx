@@ -38,12 +38,14 @@ export default function Collaborator() {
 
                     </div>
 
-                    <div className="pl-[8.25rem] pr-24 h-full">
-                        <div className="flex gap-12 h-full">
+                    <div className="w-full h-[calc(100vh-14.25rem)] max-h-[calc(100vh-14.25rem)]">
+                        <div className="flex gap-44 h-full w-full justify-center">
                             <div>
                                 <CollaboratorCard nome={collab.nome} cargo={collab.cargo} imagem={collab.imagem} email={collab.email} telefone={collab.telefone}/>
                             </div>
-                            <IndicatorsList id={collabId}/>
+                            <div className="h-full min-h-full max-h-full">
+                                <IndicatorsList id={collabId}/>
+                            </div>
                             
                         </div>
                     </div>
