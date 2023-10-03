@@ -16,11 +16,19 @@ export default function Collaborators() {
     const loadTableData = () => {
         let newData = allCollaborators.map((collaborator) => {
             const year = new Date(collaborator.data_admissao).getFullYear();
-            return {
-                colaborador: collaborator,
-                membro: `desde ${year}`,
-                status: arrayNotas.find((nota) => nota.colaborador.id === collaborator.id)?.nota || 0,
-            };
+            const status = arrayNotas.find((nota) => nota.colaborador.id === collaborator.id)?.nota;
+            if (status === undefined)
+                return {
+                    colaborador: collaborator,
+                    membro: `desde ${year}`,
+                    status: -1
+                };
+            else
+                return {
+                    colaborador: collaborator,
+                    membro: `desde ${year}`,
+                    status: status
+                };
         });
 
         newData.sort((a, b) => b.status - a.status);
@@ -49,12 +57,20 @@ export default function Collaborators() {
 
     const notaEstrelas = (nota: number) => {
         let estrelas = [];
-        for (let i = 0; i < nota; i++) {
-            estrelas.push(<img src={starSvg} alt="Estrela" className="w-4 h-4" key={i} />);
-        }
-        if (nota === 0) {
+
+        // -1 = Sem nota
+        if (nota === -1)
             estrelas.push(<p className='text-gray-500 text-sm'>Sem nota</p>);
-        }
+
+        // 0 = Nota 0
+        else if (nota === 0)
+            estrelas.push(<img src={starSvg} alt="Estrela" className="w-4 h-4" />);
+
+        // 1-5 = Nota 1-5
+        else
+            for (let i = 0; i < nota; i++)
+                estrelas.push(<img src={starSvg} alt="Estrela" className="w-4 h-4" key={i} />);
+
         return estrelas;
     };
 
