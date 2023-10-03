@@ -12,6 +12,8 @@ interface VfoodsContextType {
   setManager: Dispatch<SetStateAction<managerType>>
   metasSemestre: metasMesIndicadorType[];
   setMetasSemestre: Dispatch<SetStateAction<metasMesIndicadorType[]>>
+  addModal: boolean;
+  setAddModal: Dispatch<SetStateAction<boolean>>
   getCurrentManager: (id: string) => void;
   getCollaborators: (manager: managerType) => void;
   getIndicators: (manager: managerType) => void;
@@ -29,6 +31,7 @@ export function VfoodsProvider({ children }: VfoodsProviderProps) {
   const [allIndicators, setAllIndicators] = useState<indicatorType[]>([])
   const [metasSemestre, setMetasSemestre] = useState<metasMesIndicadorType[]>([])
   const [manager, setManager] = useState<managerType>({} as managerType)
+  const [addModal, setAddModal] = useState<boolean>(false)
 
   const getCurrentManager = async () => {
     //  TODO: get manager id from backend
@@ -114,7 +117,7 @@ export function VfoodsProvider({ children }: VfoodsProviderProps) {
   
 
   return (
-    <VfoodsContext.Provider value={{ allCollaborators, setAllCollab, allIndicators, setAllIndicators, manager, setManager, metasSemestre, setMetasSemestre, getCurrentManager, getCollaborators, getIndicators, getMetasSemestre}}>
+    <VfoodsContext.Provider value={{ allCollaborators, setAllCollab, allIndicators, setAllIndicators, manager, setManager,  addModal, setAddModal, metasSemestre, setMetasSemestre, getCurrentManager, getCollaborators, getIndicators, getMetasSemestre}}>
       {children}
     </VfoodsContext.Provider>
   )

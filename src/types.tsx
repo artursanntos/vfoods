@@ -42,7 +42,7 @@ export interface collaboratorType {
 
   export interface colaboratorIndicatorType {
     id: string;
-    mes_ano: Date;
+    mes_ano: string;//DateTime
     meta: number;
     superMeta: number;
     desafio: number;
