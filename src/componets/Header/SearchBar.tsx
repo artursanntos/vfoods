@@ -53,7 +53,7 @@ export function SearchBar() {
             </div>
 
             {showResults && (
-                <div className="bg-white border border-cinza-300 rounded-19 mt-[3.5rem] h-max w-[32.15rem] z-50 absolute">
+                <div className="bg-white border border-cinza-300 rounded-19 mt-[3.5rem] h-max w-[32.15rem] z-49 absolute">
                     <p className="text-gray-500 text-sm pt-2 pl-2">Colaboradores</p>
 
                     {filteredCollaborators.length === 0 &&
