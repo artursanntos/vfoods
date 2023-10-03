@@ -42,7 +42,8 @@ export default function Collaborators() {
         for (let i = 0; i < colaboradores.length; i++) {
             const currMonth = new Date().getMonth() + 1;
             const currYear = new Date().getFullYear();
-            const url = `nota-mensal/${colaboradores[i].id}/${currMonth}/${currYear}`;
+            const currMonthString = currMonth < 10 ? `0${currMonth}` : `${currMonth}`;
+            const url = `nota-mensal/${colaboradores[i].id}/${currMonthString}/${currYear}`;
 
             try {
                 const response = await Api.get(url);
