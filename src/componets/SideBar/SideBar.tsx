@@ -25,8 +25,8 @@ export function SideBar(){
                         
                     </div>
                     <div className="SideBarItem">
-                        <Link to={"/ranking"}>
-                            <ButtonSB pathIcon={"/src/componets/SideBar/assets/IconRanking.png"} buttonText={'Ranking'} />
+                        <Link to={"/collaborators"}>
+                            <ButtonSB pathIcon={"/src/componets/SideBar/assets/IconRanking.png"} buttonText={'Colaboradores'} />
                         </Link>
                     </div>
                     <div className="SideBarItem">
