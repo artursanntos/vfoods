@@ -7,7 +7,7 @@ interface ButtonAddColabProps {
      
 export default function ButtonAddColab({ label1, label2 }: ButtonAddColabProps) {
 
-    const styles = `flex px-5 pb-6 rounded-17 text-white bg-vermelho hover:bg-vermelho-700 w-1/6`;
+    const styles = `flex px-5 pb-6 rounded-17 text-white bg-vermelho hover:bg-vermelho-700 w-[19rem] h-[10rem]`;
     const stylePlus = ``;
 
     return (

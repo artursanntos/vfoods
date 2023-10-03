@@ -8,7 +8,7 @@ interface ButtonAddIndProps {
      
 export default function ButtonAddInd({ label1, label2, pagina }: ButtonAddIndProps) {
 
-    const styles = `flex px-5 pb-6 rounded-17 text-white ${pagina === 'perfilGestor' ? 'bg-preto hover:bg-black w-1/6' : 'bg-[#363636] hover:bg-[#282828] w-1/3'}`;
+    const styles = `flex px-5 pb-6 rounded-17 text-white h-[10rem] ${pagina === 'perfilGestor' ? 'bg-preto hover:bg-black w-[17rem]' : 'bg-[#363636] hover:bg-[#282828] w-[23rem]'}`;
     const stylePlus = `text-9xl ${pagina === 'perfilGestor' ? 'text-white' : 'text-vermelho'}`;
 
     return (
