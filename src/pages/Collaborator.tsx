@@ -61,7 +61,7 @@ export default function Collaborator() {
                         <div className="flex gap-44 h-full w-full justify-center">
                             <div className="flex flex-col justify-between items-center">
                                 <CollaboratorCard id={collabId} nome={collab.nome} cargo={collab.cargo} imagem={collab.imagem} email={collab.email} telefone={collab.telefone}/>
-                                <div className="">
+                                <div className="mt-8">
                                     <CollabCardGraph collab={collab}/>
                                 </div>
                                 
