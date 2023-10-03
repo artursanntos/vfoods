@@ -6,12 +6,19 @@ import Api from '../Api';
 
 interface IndicatorContextType {
     collaborator: collaboratorType[];
+    setCollab: Dispatch<SetStateAction<collaboratorType[]>>
     all_colab_ind: colaboradorIndicadorType[];//lista de colaboradores-indicadores
     setAllColabInd: Dispatch<SetStateAction<colaboradorIndicadorType[]>>
-    setCollab: Dispatch<SetStateAction<collaboratorType[]>>
     indicator: indicatorType;
     setIndicator: Dispatch<SetStateAction<indicatorType>>
+    openModal: boolean;
+    setOpenModal: Dispatch<SetStateAction<boolean>>
+    createEdit: string;
+    setCreateEdit: Dispatch<SetStateAction<string>>
+    allowUpdate: boolean;
+    setAllowUpdate: Dispatch<SetStateAction<boolean>>
     createIndicator: () => Promise<void>;
+    updateIndicator: (nome: string) => Promise<void>;
 }
 
 interface IndicatorProviderProps {
@@ -24,6 +31,9 @@ export function IndicatorProvider({ children }: IndicatorProviderProps) {
     const [collaborator, setCollab] = useState<collaboratorType[]>([])
     const [all_colab_ind, setAllColabInd] = useState<colaboradorIndicadorType[]>([])
     const [indicator, setIndicator] = useState<indicatorType>({} as indicatorType)
+    const [openModal, setOpenModal] = useState<boolean>(false)
+    const [createEdit, setCreateEdit] = useState<string>('')
+    const [allowUpdate, setAllowUpdate] = useState<boolean>(false)
     const { manager } = useContext(VfoodsContext);
 
     const createIndicator = async () => {
@@ -44,6 +54,24 @@ export function IndicatorProvider({ children }: IndicatorProviderProps) {
                 //É necessário que isto seja feito aqui pois é preciso o id do indicador, que só é obtido quando se faz o post
                 createColaboradorIndicador(response.data.id)
 
+            });            
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const updateIndicator = async (nome: string) => {
+        try {
+            const url = 'indicador/' + manager.id + '/' + nome
+
+            const headers = {
+                'Content-Type': 'application/json'
+            }
+
+            // console.log(manager.id);
+
+            Api.put(url, {...indicator, idGestor: manager.id}, { headers }).then(response => {
+                console.log(response)
             });            
         } catch (error) {
             console.log(error)
@@ -73,7 +101,7 @@ export function IndicatorProvider({ children }: IndicatorProviderProps) {
     }
 
     return (
-        <IndicatorContext.Provider value={{ collaborator, setCollab, indicator, setIndicator, createIndicator, all_colab_ind, setAllColabInd }}>
+        <IndicatorContext.Provider value={{ collaborator, setCollab, indicator, setIndicator, createIndicator, openModal, setOpenModal, createEdit, setCreateEdit, updateIndicator, allowUpdate, setAllowUpdate, , all_colab_ind, setAllColabInd }}>
             {children}
         </IndicatorContext.Provider>
     )
