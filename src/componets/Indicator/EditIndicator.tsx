@@ -1,11 +1,11 @@
-import { colaboradorIndicadorType, collaboratorType } from '../../types';
+import { colaboratorIndicatorType, collaboratorType } from '../../types';
 import editIconB from './assets/edit-b.svg'
 import editIconW from './assets/edit-w.svg'
 import { useState, useEffect } from 'react';
 
 type EditIndicatorProps = {
     colaborador: collaboratorType;
-    colab_ind: colaboradorIndicadorType;
+    colab_ind: colaboratorIndicatorType;
 }
 
 export function EditIndicator({ colaborador, colab_ind }: EditIndicatorProps) {
@@ -50,6 +50,7 @@ export function EditIndicator({ colaborador, colab_ind }: EditIndicatorProps) {
         //Dados mockados:
         colab_ind.mes_ano = '2023-10-01T00:00:00.000Z'; 
         //é preciso colocar o mes e ano atual, neste formato
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [editIsOpen])
 
     return (

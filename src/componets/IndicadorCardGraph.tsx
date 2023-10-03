@@ -54,6 +54,7 @@ export default function IndicadorCardGraph({ indicador }: IndicadorCardGraphProp
             console.log(error)
         }
         
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [])
 
     return (
