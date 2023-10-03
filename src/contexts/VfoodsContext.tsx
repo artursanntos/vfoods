@@ -108,6 +108,7 @@ export function VfoodsProvider({ children }: VfoodsProviderProps) {
 
   useEffect(() => {
     getCurrentManager()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   
 
