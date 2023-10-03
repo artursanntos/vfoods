@@ -11,14 +11,14 @@ interface IndicatorListProps {
 export default function IndicatorsList({id}: IndicatorListProps)  {
     
     const [indicatorList, setIndicatorList] = useState<colaboratorIndicatorType[]>([] as colaboratorIndicatorType[]);
-    const [styleIndex, setStyleIndex] = useState<number>(-1);
+    const [styleIndex, setStyleIndex] = useState<number[]>([] as number[]);
 
-    const handleOpenIndicator = (newIndex: number) => {
-        if (newIndex === styleIndex) {
-            setStyleIndex(-1);
+    const handleToggleIndicator = (newIndex: number) => {
+        if (styleIndex.includes(newIndex)) {
+            setStyleIndex(styleIndex.filter((idx) => idx !== newIndex));
             return;
         }
-        setStyleIndex(newIndex);
+        setStyleIndex([...styleIndex, newIndex]);
     }
 
     const indicatorsThisMont = () => {
@@ -50,9 +50,9 @@ export default function IndicatorsList({id}: IndicatorListProps)  {
             <p className="text-cinza text-base pb-4 border-b border-cinza-300">Selecione um para saber mais</p>
             <div className="divide-y divide-cinza-300 border-b border-cinza-300 max-h-[38.28rem] overflow-y-auto">
                 {indicatorList.map((item, index) => (
-                    <div onClick={() => handleOpenIndicator(index)}>
+                    <div onClick={() => handleToggleIndicator(index)}>
                         <IndicatorItem key={index} indicator={item} />
-                        <div className= {styleIndex === index ? "duration-300 ease-in-out z-0" : "hidden -top-8"}>
+                        <div className= {styleIndex.includes(index) ? "duration-300 ease-in-out z-0" : "hidden -top-8"}>
                             <IndicatorCardInfo indicatorInfo={item}/>
                         </div>
                     </div>
