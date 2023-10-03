@@ -51,4 +51,5 @@ export interface collaboratorType {
     notaIndicador: number;
     idColaborador: string;
     idIndicador: string;
+
   }

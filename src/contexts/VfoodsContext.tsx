@@ -1,6 +1,7 @@
 import { createContext, SetStateAction, useState, Dispatch, ReactNode, useEffect } from 'react';
 import { collaboratorType, indicatorType, managerType, metasMesIndicadorType } from '../types';
 import axios from 'axios';
+import Api from '../Api';
 
 interface VfoodsContextType {
   allCollaborators: collaboratorType[];
@@ -33,17 +34,22 @@ export function VfoodsProvider({ children }: VfoodsProviderProps) {
     //  TODO: get manager id from backend
     const tempId = 'artur@gmail.com'
     try {
-      const url = 'http://localhost:3000/gestor/' + tempId
 
-      const response = axios.get(url)
+      const url = 'gestor/' + tempId
 
-      const man = (await response).data
+      // const response = axios.get(url)
 
-      setManager(man)
-      getCollaborators(man)
-      getIndicators(man)
-      
-
+      Api.get(url).then(response => {
+        const man = response.data
+        setManager(man)
+        getCollaborators(man)
+        getIndicators(man)
+      })
+      /*
+      console.log(manager);
+      console.log(allCollaborators);
+      console.log(allIndicators);
+      */
     } catch (error) {
       console.log(error)
     }
@@ -52,12 +58,13 @@ export function VfoodsProvider({ children }: VfoodsProviderProps) {
   const getCollaborators = async (manager: managerType) => {
     const urlEmail = manager.email
     try {
-      const url = 'http://localhost:3000/gestor/colaboradores/' + urlEmail
-      const response = axios.get(url)
-
-      const collab = (await response).data
-      setAllCollab(collab)
-      console.log(allCollaborators)
+      const url = 'gestor/colaboradores/' + urlEmail
+      //const response = axios.get(url)
+      Api.get(url).then(response => {
+        const collab = response.data
+        setAllCollab(collab)
+        console.log(allCollaborators);
+      })
 
     } catch (error) {
       console.log(error)
@@ -67,12 +74,15 @@ export function VfoodsProvider({ children }: VfoodsProviderProps) {
   const getIndicators = async (manager: managerType) => {
     const urlID = manager.id
     try {
-      const url = 'http://localhost:3000/indicador/' + urlID
-      const response = axios.get(url)
+      const url = 'indicador/' + urlID
 
-      const ind = (await response).data
-      setAllIndicators(ind)
-      console.log(allIndicators)
+      Api.get(url).then(response => {
+        // console.log(response)
+        const ind = response.data
+        setAllIndicators(ind)
+        // console.log(allIndicators);
+        
+      })
 
     } catch (error) {
       console.log(error)

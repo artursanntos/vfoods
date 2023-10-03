@@ -1,39 +1,47 @@
 import Plot from 'react-plotly.js';
-//import { metasMesIndicadorType } from '../types';
+
 
 
 type LineGraphProps = {
-    indicador: {
-        meses: string[],
-        meta: number[],
-        supermeta: number[],
-        desafio: number[]
+    mmsdInd: [][]
+    // mmsdInd significa Meses, Mestas, Super-metas, Desafios por Indicadores
+    /*
+    mmsdInd: {
+        esses valores sao referentes a um indicador
+        mmsdInd[0] = mese_ano: string[], todos o meses_anos
+        mmsdInd[1] = meta: number[],  valor de metas batidas de cada mes
+        mmsdInd[2] = supermeta: number[], valor de super-metas batidas de cada mes
+        mmsdInd[3] = desafio: number[] valor de metas batidas de cada mes
     }
+    */
 }
 
-export default function LineGraph({ indicador }: LineGraphProps) {
+export default function LineGraph({ mmsdInd }: LineGraphProps) {
+    
+    //console.log(mmsdInd.desafio)
+    
     return (
         <Plot
             data={[
                 {
-                    x: indicador.meses,
-                    y: indicador.meta,
+                    x: mmsdInd[0],      //mese_ano
+                    y: mmsdInd[1],      //metas
                     type: 'scatter',
                     mode: 'lines+markers',
                     marker: { color: '#E51110' },
                     name: "Meta",
                 },
                 {
-                    x: indicador.meses,
-                    y: indicador.supermeta,
+                    x: mmsdInd[0],      //mese_ano
+                    y: mmsdInd[2],      //super-metas
                     type: 'scatter',
                     mode: 'lines+markers',
                     marker: { color: '#7D55EF' },
                     name: "Supermeta",
                 },
                 {
-                    x: indicador.meses,
-                    y: indicador.desafio,
+                    x: mmsdInd[0],      //mese_ano
+                    y: mmsdInd[3],      //desafios
                     type: 'scatter',
                     mode: 'lines+markers',
                     marker: { color: '#5EE0F1' },
