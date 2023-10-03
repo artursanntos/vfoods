@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom'
-import Button from '../componets/Atomos/Button'
 import { Header } from '../componets/Header/Header'
 import { SideBar } from '../componets/SideBar/SideBar'
 
@@ -20,10 +18,6 @@ export default function Home() {
                         <Header/>
 
                     </div>
-
-                    <Link to='/collaborators/12b7e207-3917-4f5a-95c9-c5f8318fe91a'>
-                        <Button label='Página de um colaborador' color='vermelho'/>
-                    </Link>
 
                 </div>
                 
