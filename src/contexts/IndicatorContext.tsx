@@ -1,5 +1,5 @@
 import { createContext, SetStateAction, useState, Dispatch, ReactNode } from 'react';
-import { colaboradorIndicadorType, collaboratorType, indicatorType } from '../types';
+import { colaboratorIndicatorType, collaboratorType, indicatorType } from '../types';
 import { useContext } from 'react';
 import { VfoodsContext } from './VfoodsContext';	
 import Api from '../Api';
@@ -7,8 +7,8 @@ import Api from '../Api';
 interface IndicatorContextType {
     collaborator: collaboratorType[];
     setCollab: Dispatch<SetStateAction<collaboratorType[]>>
-    all_colab_ind: colaboradorIndicadorType[];//lista de colaboradores-indicadores
-    setAllColabInd: Dispatch<SetStateAction<colaboradorIndicadorType[]>>
+    all_colab_ind: colaboratorIndicatorType[];//lista de colaboradores-indicadores
+    setAllColabInd: Dispatch<SetStateAction<colaboratorIndicatorType[]>>
     indicator: indicatorType;
     setIndicator: Dispatch<SetStateAction<indicatorType>>
     openModal: boolean;
@@ -29,7 +29,7 @@ export const IndicatorContext = createContext({} as IndicatorContextType);
 
 export function IndicatorProvider({ children }: IndicatorProviderProps) {
     const [collaborator, setCollab] = useState<collaboratorType[]>([])
-    const [all_colab_ind, setAllColabInd] = useState<colaboradorIndicadorType[]>([])
+    const [all_colab_ind, setAllColabInd] = useState<colaboratorIndicatorType[]>([])
     const [indicator, setIndicator] = useState<indicatorType>({} as indicatorType)
     const [openModal, setOpenModal] = useState<boolean>(false)
     const [createEdit, setCreateEdit] = useState<string>('')
@@ -101,7 +101,7 @@ export function IndicatorProvider({ children }: IndicatorProviderProps) {
     }
 
     return (
-        <IndicatorContext.Provider value={{ collaborator, setCollab, indicator, setIndicator, createIndicator, openModal, setOpenModal, createEdit, setCreateEdit, updateIndicator, allowUpdate, setAllowUpdate, , all_colab_ind, setAllColabInd }}>
+        <IndicatorContext.Provider value={{ collaborator, setCollab, indicator, setIndicator, createIndicator, openModal, setOpenModal, createEdit, setCreateEdit, updateIndicator, allowUpdate, setAllowUpdate, all_colab_ind, setAllColabInd }}>
             {children}
         </IndicatorContext.Provider>
     )
