@@ -110,7 +110,7 @@ export default function Collaborators() {
                                     <li key={index} className='flex flex-row items-center justify-start w-full h-min my-2 relative'>
                                         <div className='w-[80%] flex justify-around items-center'>
                                             <div className='flex flex-row items-center mt-2 w-[30%]'>
-                                                <img src={colaborador.colaborador.imagem} alt="Foto do colaborador" className='w-[2.5rem] h-[2.5rem] rounded-full mr-2' />
+                                                <img src={colaborador.colaborador.imagem} alt="Foto do colaborador" className='w-[2.5rem] h-[2.5rem] rounded-full mr-2 object-cover' />
                                                 <div className='flex flex-col items-start justify-center'>
                                                     <p className='font-bold'>{colaborador.colaborador.nome}</p>
                                                     <p className='text-sm text-gray-500'>{colaborador.colaborador.email}</p>
