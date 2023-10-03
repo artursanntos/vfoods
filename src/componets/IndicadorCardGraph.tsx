@@ -1,6 +1,7 @@
+import Api from "../Api";
 import LineGraph from "./LineGraph";
 import { IndicatorContext } from '../contexts/IndicatorContext';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 //import { indicatorType } from "../types";
 
 
@@ -20,6 +21,7 @@ export default function IndicadorCardGraph({ indicador }: IndicadorCardGraphProp
     
     
     const { updateIndicator, setAllowUpdate, setOpenModal, setCreateEdit, allowUpdate } = useContext(IndicatorContext);
+    const [cat, setCat] = useState<[][]>([]);
 
     function open() {
         setCreateEdit(indicador.nome)
@@ -39,6 +41,20 @@ export default function IndicadorCardGraph({ indicador }: IndicadorCardGraphProp
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[allowUpdate])
+  
+    useEffect(() => {
+        
+        try{
+            Api.get('metas-mes-indicador/'+indicador.id).then(res =>{
+                const aux = res.data;
+                setCat(aux); 
+                
+            })
+        } catch (error) {
+            console.log(error)
+        }
+        
+      }, [])
 
     return (
         <>
@@ -59,8 +75,9 @@ export default function IndicadorCardGraph({ indicador }: IndicadorCardGraphProp
                     </div>
                     
                     <div className='mb-4'>
-                        <LineGraph indicador={indicador} />
+                        <LineGraph mmsdInd={cat} />
                     </div>
+
                 </div>
             </button>
 
