@@ -5,7 +5,7 @@ import { collaboratorType } from "../types"
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Api from "../Api";
-import starSvg from '../assets/star.svg';
+import starSvg from '../assets/starGray.svg';
 
 
 export default function Collaborators() {
