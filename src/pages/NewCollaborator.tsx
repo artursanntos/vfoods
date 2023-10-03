@@ -6,8 +6,6 @@ import { CollaboratorContext } from '../contexts/ColaboratorContext';
 import { VfoodsContext } from '../contexts/VfoodsContext';
 import Modal from 'react-modal';
 import Textbox from "../componets/Atomos/Textbox"
-import { ToastContainer, toast } from "react-toastify"
-import 'react-toastify/dist/ReactToastify.css';
 
 export default function NewCollaborator() {
 
@@ -15,14 +13,7 @@ export default function NewCollaborator() {
     const [imagemAdicionada, setimagemAdicionada] = useState(false);
     const {collaborator, setCollab} = useContext(CollaboratorContext)
     const {createCollab} = useContext(CollaboratorContext)
-    const { setAllCollab, allCollaborators } = useContext(VfoodsContext)
-
-    const collabAdd = () => {
-        toast.success('Colaborador adicionado com sucesso!', {
-            position: "top-right",
-            theme: "light",
-        });
-    }
+    const { setAddModal, setAllCollab, allCollaborators } = useContext(VfoodsContext)
 
     const handleNome = (childData: string) => {
         setCollab({...collaborator, nome: childData})
@@ -62,7 +53,7 @@ export default function NewCollaborator() {
         console.log('chegou no log')
         createCollab()
         setAllCollab([...allCollaborators, collaborator])
-        collabAdd()
+        setAddModal(true)
         setimagemAdicionada(false)
     }
 
@@ -78,12 +69,6 @@ export default function NewCollaborator() {
 
     return (
         <>
-            <ToastContainer
-            position="top-right"
-            autoClose={1000}
-            closeOnClick
-            theme="light"
-            />
 
             <div className='flex'>
                 
