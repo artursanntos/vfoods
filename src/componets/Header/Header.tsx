@@ -19,7 +19,7 @@ export function Header(){
             
             <div className="flex items-center pl-[16rem]">
                 <div className="w-[2rem]">
-                    <img src="src\componets\Header\assets\IconNotification.png" alt="Notificações"></img>
+                    <img src="/src\componets\Header\assets\IconNotification.png" alt="Notificações"></img>
                 </div>
                 
                 <Link to={"/profile"}>

@@ -40,8 +40,9 @@ export interface collaboratorType {
     idIndicador: string;
   }
 
-  export interface colaboradorIndicadorType {
-    mes_ano: string;
+  export interface colaboratorIndicatorType {
+    id: string;
+    mes_ano: Date;
     meta: number;
     superMeta: number;
     desafio: number;
@@ -50,4 +51,5 @@ export interface collaboratorType {
     notaIndicador: number;
     idColaborador: string;
     idIndicador: string;
-}
+
+  }

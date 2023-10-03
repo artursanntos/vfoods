@@ -4,8 +4,8 @@ import ButtonAddInd from '../componets/Atomos/ButtonAddInd'
 import { Header } from '../componets/Header/Header'
 import { SideBar } from '../componets/SideBar/SideBar'
 
+
 export default function Home() {
-  
 
     return (
 
