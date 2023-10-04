@@ -3,6 +3,7 @@ export default {
     content: [
         "./index.html",
         "./src/**/*.{js,ts,jsx,tsx}",
+        'node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}'
     ],
     theme: {
         extend: {
@@ -14,12 +15,17 @@ export default {
             },
             colors: {
                 'azul': {
+                    300: '#26F2F1',
                     400: '#5EE0F1',
                     DEFAULT: '#5EE0F1',
                     800: '#1C274C',
                 },
-                'roxo': '#D05BFA',
+                'roxo': {
+                    400: '#9978F7',
+                    DEFAULT: '#D05BFA',
+                },
                 'vermelho':{
+                    400: '#EC5366',
                     500: '#E51110',
                     DEFAULT: '#E51110',
                     700: '#B00F0F',
@@ -49,6 +55,6 @@ export default {
             },
         },
     },
-    plugins: [],
+    plugins: [require('flowbite/plugin')],
 }
 

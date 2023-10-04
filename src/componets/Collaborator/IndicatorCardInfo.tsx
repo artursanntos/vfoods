@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { colaboratorIndicatorType } from "../../types";
+import { CustomFlowbiteTheme, Flowbite, Progress } from 'flowbite-react';
 import Api from "../../Api";
 
 interface IndicatorCardInfoProps {
@@ -10,6 +11,29 @@ export default function IndicatorCardInfo({ indicatorInfo }: IndicatorCardInfoPr
 
     const [indicatorUnit, setIndicatorUnit] = useState<string>('');
     const [colaboratorName, setColaboratorName] = useState<string>('');
+
+
+    const getProgressColor = () => {
+        const resultado = indicatorInfo.resultado;
+        if (resultado < indicatorInfo.meta) {
+            return 'ciano'
+        } else if (resultado < indicatorInfo.superMeta) {
+            return 'roxo'
+        } else {
+            return 'vermelho'
+        }
+    }
+
+    const customTheme: CustomFlowbiteTheme = {
+        progress: {
+            color: {
+                vermelho: 'bg-vermelho-400',
+                ciano: 'bg-azul-300',
+                roxo: 'bg-roxo-400'
+            },
+            bar: 'text-white text-sm flex items-center justify-center'
+        },
+    };
 
     const getIndicatorUnit = () => {
         const url = `/indicador/info/byId/${indicatorInfo.idIndicador}`
@@ -31,8 +55,13 @@ export default function IndicatorCardInfo({ indicatorInfo }: IndicatorCardInfoPr
         const resultado = indicatorInfo.resultado;
         const total = indicatorInfo.desafio;
         const progresso = (resultado / total) * 100;
-        //console.log(progresso);
-        return progresso;
+        const progressoFormatado = parseFloat(progresso.toFixed(2))
+        if (progresso > 100) {
+            return 100
+        } else {
+
+            return progressoFormatado;
+        }
     }
 
     useEffect(() => {
@@ -49,7 +78,7 @@ export default function IndicatorCardInfo({ indicatorInfo }: IndicatorCardInfoPr
                 <p className="font-semibold text-xl text-cinza-400">Meta</p>
                 <p className="text-cinza-400"> &gt;unidade de medida: {indicatorUnit} </p>
                 <p className="text-cinza-700"> {colaboratorName} atingiu...</p>
-                <div className="flex flex-row justify-evenly py-4 ">
+                <div className="flex flex-row justify-evenly py-4">
                     <div className="flex flex-col flex-1 w-1/3 items-center">
                         <label className="font-semibold">
                             Resultado
@@ -71,7 +100,9 @@ export default function IndicatorCardInfo({ indicatorInfo }: IndicatorCardInfoPr
                         <p>--</p>
                     </div>
                 </div>
-                <progress></progress>
+                <Flowbite theme={{ theme: customTheme }} >
+                    <Progress labelProgress size="lg" progress={getProgressValue()} color={getProgressColor()} />
+                </Flowbite>
             </div>
         </section>
     )
