@@ -23,7 +23,7 @@ export default function Collaborator() {
             let tempLastSeen;
             if (lastSeen.includes(collabId)) {
                 tempLastSeen = lastSeen.filter((id) => id !== collabId);
-                //console.log(tempLastSeen);
+                console.log(tempLastSeen);
                 tempLastSeen.unshift(collabId);
                 console.log(tempLastSeen);
                 setLastSeen(tempLastSeen);

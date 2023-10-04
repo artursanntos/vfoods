@@ -80,6 +80,7 @@ export default function Home() {
         const lastSeenLocal = localStorage.getItem('lastSeen')
         if (lastSeenLocal) {
             setLastSeen(JSON.parse(lastSeenLocal))
+            console.log(lastSeenLocal);     
         }
     }, [])
 
