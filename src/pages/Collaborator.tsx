@@ -1,12 +1,13 @@
 import { useParams } from "react-router-dom";
 import { Header } from "../componets/Header/Header";
 import { SideBar } from "../componets/SideBar/SideBar";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Api from "../Api";
 import CollaboratorCard from "../componets/Collaborator/CollaboratorCard";
 import { colaboratorIndicatorType, collaboratorType } from "../types";
 import IndicatorsList from "../componets/Collaborator/IndicatorsList";
 import CollabCardGraph from "../componets/CollabCardGraph";
+import { CollaboratorContext } from "../contexts/ColaboratorContext";
 
 export default function Collaborator() {
 
@@ -14,6 +15,28 @@ export default function Collaborator() {
     const [collab, setCollab] = useState<collaboratorType>({} as collaboratorType);
     const [monthData, setMonthData] = useState<colaboratorIndicatorType[]>([] as colaboratorIndicatorType[]); 
     const collabId = params.id;
+    const { lastSeen, setLastSeen}  = useContext(CollaboratorContext);
+
+    const handleAddLastSeen = () => {
+        
+        if (collabId !== undefined) {
+            let tempLastSeen;
+            if (lastSeen.includes(collabId)) {
+                tempLastSeen = lastSeen.filter((id) => id !== collabId);
+                //console.log(tempLastSeen);
+                tempLastSeen.unshift(collabId);
+                console.log(tempLastSeen);
+                setLastSeen(tempLastSeen);
+            } else {
+                tempLastSeen = lastSeen;
+                tempLastSeen.unshift(collabId);
+                tempLastSeen.splice(2, 1);
+                console.log(tempLastSeen);
+                setLastSeen(tempLastSeen);
+            }
+        }
+        
+    }
 
     const getCollaboratorData = () => {
         Api.get(`/colaborador/${collabId}`).then((response) => {
@@ -41,6 +64,7 @@ export default function Collaborator() {
     useEffect(() => {
         getCollaboratorData();
         getSemesterData();
+        handleAddLastSeen();
     }, []);
 
     return (

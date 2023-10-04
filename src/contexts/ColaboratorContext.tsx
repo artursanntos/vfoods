@@ -1,4 +1,4 @@
-import { createContext, SetStateAction, useState, Dispatch, ReactNode } from 'react';
+import { createContext, SetStateAction, useState, Dispatch, ReactNode, useEffect } from 'react';
 import { collaboratorType } from '../types';
 import { useContext } from 'react';
 import { VfoodsContext } from './VfoodsContext';	
@@ -8,6 +8,8 @@ interface CollaboratorContextType {
     collaborator: collaboratorType;
     setCollab: Dispatch<SetStateAction<collaboratorType>>
     createCollab: () => Promise<void>;
+    lastSeen: string[];
+    setLastSeen: Dispatch<SetStateAction<string[]>>
 }
 
 interface CollaboratorProviderProps {
@@ -18,6 +20,7 @@ export const CollaboratorContext = createContext({} as CollaboratorContextType);
 
 export function CollaboratorProvider({ children }: CollaboratorProviderProps) {
     const [collaborator, setCollab] = useState<collaboratorType>({} as collaboratorType)
+    const [lastSeen, setLastSeen] = useState<string[]>([] as string[])
     const { manager } = useContext(VfoodsContext);
 
     const createCollab = async () => {
@@ -42,8 +45,24 @@ export function CollaboratorProvider({ children }: CollaboratorProviderProps) {
         }
     }
 
+    const getLastSeen = () => {
+        const lastSeen = localStorage.getItem('lastSeen')
+        if (lastSeen) {
+            setLastSeen(JSON.parse(lastSeen))
+        }
+    }
+
+    useEffect(() => {
+        localStorage.setItem('lastSeen', JSON.stringify(lastSeen))
+    }, [lastSeen])
+
+    useEffect(() => {
+        console.log('Opa!');
+        getLastSeen()
+    }, [])
+
     return (
-        <CollaboratorContext.Provider value={{ collaborator, setCollab,  createCollab }}>
+        <CollaboratorContext.Provider value={{ collaborator, setCollab,  createCollab, lastSeen, setLastSeen }}>
             {children}
         </CollaboratorContext.Provider>
     )

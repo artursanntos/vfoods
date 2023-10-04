@@ -97,7 +97,7 @@ export default function IndicatorModal() {
 
     useEffect ( () => {
         if (openModal){
-            console.log(openModal)
+            //console.log(openModal)
             openIndicatorModal()
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
