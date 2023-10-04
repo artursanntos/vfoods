@@ -12,12 +12,14 @@ import { Link } from 'react-router-dom'
 import { IndicatorContext } from '../contexts/IndicatorContext';
 import IndicatorModal from '../componets/Indicator/IndicatorModal';
 import CollabTable from '../componets/Homepage/CollabTable';
+import { CollaboratorContext } from '../contexts/ColaboratorContext'
 
 
 export default function Home() {
 
     const {addModal, setAddModal, manager } = useContext(VfoodsContext)
     const { setOpenModal } = useContext(IndicatorContext);
+    const { lastSeen, setLastSeen } = useContext(CollaboratorContext);
     // const redirectTo = useNavigate();
 
     const getFirstName = () => {
@@ -73,6 +75,13 @@ export default function Home() {
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [addModal])
+
+    useEffect(() => {
+        const lastSeenLocal = localStorage.getItem('lastSeen')
+        if (lastSeenLocal) {
+            setLastSeen(JSON.parse(lastSeenLocal))
+        }
+    }, [])
 
     return (
 

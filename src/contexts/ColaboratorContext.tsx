@@ -45,22 +45,6 @@ export function CollaboratorProvider({ children }: CollaboratorProviderProps) {
         }
     }
 
-    const getLastSeen = () => {
-        const lastSeen = localStorage.getItem('lastSeen')
-        if (lastSeen) {
-            setLastSeen(JSON.parse(lastSeen))
-        }
-    }
-
-    useEffect(() => {
-        localStorage.setItem('lastSeen', JSON.stringify(lastSeen))
-    }, [lastSeen])
-
-    useEffect(() => {
-        console.log('Opa!');
-        getLastSeen()
-    }, [])
-
     return (
         <CollaboratorContext.Provider value={{ collaborator, setCollab,  createCollab, lastSeen, setLastSeen }}>
             {children}

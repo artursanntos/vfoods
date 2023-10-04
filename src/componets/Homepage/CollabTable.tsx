@@ -34,7 +34,7 @@ export default function CollabTable() {
 
     useEffect(() => {
         getLastSeenInfo();
-    },[])
+    },[lastSeen])
 
     return (
         <table>
@@ -49,25 +49,28 @@ export default function CollabTable() {
                 </tr>
             </thead>
             <tbody>
+                {lastSeenCollab.length === 0 && 
+                <p className="flex justify-center mt-12 text-base font-semibold text-cinza-500">Aqui aparecerão os últimos colaboradores vistos</p>}
                 {lastSeenCollab.map((collaborator) => {
-                    return (
-                        <tr className="flex gap-44 mb-3 text-sm text-cinza-500 px-4 mt-4">
-                            <td className="flex max-w-[6rem]">
-                                <img src={collaborator.imagem} alt="Foto" className='w-[2.5rem] h-[2.5rem] rounded-full mr-2 object-cover'/>
-                                <div className="flex flex-col">
-                                    <p className="text-preto font-semibold">{collaborator.nome}</p>
-                                    <p className="text-xs">{collaborator.email}</p>
-                                </div>
-                                
-                            </td>
-                            <td className="flex max-w-[6rem]">{parseId(collaborator.id)}</td>
-                            <td className="flex max-w-[4rem]">{collaborator.cargo}</td>
-                            <td className="flex max-w-[6rem] ">{getDate(collaborator.data_admissao)}</td>
-                            <td className="flex max-w-[6rem]">estrelas</td>
-                            <td className="flex max-w-[6rem]">...</td>
-                        </tr>
-                    )
-                })}
+            return (
+                <tr className="flex gap-44 mb-3 text-sm text-cinza-500 px-4 mt-4">
+                    <td className="flex max-w-[6rem]">
+                        <img src={collaborator.imagem} alt="Foto" className='w-[2.5rem] h-[2.5rem] rounded-full mr-2 object-cover'/>
+                        <div className="flex flex-col">
+                            <p className="text-preto font-semibold">{collaborator.nome}</p>
+                            <p className="text-xs">{collaborator.email}</p>
+                        </div>
+                        
+                    </td>
+                    <td className="flex max-w-[6rem]">{parseId(collaborator.id)}</td>
+                    <td className="flex max-w-[4rem]">{collaborator.cargo}</td>
+                    <td className="flex max-w-[6rem] ">{getDate(collaborator.data_admissao)}</td>
+                    <td className="flex max-w-[6rem]">estrelas</td>
+                    <td className="flex max-w-[6rem]">...</td>
+                </tr>
+            )
+        })}
+                
             </tbody>
         </table>
     )

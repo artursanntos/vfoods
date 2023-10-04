@@ -27,12 +27,15 @@ export default function Collaborator() {
                 tempLastSeen.unshift(collabId);
                 console.log(tempLastSeen);
                 setLastSeen(tempLastSeen);
+                localStorage.setItem('lastSeen', JSON.stringify(tempLastSeen))
             } else {
                 tempLastSeen = lastSeen;
                 tempLastSeen.unshift(collabId);
                 tempLastSeen.splice(2, 1);
                 console.log(tempLastSeen);
                 setLastSeen(tempLastSeen);
+                localStorage.setItem('lastSeen', JSON.stringify(tempLastSeen))
+
             }
         }
         
