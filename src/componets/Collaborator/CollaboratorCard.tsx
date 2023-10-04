@@ -1,6 +1,9 @@
+import { useEffect, useState } from "react";
+import Api from "../../Api";
 import { collaboratorType } from "../../types";
 
 interface CollaboratorCardProps {
+    id: collaboratorType["id"] | undefined;
     nome: collaboratorType["nome"];
     cargo: collaboratorType["cargo"];
     imagem: collaboratorType["imagem"];
@@ -8,18 +11,39 @@ interface CollaboratorCardProps {
     telefone: collaboratorType["telefone"];
 }
 
-export default function CollaboratorCard({ nome, cargo, imagem, email, telefone }: CollaboratorCardProps) {
+export default function CollaboratorCard({ id, nome, cargo, imagem, email, telefone }: CollaboratorCardProps) {
 
-    // TODO: forma de calcular a nota do colaborador
-    const nota = 3;
+    const [nota, setNota] = useState<number>(0);
 
-    const notaEstrelas = () => {
+    const getNota = async () => {
+        const month = new Date().getMonth() + 1;
+        const monthString = month < 10 ? `0${month}` : `${month}`;
+        const year = new Date().getFullYear();
+        const url = `/nota-mensal/` + id + `/` + monthString + `/` + year;
+        //console.log(url);
+        await Api.get(url).then((response) => {
+            //console.log(response.data.notaMensal);
+            setNota(response.data.notaMensal);
+        })
+        
+    } 
+
+    const notaEstrelas = (nota: number) => {
         let estrelas = [];
         for (let i = 0; i < nota; i++) {
             estrelas.push(<img src="/src/assets/star.svg" alt="Estrela" className="w-4 h-4" key={i} />);
         }
         return estrelas;
+
     }
+
+    useEffect(() => {
+        const loadData = async () => {
+            await getNota();
+        }
+
+        loadData();
+    }, [])
 
     return (
         <>
@@ -31,7 +55,7 @@ export default function CollaboratorCard({ nome, cargo, imagem, email, telefone 
                         <div className="flex items-center gap-2">
                             <p className="font-semibold text-cinza">{cargo}</p>
                             <div className="flex gap-1">
-                                {notaEstrelas()}
+                                {notaEstrelas(nota)}
                             </div>
                         </div>
                     </div>

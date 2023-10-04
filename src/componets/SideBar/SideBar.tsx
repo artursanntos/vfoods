@@ -37,11 +37,8 @@ export function SideBar(){
                     
                 </div>
 
-                <div className="flex flex-col pt-5 gap-5 mb-14">
-                    <div className="SideBarItem">
-                        <ButtonSB pathIcon={"/src/componets/SideBar/assets/IconConfiguracoes.png"} buttonText={'Configurações'} />
-                    </div>
-                    
+                <div className="flex flex-col mb-16">
+                                  
                     <div className="SideBarItem">
                         <Link to={"/login"}>
                             <ButtonSB pathIcon={"/src/componets/SideBar/assets/IconSair.png"} buttonText={'Sair'} />
