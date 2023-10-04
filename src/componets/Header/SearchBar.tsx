@@ -61,7 +61,7 @@ export function SearchBar() {
                 />
                 <img
                     src={iconSearch}
-                    className="w-[2.75rem] pt-[0.3rem] cursor-pointer"
+                    className="w-[2.75rem] pt-[0.3rem]"
                     alt="Buscar"
                 />
             </div>
