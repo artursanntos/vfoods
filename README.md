@@ -50,8 +50,8 @@
   </tr>
   <tr>
     <td align="center">
-      <a href="xxx">
-        <img src="xxx" width="100px;" height="100px;" alt=""/>
+      <a href="https://www.linkedin.com/in/juliadelimabacelar">
+        <img src="https://media.licdn.com/dms/image/C5603AQGlmbJ7EUnU5g/profile-displayphoto-shrink_400_400/0/1660002414071?e=1701907200&v=beta&t=WwaXiWFqlLyPH34VASdHxk-wQP3-4skhjC-F5w6hVbo" width="100px;" height="100px;" alt=""/>
         <br /><sub><b>Júlia Bacelar</b><br/>Designer</sub>
       </a>
     </td>
