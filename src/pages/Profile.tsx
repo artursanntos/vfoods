@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import ButtonAddColab from "../componets/Atomos/ButtonAddColab"
 import ButtonAddInd from "../componets/Atomos/ButtonAddInd"
-import GestorCard from "../componets/Gestor/gestorCard"
+import GestorCard from "../componets/Gestor/GestorCard"
 import { Header } from "../componets/Header/Header"
 import { SideBar } from "../componets/SideBar/SideBar"
 import { VfoodsContext } from "../contexts/VfoodsContext"

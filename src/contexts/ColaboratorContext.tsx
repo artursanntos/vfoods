@@ -1,4 +1,4 @@
-import { createContext, SetStateAction, useState, Dispatch, ReactNode } from 'react';
+import { createContext, SetStateAction, useState, Dispatch, ReactNode, useEffect } from 'react';
 import { collaboratorType } from '../types';
 import { useContext } from 'react';
 import { VfoodsContext } from './VfoodsContext';	
@@ -8,6 +8,8 @@ interface CollaboratorContextType {
     collaborator: collaboratorType;
     setCollab: Dispatch<SetStateAction<collaboratorType>>
     createCollab: () => Promise<void>;
+    lastSeen: string[];
+    setLastSeen: Dispatch<SetStateAction<string[]>>
     loadGraph: boolean;
     setLoadGraph: Dispatch<SetStateAction<boolean>>;
 }
@@ -20,6 +22,7 @@ export const CollaboratorContext = createContext({} as CollaboratorContextType);
 
 export function CollaboratorProvider({ children }: CollaboratorProviderProps) {
     const [collaborator, setCollab] = useState<collaboratorType>({} as collaboratorType)
+    const [lastSeen, setLastSeen] = useState<string[]>([] as string[])
     const [loadGraph, setLoadGraph] = useState<boolean>(false);
     const { manager } = useContext(VfoodsContext);
 
@@ -46,7 +49,8 @@ export function CollaboratorProvider({ children }: CollaboratorProviderProps) {
     }
 
     return (
-        <CollaboratorContext.Provider value={{ collaborator, setCollab,  createCollab, loadGraph, setLoadGraph }}>
+        <CollaboratorContext.Provider value={{ collaborator, setCollab,  createCollab, lastSeen, setLastSeen, loadGraph, setLoadGraph }}>
+
             {children}
         </CollaboratorContext.Provider>
     )
