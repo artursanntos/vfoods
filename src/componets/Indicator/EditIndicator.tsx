@@ -1,57 +1,39 @@
 import { colaboratorIndicatorType, collaboratorType } from '../../types';
 import editIconB from './assets/edit-b.svg'
 import editIconW from './assets/edit-w.svg'
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 type EditIndicatorProps = {
     colaborador: collaboratorType;
-    colab_ind: colaboratorIndicatorType;
+    colabInd: colaboratorIndicatorType;
 }
 
-export function EditIndicator({ colaborador, colab_ind }: EditIndicatorProps) {
-    const indicador = { meta: 0, supermeta: 0, desafio: 0, peso: 1 }
-    const [valoresIndicador, setValoresIndicador] = useState(indicador);
+export function EditIndicator({ colaborador, colabInd }: EditIndicatorProps) {
     const [editIsOpen, setEditIsOpen] = useState(false);
 
     function handleMetaChanges(value: string) {
         const newValue = parseInt(value);
-        setValoresIndicador({ ...valoresIndicador, meta: newValue });
-        colab_ind.meta = newValue;
+        colabInd.meta = newValue;
     }
 
     function handleSupermetaChanges(value: string) {
         const newValue = parseInt(value);
-        setValoresIndicador({ ...valoresIndicador, supermeta: newValue });
-        colab_ind.superMeta = newValue;
+        colabInd.superMeta = newValue;
     }
 
     function handleDesafioChanges(value: string) {
         const newValue = parseInt(value);
-        setValoresIndicador({ ...valoresIndicador, desafio: newValue });
-        colab_ind.desafio = newValue;
+        colabInd.desafio = newValue;
     }
 
     function handlePesoChanges(value: string) {
         const newValue = parseInt(value);
-        setValoresIndicador({ ...valoresIndicador, peso: newValue });
-        colab_ind.peso = newValue;
+        colabInd.peso = newValue;
     }
 
     function openCloseEdit() {
         setEditIsOpen(!editIsOpen);
     }
-
-    useEffect(() => {
-        //setando valores padrão, para caso o user não faça alterações não seja mandado -1 nas mestas
-        colab_ind.meta= 0;
-        colab_ind.superMeta= 0;
-        colab_ind.desafio= 0;
-        colab_ind.peso= 1;
-        //Dados mockados:
-        colab_ind.mes_ano = '2023-10-01T00:00:00.000Z'; 
-        //é preciso colocar o mes e ano atual, neste formato
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [editIsOpen])
 
     return (
         <li className="py-3 sm:py-4">
@@ -95,28 +77,28 @@ export function EditIndicator({ colaborador, colab_ind }: EditIndicatorProps) {
                                 <label className='font-bold'>
                                     Meta
                                 </label>
-                                <input className='border rounded-md h-[1.5rem] w-[4rem] text-center' type='number' defaultValue={valoresIndicador.meta} onChange={(e) => handleMetaChanges(e.target.value)} />
+                                <input className='border rounded-md h-[1.5rem] w-[4rem] text-center' type='number' defaultValue={colabInd.meta} onChange={(e) => handleMetaChanges(e.target.value)} />
                             </div>
 
                             <div className='flex flex-col gap-2'>
                                 <label className='font-bold'>
                                     Supermeta
                                 </label>
-                                <input className='border rounded-md h-[1.5rem] w-[4rem] text-center' type='number' defaultValue={valoresIndicador.supermeta} onChange={(e) => handleSupermetaChanges(e.target.value)} />
+                                <input className='border rounded-md h-[1.5rem] w-[4rem] text-center' type='number' defaultValue={colabInd.superMeta} onChange={(e) => handleSupermetaChanges(e.target.value)} />
                             </div>
 
                             <div className='flex flex-col gap-2'>
                                 <label className='font-bold'>
                                     Desafio
                                 </label>
-                                <input className='border rounded-md h-[1.5rem] w-[4rem] text-center' type='number' defaultValue={valoresIndicador.desafio} onChange={(e) => handleDesafioChanges(e.target.value)} />
+                                <input className='border rounded-md h-[1.5rem] w-[4rem] text-center' type='number' defaultValue={colabInd.desafio} onChange={(e) => handleDesafioChanges(e.target.value)} />
                             </div>
 
                             <div className='flex flex-col gap-2'>
                                 <label className='font-bold'>
                                     Peso
                                 </label>
-                                <input className='border rounded-md h-[1.5rem] w-[4rem] text-center' type='number' defaultValue={valoresIndicador.peso} onChange={(e) => handlePesoChanges(e.target.value)}  />
+                                <input className='border rounded-md h-[1.5rem] w-[4rem] text-center' type='number' defaultValue={colabInd.peso} onChange={(e) => handlePesoChanges(e.target.value)}  />
                             </div>
                         </div>
 

@@ -34,7 +34,7 @@ export default function Indicators() {
 
                     </div>
 
-                    <div className='grid grid-cols-2 gap-[4rem] ml-[8.25rem] items-center'>
+                    <div className='grid grid-cols-2 gap-[3rem] ml-[10.25rem] items-center'>
                         <button onClick={open} className='border rounded-10 border-cinza-100 h-[23.125rem] w-[29.75rem] hover:border-[#7D55EF] hover:border-2'>
                             
                             <div className='flex flex-col items-center justify-center h-[23.125rem] gap-2'>
