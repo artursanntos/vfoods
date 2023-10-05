@@ -2,14 +2,30 @@ import Textbox from "../Atomos/Textbox";
 import { useContext, useEffect, useState } from "react";
 import { IndicatorContext } from "../../contexts/IndicatorContext";
 import { VfoodsContext } from "../../contexts/VfoodsContext";
-import { colaboradorIndicadorType } from "../../types";
+import { colaboratorIndicatorType } from "../../types";
+import { ToastContainer, toast } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function ColaboradoresPage() {
-    const { allCollaborators, setAllCollab } = useContext(VfoodsContext);
+    
+    const { allCollaborators } = useContext(VfoodsContext);
     const { collaborator, setCollab, all_colab_ind, setAllColabInd } = useContext(IndicatorContext);
     const [filteredCollab, setFilteredCollab] = useState(allCollaborators);
     const iconStyles = ["h-6 w-6 text-vermelho", "h-6 w-6 text-vermelho rotate-[-45deg] ease-in-out duration-500"];
 
+    const collabAdd = () => {
+        toast.success('Colaborador adicionado com sucesso!', {
+            position: "top-right",
+            theme: "light",
+        });
+    }
+  
+    const collabRemove = () => {
+        toast.success('Colaborador removido com sucesso!', {
+            position: "top-right",
+            theme: "light",
+        });
+    }
 
     const isCollabAdded = (email: string) => {
         // Verifica se o colaborador já foi adicionado no contexto do indicador
@@ -28,7 +44,7 @@ export default function ColaboradoresPage() {
         })
 
         //Cria um colab-indic padrão
-        const colabInd: colaboradorIndicadorType = {
+        const colabInd: colaboratorIndicatorType = {
             mes_ano: "default",
             meta: -1,
             superMeta: -1,
@@ -43,15 +59,17 @@ export default function ColaboradoresPage() {
         // Verifica se o colaborador já foi adicionado no contexto do indicador
         if (collaborator.filter((collab) => collab.email === collabToBeAdded[0].email).length === 0) {
             setCollab([...collaborator, collabToBeAdded[0]]);
+            collabAdd()
             setAllColabInd([...all_colab_ind, colabInd]);
-            alert("Colaborador adicionado com sucesso!");
+          
         }
 
         // Se já foi adicionado, remove do contexto do indicador
         else {
             setCollab(collaborator.filter((collab) => collab.email !== collabToBeAdded[0].email));
+            collabRemove()
             setAllColabInd(all_colab_ind.filter((colInd) => colInd.idColaborador !== colabInd.idColaborador))
-            alert("Colaborador removido com sucesso!");
+           
         }
     }
 
@@ -70,7 +88,16 @@ export default function ColaboradoresPage() {
     }, [filteredCollab])
 
     return (
+        
         <div className='flex flex-col mt-6 gap-2 w-full'>
+
+            <ToastContainer
+            position="top-right"
+            autoClose={1000}
+            closeOnClick
+            theme="light"
+            />
+
             <div className='min-w-full mb-4'>
                 <Textbox label="Pesquisar" type="search" parentCallback={handleCallback} />
             </div>

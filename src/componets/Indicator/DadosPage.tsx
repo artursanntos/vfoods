@@ -1,15 +1,20 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import Textbox from "../Atomos/Textbox";
 import DropdownList from "../Atomos/DropdownList";
 import { IndicatorContext } from "../../contexts/IndicatorContext";
+import { VfoodsContext } from "../../contexts/VfoodsContext";
+import Api from "../../Api";
+import { indicatorType } from "../../types";
 
 export default function DadosPage() {
 
     const measureOptions = ["Número", "Percentual", "Financeiro"];
-    const { indicator, setIndicator } = useContext(IndicatorContext);
+    const { indicator, setIndicator, createEdit } = useContext(IndicatorContext);
+    const {manager} = useContext(VfoodsContext)
 
     function dateToString() {
-        const date = indicator.data_deadline;
+        
+        const date = new Date(indicator.data_deadline);
 
         if (date === undefined) {
             return '';
@@ -21,6 +26,27 @@ export default function DadosPage() {
         //console.log(resultDate);
         return resultDate;
         
+        
+    }
+
+    function clearIndicator() {
+        setIndicator({} as indicatorType)
+    }
+
+    function getIndicator(){
+        try {
+            const url = 'indicador/' + manager.id + '/' + createEdit
+
+            // console.log(manager.id);
+
+            Api.get(url).then(response => {
+                const indicador = response.data
+                setIndicator({...indicator, nome: indicador.nome, data_deadline: indicador.data_deadline, unidade_medida: indicador.unidade_medida, descricao: indicador.descricao})
+                //console.log(indicador)
+              })
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     const handleDateCallback = (childData: string) => {
@@ -39,6 +65,16 @@ export default function DadosPage() {
     const handleDescriptionCallback = (childData: string) => {
         setIndicator({ ...indicator, descricao: childData })
     }
+
+    useEffect (() => {
+        if (createEdit != 'Criar') {
+            getIndicator()
+        } else {
+            clearIndicator()
+        }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [createEdit])
 
 
     return (

@@ -22,11 +22,12 @@ export default function IndicatorsList({ id }: IndicatorListProps) {
         setStyleIndex([...styleIndex, newIndex]);
     }
 
-    const indicatorsThisMont = () => {
+    const indicatorsThisMonth = () => {
         const month = new Date().getMonth() + 1;
         //console.log(month);
         const monthString = month < 10 ? `0${month}` : `${month}`;
-        const url = `/colaborador-indicador/findAllOfColaboratorByMonth/` + id + `/2023-` + monthString + `-01T00:00:00.000Z`
+        const year = new Date().getFullYear();
+        const url = `/colaborador-indicador/findAllOfColaboratorByMonth/` + id + `/` + year + '-' + monthString + `-01T00:00:00.000Z`
         //console.log(url);
 
         Api.get(url).then((response) => {
@@ -42,7 +43,7 @@ export default function IndicatorsList({ id }: IndicatorListProps) {
     }
 
     useEffect(() => {
-        indicatorsThisMont();
+        indicatorsThisMonth();
     }, []);
 
     return (
