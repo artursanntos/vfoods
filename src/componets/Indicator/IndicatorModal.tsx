@@ -14,8 +14,8 @@ export default function IndicatorModal() {
     const { openModal, setOpenModal } = useContext(IndicatorContext);
     const [indicatorModalIsOpen, setIndicatorModalIsOpen] = useState(false);
     const [modalPage, setModalPage] = useState(0); // 0 = Dados, 1 = Colaboradores, 2 = Meta
-    const { createIndicator, setAllowUpdate, createEdit, setIndicator, indicator } = useContext(IndicatorContext);
-    const { allIndicators, setAllIndicators } = useContext(VfoodsContext);
+    const { createIndicator, updateIndicator, setAllColabInd, setCollab, createEdit, setCreateEdit, setIndicator } = useContext(IndicatorContext);
+    const { allIndicators } = useContext(VfoodsContext);
 
     function openIndicatorModal() {
         setIndicatorModalIsOpen(true);
@@ -26,17 +26,26 @@ export default function IndicatorModal() {
         setIndicatorModalIsOpen(false);
         setOpenModal(false);
         setIndicator({} as indicatorType)
+        setCreateEdit('')
+        setAllColabInd([])
+        setCollab([])
+        setModalPage(0)
     }
 
     function create() {  
         createIndicator();
-        setAllIndicators([...allIndicators, indicator]);
-        closeModal()
+        setCreateEdit('')
+        setIndicatorModalIsOpen(false);
+        setOpenModal(false);
+        setModalPage(0);
     }
 
     function update() {
-        setAllowUpdate(true)
-        closeModal()
+        updateIndicator(createEdit)
+        setIndicatorModalIsOpen(false);
+        setOpenModal(false);
+        setCreateEdit('')
+        setModalPage(0);
     }
 
     // Função que muda a página do modal

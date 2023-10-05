@@ -44,6 +44,7 @@ export default function DadosPage() {
                 setIndicator({...indicator, nome: indicador.nome, data_deadline: indicador.data_deadline, unidade_medida: indicador.unidade_medida, descricao: indicador.descricao})
                 //console.log(indicador)
               })
+
         } catch (error) {
             console.log(error)
         }

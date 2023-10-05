@@ -1,7 +1,8 @@
 import { colaboratorIndicatorType, collaboratorType } from '../../types';
 import editIconB from './assets/edit-b.svg'
 import editIconW from './assets/edit-w.svg'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { IndicatorContext } from '../../contexts/IndicatorContext';
 
 type EditIndicatorProps = {
     colaborador: collaboratorType;
@@ -12,6 +13,7 @@ export function EditIndicator({ colaborador, colab_ind }: EditIndicatorProps) {
     const indicador = { meta: 0, supermeta: 0, desafio: 0, peso: 1 }
     const [valoresIndicador, setValoresIndicador] = useState(indicador);
     const [editIsOpen, setEditIsOpen] = useState(false);
+    const {createEdit} = useContext(IndicatorContext)
 
     function handleMetaChanges(value: string) {
         const newValue = parseInt(value);
@@ -42,14 +44,24 @@ export function EditIndicator({ colaborador, colab_ind }: EditIndicatorProps) {
     }
 
     useEffect(() => {
-        //setando valores padrão, para caso o user não faça alterações não seja mandado -1 nas mestas
-        colab_ind.meta= 0;
-        colab_ind.superMeta= 0;
-        colab_ind.desafio= 0;
-        colab_ind.peso= 1;
-        //Dados mockados:
-        colab_ind.mes_ano = '2023-10-01T00:00:00.000Z'; 
-        //é preciso colocar o mes e ano atual, neste formato
+        if (createEdit == 'Criar') {
+            //setando valores padrão, para caso o user não faça alterações não seja mandado -1 nas mestas
+            colab_ind.meta= 0;
+            colab_ind.superMeta= 0;
+            colab_ind.desafio= 0;
+            colab_ind.peso= 1;
+            //Dados mockados:
+            const year = new Date().getFullYear();
+            const month = new Date().getMonth() + 1;
+            const monthString = month < 10 ? `0${month}` : `${month}`;
+            colab_ind.mes_ano = year + '-' + monthString + '-01T00:00:00.000Z'
+
+        } else {
+            console.log(colab_ind)
+            setValoresIndicador({...valoresIndicador, peso: colab_ind.peso, meta: colab_ind.meta, supermeta: colab_ind.superMeta, desafio: colab_ind.desafio})
+
+        }
+        
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [editIsOpen])
 

@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 export default function ColaboradoresPage() {
     
     const { allCollaborators } = useContext(VfoodsContext);
-    const { collaborator, setCollab, all_colab_ind, setAllColabInd } = useContext(IndicatorContext);
+    const { collaborator, setCollab, all_colab_ind, setAllColabInd, createEdit } = useContext(IndicatorContext);
     const [filteredCollab, setFilteredCollab] = useState(allCollaborators);
     const iconStyles = ["h-6 w-6 text-vermelho", "h-6 w-6 text-vermelho rotate-[-45deg] ease-in-out duration-500"];
 
@@ -82,6 +82,33 @@ export default function ColaboradoresPage() {
             }
         }))
     }
+
+    
+
+    function addForEdit() {
+        for (let x = 0; x < allCollaborators.length; x++) {
+            for (let i = 0; i < all_colab_ind.length; i++) {
+                if (allCollaborators[x].id == all_colab_ind[i].idColaborador) {
+                    setCollab(prevState => [...prevState, allCollaborators[x]]);
+                    console.log('Cheguei aqui') 
+                }
+            }
+        }
+        
+        console.log(collaborator)
+        console.log(all_colab_ind)
+    }
+
+    useEffect(() => {
+        if (createEdit != 'Criar') {
+            setCollab([])
+            addForEdit()
+            console.log('Cheguei useEffect')
+            
+        }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [createEdit])
 
     useEffect(() => {
 

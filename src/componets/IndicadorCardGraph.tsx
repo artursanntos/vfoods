@@ -20,27 +20,16 @@ type IndicadorCardGraphProps = {
 export default function IndicadorCardGraph({ indicador }: IndicadorCardGraphProps) {
     
     
-    const { updateIndicator, setAllowUpdate, setOpenModal, setCreateEdit, allowUpdate } = useContext(IndicatorContext);
+    const { setOpenModal, setCreateEdit, getAllIndicatorMonth } = useContext(IndicatorContext);
     const [cat, setCat] = useState<[][]>([]);
 
     function open() {
         setCreateEdit(indicador.nome)
+        getAllIndicatorMonth(indicador.id)
         setOpenModal(true)
         console.log('chegou open')
 
     }
-
-    function update() {
-        updateIndicator(indicador.nome)
-        setAllowUpdate(false)
-    }
-
-    useEffect (() => {
-        if (allowUpdate) {
-            update()
-        }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[allowUpdate])
   
     useEffect(() => {
         

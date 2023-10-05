@@ -4,6 +4,8 @@ import { IndicatorContext } from "../../contexts/IndicatorContext";
 
 export default function MetasPage() {
     const { collaborator, all_colab_ind } = useContext(IndicatorContext);
+
+    
     
     //É mandado como propriedade o colaborador-indicador referente ao colaborador que também é mandado
 
