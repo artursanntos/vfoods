@@ -30,7 +30,7 @@ export default function IndicatorsList({id}: IndicatorListProps)  {
         //console.log(url);
         
         Api.get(url).then((response) => {
-            console.log(response.data.colaboradorIndicadores)
+            //console.log(response.data.colaboradorIndicadores)
             setIndicatorList(response.data.colaboradorIndicadores);
         })
     }

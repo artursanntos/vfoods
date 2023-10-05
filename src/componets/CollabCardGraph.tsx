@@ -1,45 +1,34 @@
 import Api from "../Api";
-import LineGraph from "./LineGraph";
-import { useEffect, useState } from 'react';
+import CollabLineGraph from "./CollabLineGraph";
+import { useEffect, useState, useContext } from 'react';
+import { CollaboratorContext } from "../contexts/ColaboratorContext";
 
 type CollabCardGraphProps = {
-    collab: {
-        id: string,
-        nome: string,
-        //eh recebido todas informacoes de collab
-        //mas so essas sao usada
-    }
+    id: string;
 }
 
-//o tipo recebido é esse:
-/*
-export interface indicatorType {
-    id: string
-    nome: string
-    unidade_medida: string
-    descricao: string
-    data_deadline: Date
-    idGestor: string
-  }
-*/
-
-export default function CollabCardGraph({ collab }: CollabCardGraphProps) {
+export default function CollabCardGraph({ id }: CollabCardGraphProps) {
     
-    const [cat, setCat] = useState<[][]>([]);
+    const [data, setData] = useState<[][]>([]);
+    const { setLoadGraph } = useContext(CollaboratorContext);
 
-    /*useEffect(() => {
+    useEffect(() => {
         
         try{
-            Api.get('metas-mes-collab/'+collab.id).then(res =>{
+            const year = new Date().getFullYear();
+            const month = new Date().getMonth() + 1;
+
+            const url = `colaborador-indicador/getPercentualDeMetasBatidasLast6Months/` + id + `/` + year + '-' + month + `-01T00:00:00.000Z`
+            Api.get(url).then(res =>{
                 const aux = res.data;
-                setCat(aux); 
+                setData(aux); 
+                setLoadGraph(true);
                 
             })
         } catch (error) {
             console.log(error)
         }
-        
-      }, [])*/
+      }, [])
     
    
         
@@ -57,7 +46,7 @@ export default function CollabCardGraph({ collab }: CollabCardGraphProps) {
                     Indicadores
                 </h4>
                 <div className='mb-4'>
-                    <LineGraph mmsdInd={cat} />
+                    <CollabLineGraph msdamInd={data} />
                 </div>
             </div>
         </button>
