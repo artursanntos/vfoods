@@ -11,19 +11,37 @@ export default function IndicatorCardInfo({ indicatorInfo }: IndicatorCardInfoPr
 
     const [indicatorUnit, setIndicatorUnit] = useState<string>('');
     const [colaboratorName, setColaboratorName] = useState<string>('');
+    const [progressState, setProgressState] = useState<string>('');
+    const [progressText, setProgressText] = useState<string>('');
 
     const indicador = { meta: 0, supermeta: 0, desafio: 0, peso: 1 }
     const [valorResultado, setValorResultado] = useState(indicador);
 
     const getProgressColor = () => {
         const resultado = indicatorInfo.resultado;
-        console.log(resultado)
         if (resultado < indicatorInfo.meta) {
             return 'ciano'
         } else if (resultado < indicatorInfo.superMeta) {
             return 'roxo'
         } else {
             return 'vermelho'
+        }
+    }
+
+    const getProgressStyle = () => {
+        const resultado = indicatorInfo.resultado;
+        if (resultado < indicatorInfo.meta) {
+            setProgressState('Meta')
+            setProgressText(' está a caminho da meta!')
+        } else if (resultado < indicatorInfo.superMeta) {
+            setProgressState('Meta')
+            setProgressText(' atingiu a meta e foi um sucesso!')
+        } else if (resultado < indicatorInfo.desafio) {
+            setProgressState('Supermeta')
+            setProgressText(' atingiu a supermeta e foi um sucesso!')
+        } else {
+            setProgressState('Desafio')
+            setProgressText(' atingiu o desafio e foi um  sucesso!')
         }
     }
 
@@ -39,7 +57,6 @@ export default function IndicatorCardInfo({ indicatorInfo }: IndicatorCardInfoPr
     };
 
     const getIndicatorUnit = () => {
-        console.log(indicatorInfo.resultado)
         const url = `/indicador/info/byId/${indicatorInfo.idIndicador}`
         Api.get(url).then((response) => {
             setIndicatorUnit(response.data.unidade_medida);
@@ -63,7 +80,6 @@ export default function IndicatorCardInfo({ indicatorInfo }: IndicatorCardInfoPr
         if (progresso > 100) {
             return 100
         } else {
-
             return progressoFormatado;
         }
     }
@@ -77,11 +93,12 @@ export default function IndicatorCardInfo({ indicatorInfo }: IndicatorCardInfoPr
     useEffect(() => {
         getIndicatorUnit();
         getColaboratorName();
+        getProgressStyle();
     }, [])
 
     if (indicatorInfo.resultado == -1) {
         return (
-            <section className="max-w-fit min-w-[325px]
+            <section className="w-[325px]
             bg-slate-50
              rounded-17 drop-shadow-md
              align-middle">
@@ -119,14 +136,14 @@ export default function IndicatorCardInfo({ indicatorInfo }: IndicatorCardInfoPr
         )
     } else {
         return (
-            <section className="max-w-fit min-w-[325px]
+            <section className="w-[325px]
             bg-slate-50
              rounded-17 drop-shadow-md
              align-middle">
                 <div className="px-7 py-5" >
-                    <p className="font-semibold text-xl">MetaFUNCIONOU</p>
+                    <p className="font-semibold text-xl">{progressState}</p>
                     <p className="text-cinza-400"> &gt;unidade de medida: {indicatorUnit} </p>
-                    <p className="text-cinza-700"> {colaboratorName} atingiu o "VALOR" e foi <br /> um sucesso!</p>
+                    <p className="text-cinza-700"> {colaboratorName} {progressText}</p>
                     <div className="flex flex-row justify-evenly py-4">
                         <div className="flex flex-col flex-1 w-1/3 items-center">
                             <label className="font-semibold">
@@ -146,7 +163,7 @@ export default function IndicatorCardInfo({ indicatorInfo }: IndicatorCardInfoPr
                             <label className="font-semibold">
                                 Nota
                             </label>
-                            <p>--</p>
+                            <p>{indicatorInfo.notaIndicador}</p>
                         </div>
                     </div>
                     <Flowbite theme={{ theme: customTheme }} >
