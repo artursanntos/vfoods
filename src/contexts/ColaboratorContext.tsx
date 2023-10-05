@@ -10,6 +10,8 @@ interface CollaboratorContextType {
     createCollab: () => Promise<void>;
     lastSeen: string[];
     setLastSeen: Dispatch<SetStateAction<string[]>>
+    loadGraph: boolean;
+    setLoadGraph: Dispatch<SetStateAction<boolean>>;
 }
 
 interface CollaboratorProviderProps {
@@ -21,6 +23,7 @@ export const CollaboratorContext = createContext({} as CollaboratorContextType);
 export function CollaboratorProvider({ children }: CollaboratorProviderProps) {
     const [collaborator, setCollab] = useState<collaboratorType>({} as collaboratorType)
     const [lastSeen, setLastSeen] = useState<string[]>([] as string[])
+    const [loadGraph, setLoadGraph] = useState<boolean>(false);
     const { manager } = useContext(VfoodsContext);
 
     const createCollab = async () => {
@@ -46,7 +49,8 @@ export function CollaboratorProvider({ children }: CollaboratorProviderProps) {
     }
 
     return (
-        <CollaboratorContext.Provider value={{ collaborator, setCollab,  createCollab, lastSeen, setLastSeen }}>
+        <CollaboratorContext.Provider value={{ collaborator, setCollab,  createCollab, lastSeen, setLastSeen, loadGraph, setLoadGraph }}>
+
             {children}
         </CollaboratorContext.Provider>
     )

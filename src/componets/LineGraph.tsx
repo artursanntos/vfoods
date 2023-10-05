@@ -18,7 +18,7 @@ type LineGraphProps = {
 
 export default function LineGraph({ mmsdInd }: LineGraphProps) {
     
-    //console.log(mmsdInd.desafio)
+    //console.log(mmsdInd)
     
     return (
         <Plot
@@ -28,7 +28,7 @@ export default function LineGraph({ mmsdInd }: LineGraphProps) {
                     y: mmsdInd[1],      //metas
                     type: 'scatter',
                     mode: 'lines+markers',
-                    marker: { color: '#E51110' },
+                    marker: { color: '#5EE0F1' },
                     name: "Meta",
                 },
                 {
@@ -44,7 +44,7 @@ export default function LineGraph({ mmsdInd }: LineGraphProps) {
                     y: mmsdInd[3],      //desafios
                     type: 'scatter',
                     mode: 'lines+markers',
-                    marker: { color: '#5EE0F1' },
+                    marker: { color: '#E51110' },
                     name: "Desafio",
                 },
             ]}
