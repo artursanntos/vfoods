@@ -33,64 +33,10 @@ export default function CollabTable() {
     useEffect(() => {
         getLastSeenInfo();
         //console.log(lastSeenCollab);
-        loadNotas(lastSeenCollab)
         
     },[lastSeen])
 
-    async function loadNotas(colaboradores: collaboratorType[]): Promise<any> {
-        setArrayNotas([] as { colaborador: collaboratorType, nota: number }[]);
-        for (let i = 0; i < colaboradores.length; i++) {
-            const currMonth = new Date().getMonth() + 1;
-            const currYear = new Date().getFullYear();
-            const currMonthString = currMonth < 10 ? `0${currMonth}` : `${currMonth}`;
-            const url = `nota-mensal/${colaboradores[i].id}/${currMonthString}/${currYear}`;
-            console.log(url);
-
-            try {
-                const response = await Api.get(url);
-                const data = response.data;
-
-                //arrayNotas.push({ colaborador: colaboradores[i], nota: data.notaMensal });
-                setArrayNotas([...arrayNotas, { colaborador: colaboradores[i], nota: data.notaMensal }])
-                console.log({ colaborador: colaboradores[i], nota: data.notaMensal });
-                
-            } catch (error) {
-                console.error(`Ocorreu um erro ao carregar a nota para o colaborador ${colaboradores[i].id}`);
-            }
-        }
-    };
-
-    const createEstrelas = (nota: number) => {
-        let estrelas = [];
-
-        // -1 = Sem nota
-        if (nota === -1)
-            estrelas.push(<p className='text-gray-500 text-sm'>Sem nota</p>);
-
-        // 0 = Nota 0
-        else if (nota === 0)
-            estrelas.push(<img src="/src/assets/star.svg" alt="Estrela" className="w-4 h-4" />);
-
-        // 1-5 = Nota 1-5
-        else
-            for (let i = 0; i < nota; i++)
-                estrelas.push(<img src="/src/assets/star.svg" alt="Estrela" className="w-4 h-4" key={i} />);
-
-        return estrelas;
-    };
-
-    const returnEstrelas = (id: string) => {
-        // in the array arrayNotas, get the grade that corresponds to the id
-        console.log(id);
-        console.log(arrayNotas);
-        const nota = arrayNotas.find((element) => element.colaborador.id === id)?.nota;
-        console.log(nota);
-        if (nota != undefined) {
-            return createEstrelas(nota);
-        }
-        return 0;
-    }
-
+   
     const getDate = (date: Date) => {
         return new Date(date).toLocaleDateString('pt-BR');
     }
