@@ -94,40 +94,42 @@ export default function Collaborators() {
                         <Header />
                     </div>
 
-                    <div className='flex flex-col justify-between items-center w-[85%] h-full mx-10'>
+                    <div className='flex flex-col justify-center items-center w-[85%] h-full mx-10'>
 
-                        <div className='bg-vermelho w-full h-[2.75rem] flex items-center justify-start rounded-xl'>
-                            <div className='flex flex-row items-center justify-around w-[80%]'>
-                                <p className='text-white font-bold'>Colaborador</p>
-                                <p className='text-white font-bold'>Colocação</p>
-                                <p className='text-white font-bold'>Membro</p>
-                                <p className='text-white font-bold'>Status</p>
+                        <div className='bg-vermelho w-full h-[2.75rem] flex flex-row items-center justify-around rounded-xl'>
+                            <p className='text-white font-bold w-[20%] text-center'>Colaborador</p>
+                            <p className='text-white font-bold w-[20%] text-center'>Colocação</p>
+                            <p className='text-white font-bold w-[20%] text-center'>Membro</p>
+                            <p className='text-white font-bold w-[20%] text-center'>Status</p>
+
+                            <div className='w-[20%] items-center'>
+                                <button className='bg-azul font-bold text-sm rounded-2xl px-6 py-2 items-center w-max hover:bg-azul-800 hover:text-white transition duration-300 ease-in-out'>
+                                    <Link to='/new_collaborator'>Add Colaborador</Link>
+                                </button>
                             </div>
                         </div>
 
                         {tableData.length > 0 ? (
                             <ul className='w-full flex flex-col divide-y divide-gray-200 h-[90%] rounded-xl overflow-y-scroll'>
                                 {tableData.map((colaborador, index) => (
-                                    <li key={index} className='flex flex-row items-center justify-start w-full h-min my-2 relative'>
-                                        <div className='w-[80%] flex justify-around items-center'>
-                                            <div className='flex flex-row items-center mt-2 w-[30%]'>
-                                                <img src={colaborador.colaborador.imagem} alt="Foto do colaborador" className='w-[2.5rem] h-[2.5rem] rounded-full mr-2 object-cover' />
-                                                <div className='flex flex-col items-start justify-center'>
-                                                    <p className='font-bold'>{colaborador.colaborador.nome}</p>
-                                                    <p className='text-sm text-gray-500'>{colaborador.colaborador.email}</p>
-                                                </div>
-                                            </div>
-
-                                            <p className='text-gray-500 w-[10%] text-center'>#{index + 1}</p>
-                                            <p className='text-gray-500 w-[25%] text-center'>{colaborador.membro}</p>
-                                            <div className='flex flex-row items-center justify-center w-[15%]'>
-                                                {notaEstrelas(colaborador.status).map((estrela, index) => (
-                                                    <span key={index}>{estrela}</span>
-                                                ))}
+                                    <li key={index} className='flex flex-row items-center justify-around w-full h-min my-2'>
+                                        <div className='flex flex-row items-center mt-2 ml-2 w-[20%]'>
+                                            <img src={colaborador.colaborador.imagem} alt="Foto do colaborador" className='w-[2.5rem] h-[2.5rem] rounded-full mr-2 object-cover' />
+                                            <div className='flex flex-col items-start justify-center'>
+                                                <p className='font-bold'>{colaborador.colaborador.nome}</p>
+                                                <p className='text-sm text-gray-500'>{colaborador.colaborador.email}</p>
                                             </div>
                                         </div>
 
-                                        <Link to={`/collaborators/${colaborador.colaborador.id}`} className='absolute right-0 bottom-[10%] mr-16'>
+                                        <p className='text-gray-500 w-[20%] text-center'>#{index + 1}</p>
+                                        <p className='text-gray-500 w-[20%] text-center'>{colaborador.membro}</p>
+                                        <div className='flex flex-row items-center justify-center w-[22%]'>
+                                            {notaEstrelas(colaborador.status).map((estrela, index) => (
+                                                <span key={index}>{estrela}</span>
+                                            ))}
+                                        </div>
+
+                                        <Link to={`/collaborators/${colaborador.colaborador.id}`} className="flex justify-end pr-[5%] items-center w-[18%]">
                                             <button className='text-vermelho text-sm border-2 border-vermelho rounded-xl px-4 py-1 hover:bg-vermelho hover:text-white transition duration-300 ease-in-out'>
                                                 Ver Perfil
                                             </button>
@@ -138,10 +140,6 @@ export default function Collaborators() {
                         ) : (
                             <p className='my-2 text-gray-500 text-2xl font-bold text-center'>Carregando...</p>
                         )}
-
-                        <button className='bg-vermelho text-white text-sm rounded-md px-10 py-2 mt-6 mr-4 items-center w-max hover:bg-vermelho-700 transition duration-300 ease-in-out'>
-                            <Link to='/new_collaborator'>Add Colaborador</Link>
-                        </button>
                     </div>
                 </div>
             </div>
