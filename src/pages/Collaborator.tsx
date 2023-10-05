@@ -14,6 +14,7 @@ export default function Collaborator() {
     const params = useParams();
     const [collab, setCollab] = useState<collaboratorType>({} as collaboratorType);
     const [monthData, setMonthData] = useState<colaboratorIndicatorType[]>([] as colaboratorIndicatorType[]); 
+
     const collabId = params.id;
     const { lastSeen, setLastSeen}  = useContext(CollaboratorContext);
 
@@ -58,7 +59,7 @@ export default function Collaborator() {
             const url = `/colaborador-indicador/findAllOfColaboratorByMonth/` + collabId + `/` + year + '-' + monthString + `-01T00:00:00.000Z`
 
             Api.get(url).then((response) => {
-                console.log(response.data.colaboradorIndicadores)
+                //console.log(response.data.colaboradorIndicadores)
                 setMonthData([...monthData, response.data.colaboradorIndicadores]);
             })
         }
@@ -89,7 +90,7 @@ export default function Collaborator() {
                             <div className="flex flex-col justify-between items-center">
                                 <CollaboratorCard id={collabId} nome={collab.nome} cargo={collab.cargo} imagem={collab.imagem} email={collab.email} telefone={collab.telefone}/>
                                 <div className="mt-8">
-                                    <CollabCardGraph collab={collab}/>
+                                    <CollabCardGraph id={collabId}/>
                                 </div>
                                 
                             </div>
