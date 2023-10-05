@@ -8,6 +8,8 @@ interface CollaboratorContextType {
     collaborator: collaboratorType;
     setCollab: Dispatch<SetStateAction<collaboratorType>>
     createCollab: () => Promise<void>;
+    loadGraph: boolean;
+    setLoadGraph: Dispatch<SetStateAction<boolean>>;
 }
 
 interface CollaboratorProviderProps {
@@ -18,6 +20,7 @@ export const CollaboratorContext = createContext({} as CollaboratorContextType);
 
 export function CollaboratorProvider({ children }: CollaboratorProviderProps) {
     const [collaborator, setCollab] = useState<collaboratorType>({} as collaboratorType)
+    const [loadGraph, setLoadGraph] = useState<boolean>(false);
     const { manager } = useContext(VfoodsContext);
 
     const createCollab = async () => {
@@ -43,7 +46,7 @@ export function CollaboratorProvider({ children }: CollaboratorProviderProps) {
     }
 
     return (
-        <CollaboratorContext.Provider value={{ collaborator, setCollab,  createCollab }}>
+        <CollaboratorContext.Provider value={{ collaborator, setCollab,  createCollab, loadGraph, setLoadGraph }}>
             {children}
         </CollaboratorContext.Provider>
     )
