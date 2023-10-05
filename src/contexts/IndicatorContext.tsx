@@ -7,7 +7,7 @@ import Api from '../Api';
 interface IndicatorContextType {
     collaborator: collaboratorType[];
     setCollab: Dispatch<SetStateAction<collaboratorType[]>>
-    all_colab_ind: colaboratorIndicatorType[];//lista de colaboradores-indicadores
+    allCollabInd: colaboratorIndicatorType[];//lista de colaboradores-indicadores
     setAllColabInd: Dispatch<SetStateAction<colaboratorIndicatorType[]>>
     indicator: indicatorType;
     setIndicator: Dispatch<SetStateAction<indicatorType>>
@@ -18,7 +18,6 @@ interface IndicatorContextType {
     createIndicator: () => Promise<void>;
     updateIndicator: (nome: string) => Promise<void>;
     getAllColaboradorIndicador: (idIndicador: string) => void;
-    getAllIndicatorMonth: (idIndicador: string) => void;
 }
 
 interface IndicatorProviderProps {
@@ -29,11 +28,11 @@ export const IndicatorContext = createContext({} as IndicatorContextType);
 
 export function IndicatorProvider({ children }: IndicatorProviderProps) {
     const [collaborator, setCollab] = useState<collaboratorType[]>([])
-    const [all_colab_ind, setAllColabInd] = useState<colaboratorIndicatorType[]>([])
+    const [allCollabInd, setAllColabInd] = useState<colaboratorIndicatorType[]>([])
     const [indicator, setIndicator] = useState<indicatorType>({} as indicatorType)
     const [openModal, setOpenModal] = useState<boolean>(false)
     const [createEdit, setCreateEdit] = useState<string>('')
-    const { manager, allCollaborators, getIndicators } = useContext(VfoodsContext);
+    const { manager, getIndicators } = useContext(VfoodsContext);
 
     const createIndicator = async () => {
         
@@ -45,7 +44,7 @@ export function IndicatorProvider({ children }: IndicatorProviderProps) {
             }
 
             console.log(collaborator)
-            console.log(all_colab_ind)
+            console.log(allCollabInd)
 
             Api.post(url, {...indicator, idGestor: manager.id}, { headers }).then(response => {
                 console.log(response)
@@ -68,7 +67,7 @@ export function IndicatorProvider({ children }: IndicatorProviderProps) {
                     'Content-Type': 'application/json'
         }
         //Enviar uma requisicao para cada colaborador adiconado ao indicador
-        all_colab_ind.forEach(colabIndic => {
+        allCollabInd.forEach(colabIndic => {
             try {
     
                 Api.post(url, {...colabIndic, idIndicador: idIndicador}, { headers }).then(response => {
@@ -115,7 +114,7 @@ export function IndicatorProvider({ children }: IndicatorProviderProps) {
                     'Content-Type': 'application/json'
         }
         //Enviar uma requisicao para cada colaborador adiconado ao indicador
-        all_colab_ind.forEach(colabIndic => {
+        allCollabInd.forEach(colabIndic => {
             try {
                 const url = 'colaborador-indicador/' + colabIndic.id
                 console.log(url)
@@ -149,45 +148,8 @@ export function IndicatorProvider({ children }: IndicatorProviderProps) {
                     setAllColabInd(prevState => [...prevState, adicionar]);
 
                 })
-                console.log(all_colab_ind)
+                console.log(allCollabInd)
             });
-
-        } catch (error) {
-            console.log(error)
-        }
-        
-    }
-
-    const getAllIndicatorMonth = async (idIndicador:string) => {
-        
-        const month = new Date().getMonth() + 1;
-        const monthString = month < 10 ? `0${month}` : `${month}`;
-        const url = 'colaborador-indicador/findAllOfIndicatorByMonth/' + idIndicador + '/2023-' + monthString + '-01T00:00:00.000Z'
-        setCollab([])
-        
-        try {
-
-            Api.get(url).then(response => {
-                const indCol = response.data.colaboradorIndicadores
-                indCol.map((adicionar: colaboratorIndicatorType) => {
-                    console.log(adicionar)
-                    setAllColabInd(prevState => [...prevState, adicionar]);
-
-                })
-                console.log(all_colab_ind)
-            });
-
-            for (let x = 0; x < allCollaborators.length; x++) {
-                for (let i = 0; i < all_colab_ind.length; i++) {
-                    if (allCollaborators[x].id == all_colab_ind[i].idColaborador) {
-                        setCollab(prevState => [...prevState, allCollaborators[x]]);
-                        console.log('Cheguei aqui') 
-                    }
-                }
-            }
-            
-            console.log(collaborator)
-            console.log(all_colab_ind)
 
         } catch (error) {
             console.log(error)
@@ -196,7 +158,7 @@ export function IndicatorProvider({ children }: IndicatorProviderProps) {
     }
 
     return (
-        <IndicatorContext.Provider value={{ collaborator, setCollab, indicator, setIndicator, createIndicator, openModal, setOpenModal, createEdit, setCreateEdit, updateIndicator, all_colab_ind, setAllColabInd, getAllColaboradorIndicador, getAllIndicatorMonth }}>
+        <IndicatorContext.Provider value={{ collaborator, setCollab, indicator, setIndicator, createIndicator, openModal, setOpenModal, createEdit, setCreateEdit, updateIndicator, allCollabInd, setAllColabInd, getAllColaboradorIndicador }}>
             {children}
         </IndicatorContext.Provider>
     )

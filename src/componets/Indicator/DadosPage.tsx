@@ -4,13 +4,13 @@ import DropdownList from "../Atomos/DropdownList";
 import { IndicatorContext } from "../../contexts/IndicatorContext";
 import { VfoodsContext } from "../../contexts/VfoodsContext";
 import Api from "../../Api";
-import { indicatorType } from "../../types";
+import { indicatorType, colaboratorIndicatorType } from "../../types";
 
 export default function DadosPage() {
 
     const measureOptions = ["Número", "Percentual", "Financeiro"];
-    const { indicator, setIndicator, createEdit } = useContext(IndicatorContext);
-    const {manager} = useContext(VfoodsContext)
+    const { indicator, setIndicator, createEdit, setAllColabInd, setCollab, allCollabInd } = useContext(IndicatorContext);
+    const {manager, allCollaborators} = useContext(VfoodsContext)
 
     function dateToString() {
         
@@ -66,6 +66,52 @@ export default function DadosPage() {
     const handleDescriptionCallback = (childData: string) => {
         setIndicator({ ...indicator, descricao: childData })
     }
+
+    function addForEdit() {
+        const year = new Date().getFullYear();
+        const month = new Date().getMonth() + 1;
+        const monthString = month < 10 ? `0${month}` : `${month}`;
+        const url = 'colaborador-indicador/findAllOfIndicatorByMonth/' + indicator.id + '/' + year + '-' + monthString + '-01T00:00:00.000Z'
+        
+        try {
+
+            Api.get(url).then(response => {
+                const indCol = response.data.colaboradorIndicadores
+                indCol.map((adicionar: colaboratorIndicatorType) => {
+                    console.log(adicionar)
+                    setAllColabInd(prevState => [...prevState, adicionar]);
+
+                })
+                console.log(allCollabInd)
+            });
+
+            for (let x = 0; x < allCollaborators.length; x++) {
+                for (let i = 0; i < allCollabInd.length; i++) {
+                    if (allCollaborators[x].id == allCollabInd[i].idColaborador) {
+                        setCollab(prevState => [...prevState, allCollaborators[x]]);
+                        console.log('Cheguei aqui') 
+                    }
+                }
+            }
+            
+            
+            console.log('EIIIIIIIIIIII')
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        if (createEdit != 'Criar') {
+            setCollab([])
+            addForEdit()
+            console.log('Cheguei useEffect')
+            
+        }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [createEdit])
 
     useEffect (() => {
         if (createEdit != 'Criar') {
