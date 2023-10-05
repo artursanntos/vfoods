@@ -99,6 +99,10 @@ export default function CollabTable() {
         return id.slice(0, 5);
     }
 
+    const parsePhone = (phone: string) => {
+        return `(` + phone.slice(0, 2) + `) ` + phone.slice(2, 7) + `-` + phone.slice(7, 11);
+    }
+
     return (
         <>
         {lastSeenCollab.length === 0 && 
@@ -110,8 +114,8 @@ export default function CollabTable() {
                         <th className="font-medium px-4 py-2 text-left">Colaborador</th>
                         <th className="font-medium px-4 py-2 text-left">Cod</th>
                         <th className="font-medium px-4 py-2 text-left">Cargo</th>
+                        <th className="font-medium px-4 py-2 text-left">Contato</th>
                         <th className="font-medium px-4 py-2 text-left">Data de Admissão</th>
-                        <th className="font-medium px-4 py-2 text-left">Desempenho</th>
                         <th className="font-medium px-4 py-2 text-left"></th>
                     </tr>
                 </thead>
@@ -132,8 +136,8 @@ export default function CollabTable() {
                             </td>
                             <td className="px-4 py-2">{parseId(collaborator.id)}</td>
                             <td className="px-4 py-2">{collaborator.cargo}</td>
+                            <td className="px-4 py-2">{parsePhone(collaborator.telefone)}</td>
                             <td className="px-4 py-2">{getDate(collaborator.data_admissao)}</td>
-                            <td className="px-4 py-2">{returnEstrelas(collaborator.id)}</td>
                             <td className="px-4 py-2">
                                 <Link to={`/collaborators/${collaborator.id}`} className=''>
                                     <button className='text-branco text-sm border-2 border-preto bg-preto rounded-xl px-4 py-1 hover:bg-branco hover:text-preto transition duration-300 ease-in-out'>
