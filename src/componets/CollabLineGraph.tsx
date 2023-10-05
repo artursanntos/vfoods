@@ -34,7 +34,7 @@ export default function LineGraph({ msdamInd }: LineGraphProps) {
           // for each of the lists, add the first element to the meta list
           for (let i = 0; i < array.length; i++) {
             if (array[i].length != 0) {
-                meta.push(array[i][type] as unknown as number);
+                meta.push((array[i][type] * 100) as unknown as number);
               } 
           }
           //console.log(meta);
@@ -101,7 +101,7 @@ export default function LineGraph({ msdamInd }: LineGraphProps) {
                 width: 450,
                 height: 300,
                 showlegend: true,
-                yaxis: { showticklabels: true, title: { text: 'Quantidade' } },
+                yaxis: { showticklabels: true, title: { text: 'Quantidade (%)' } },
                 xaxis: { showgrid: true, tickmode: 'linear', dtick: 1, title: { text: 'Mês' } },
                 modebar: { remove: ["hoverCompareCartesian", "hovercompare", "lasso2d", "orbitRotation", "pan2d", "pan3d", "resetCameraDefault3d", "resetCameraLastSave3d", "resetGeo", "resetScale2d", "resetViewMapbox", "resetViews", "select2d", "sendDataToCloud", "tableRotation", "toImage", "toggleHover", "toggleSpikelines", "togglespikelines", "zoom2d", "zoom3d", "zoomIn2d", "zoomInGeo", "zoomInMapbox", "zoomOut2d", "zoomOutGeo", "zoomOutMapbox"] }
             }}

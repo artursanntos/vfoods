@@ -18,11 +18,13 @@ export default function CollabCardGraph({ id }: CollabCardGraphProps) {
             const year = new Date().getFullYear();
             const month = new Date().getMonth() + 1;
 
-            const url = `colaborador-indicador/getPercentualDeMetasBatidasLast6Months/` + id + `/` + year + '-' + month + `-01T00:00:00.000Z`
+            const url = `colaborador-indicador/getPercentualDeMetasBatidasLastXMonths/` + id + `/` + year + '-' + month + `-01T00:00:00.000Z`
             Api.get(url).then(res =>{
                 const aux = res.data;
                 setData(aux); 
                 setLoadGraph(true);
+                //console.log(res.data);
+                
                 
             })
         } catch (error) {
@@ -30,11 +32,6 @@ export default function CollabCardGraph({ id }: CollabCardGraphProps) {
         }
       }, [])
     
-   
-        
-    
-    
-
     return (
         
         <button
