@@ -6,105 +6,117 @@ import { CollaboratorContext } from '../contexts/ColaboratorContext';
 
 type HomePageLineGraphProps = {
     msdamInd: [][]
-    // msdamInd significa Meta, Super-meta, Desafio, Ano, Mês por Indicadores
-    /*
-    mmsdInd: {
-        esses valores sao referentes a um indicador
-
-        mmsdInd[X][0] = meta: number[], quantidade de metas batidas daquele mes
-        mmsdInd[X][1] = supermeta: number[], quantidade de super-metas batidas daquele mes
-        mmsdInd[X][2] = desafio: number[], quantidade de desafios batidos daquele mes
-        mmsdInd[X][3] = ano: number[] valor do ano
-        mmsdInd[X][4] = mes: number[] valor do mes
-    }
-    */
+    
 }
 
 export default function HomePageLineGraph({ msdamInd }: HomePageLineGraphProps) {
     
     const { loadGraph, setLoadGraph } = useContext(CollaboratorContext);
-    const [ array, setArray ] = useState<number[][]>([])
-    const [meta, setMeta] = useState<number[]>([]);
-    const [supermeta, setSupermeta] = useState<number[]>([]);
-    const [desafio, setDesafio] = useState<number[]>([]);
-    const [meses, setMeses] = useState<number[]>([]);
-
-    const extractMeta = (type: number): number[] => {
-        let meta: number[] = [];
-          // for each of the lists, add the first element to the meta list
-          for (let i = 0; i < array.length; i++) {
-            if (array[i].length != 0) {
-                meta.push(array[i][type] as unknown as number);
-              } 
-          }
-          //console.log(meta);
-          return meta;
-    }
-
-    const extractMeses = (): number[] => {
-        let meses: number[] = [];
-          // for each of the lists, add the first element to the meta list
-          for (let i = 0; i < array.length; i++) {
-            if (array[i].length != 0) {
-                meses.push(array[i][4] as unknown as number);
-              } 
-          }
-          //console.log(meses);
-          return meses;
-    }
+    const [ arrayValues, setArrayValues ] = useState<number[][]>([])
+    const [ arrayDates, setArrayDates ] = useState<number[]>([]);
+    const [ arrayMetas, setArrayMetas ] = useState<number[]>([]);
+    const [ arraySuperMetas, setArraySuperMetas ] = useState<number[]>([]);
+    const [ arrayDesafios, setArrayDesafios ] = useState<number[]>([]);
     
+    function sortByDatesAndReorder(dates: string[], numbers: number[]): [string[], number[]] {
+        // Zip the dates with their respective numbers
+        const zippedData = dates.map((date, index) => ({
+          date,
+          number: numbers[index],
+        }));
+      
+        // Sort the zipped data by dates
+        zippedData.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+      
+        // Unzip the sorted data into separate date and number arrays
+        const sortedDates = zippedData.map((item) => item.date);
+        const sortedNumbers = zippedData.map((item) => item.number);
+      
+        return [sortedDates, sortedNumbers];
+    }
+
+    const parseDate = (date: string): number => {
+        // i want to return just the month number (1-12)
+        const month = date.split('-')[1];
+        //console.log(parseInt(month));
+        return parseInt(month);
+
+    }
+
+    // a function that gets a list of months and calls parseDate on each of them
+    const parseDates = (dates: string[]): number[] => {
+        let parsedDates: number[] = [];
+        for (let i = 0; i < dates.length; i++) {
+            parsedDates.push(parseDate(dates[i]));
+        }
+        return parsedDates;
+    }
+
+
     useEffect(() => {
-        setArray(msdamInd);
+        console.log(msdamInd[0]);
+        
+        console.log(sortByDatesAndReorder(msdamInd[0], msdamInd[1]));
+        setArrayDates(parseDates(sortByDatesAndReorder(msdamInd[0], msdamInd[1])[0]));
+        setArrayMetas(sortByDatesAndReorder(msdamInd[0], msdamInd[1])[1]);
+        setArraySuperMetas(sortByDatesAndReorder(msdamInd[0], msdamInd[2])[1]);
+        setArrayDesafios(sortByDatesAndReorder(msdamInd[0], msdamInd[3])[1]);
+        
         setLoadGraph(false);
     }, [loadGraph])
 
-    useEffect(() => {
-        setMeta(extractMeta(0));
-        setSupermeta(extractMeta(1));
-        setDesafio(extractMeta(2));
-        setMeses(extractMeses());
-    }, [array])
-
     return (
-        <Plot
-            data={[
-                
-                {
-                    x: meses,      //mese_ano
-                    y: meta,      //metas
-                    type: 'scatter',
-                    mode: 'lines+markers',
-                    marker: { color: '#5EE0F1' },
-                    //line: { shape: 'spline', smoothing: 1.4},
-                    name: "Meta",
-                },
-                {
-                    x: meses,      //mese_ano
-                    y: supermeta,      //super-metas
-                    type: 'scatter',
-                    mode: 'lines+markers',
-                    marker: { color: '#7D55EF' },
-                    // line: { shape: 'spline', smoothing: 1.4},
-                    name: "Supermeta",
-                },
-                {
-                    x: meses,      //mese_ano
-                    y: desafio,      //desafios
-                    type: 'scatter',
-                    mode: 'lines+markers',
-                    marker: { color: '#E51110' },
-                    //line: { shape: 'spline', smoothing: 1.4},
-                    name: "Desafio",
-                },
-            ]}
-            layout={{
-                width: 450,
-                height: 300,
-                showlegend: true,
-                yaxis: { showticklabels: true, title: { text: 'Quantidade' } },
-                xaxis: { showgrid: true, tickmode: 'linear', dtick: 1, title: { text: 'Mês' } },
-                modebar: { remove: ["hoverCompareCartesian", "hovercompare", "lasso2d", "orbitRotation", "pan2d", "pan3d", "resetCameraDefault3d", "resetCameraLastSave3d", "resetGeo", "resetScale2d", "resetViewMapbox", "resetViews", "select2d", "sendDataToCloud", "tableRotation", "toImage", "toggleHover", "toggleSpikelines", "togglespikelines", "zoom2d", "zoom3d", "zoomIn2d", "zoomInGeo", "zoomInMapbox", "zoomOut2d", "zoomOutGeo", "zoomOutMapbox"] }
-            }}
-        />
+        <>
+        {!loadGraph &&
+            <Plot
+                data={[
+                    
+                    {
+                        x: [1,2,3,4,5,6,76,],      //mese_ano
+                        y: arrayMetas,      //metas
+                        type: 'scatter',
+                        mode: 'lines+markers',
+                        marker: { color: '#5EE0F1' },
+                        //line: { shape: 'spline', smoothing: 1.4},
+                        name: "Meta",
+                    },
+                    {
+                        x: [1,2,3,4,5,6,76,],      //mese_ano
+                        y: arraySuperMetas,      //super-metas
+                        type: 'scatter',
+                        mode: 'lines+markers',
+                        marker: { color: '#7D55EF' },
+                        // line: { shape: 'spline', smoothing: 1.4},
+                        name: "Supermeta",
+                    },
+                    {
+                        x: [1,2,3,4,5,6,76,],      //mese_ano
+                        y: arrayDesafios,      //desafios
+                        type: 'scatter',
+                        mode: 'lines+markers',
+                        marker: { color: '#E51110' },
+                        //line: { shape: 'spline', smoothing: 1.4},
+                        name: "Desafio",
+                    },
+                ]}
+                layout={{
+                    width: 450,
+                    height: 300,
+                    showlegend: true,
+                    yaxis: { showticklabels: true, title: { text: 'Quantidade' }},
+                    xaxis: { showgrid: true, tickmode: 'linear', dtick: 1, title: { text: 'Mês' } },
+                    modebar: { remove: ["hoverCompareCartesian", "hovercompare", "lasso2d", "orbitRotation", "pan2d", "pan3d", "resetCameraDefault3d", "resetCameraLastSave3d", "resetGeo", "resetScale2d", "resetViewMapbox", "resetViews", "select2d", "sendDataToCloud", "tableRotation", "toImage", "toggleHover", "toggleSpikelines", "togglespikelines", "zoom2d", "zoom3d", "zoomIn2d", "zoomInGeo", "zoomInMapbox", "zoomOut2d", "zoomOutGeo", "zoomOutMapbox"] }
+                }}
+            />
+        }
+        {!arrayDates && !arrayValues &&
+        <p>Carregando...</p>} 
+        </>
+        
+        
     );
 }
+
+//sortByDatesAndReorder(arrayDates, arrayValues[0]);
+
+/* */
