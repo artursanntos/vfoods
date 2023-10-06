@@ -60,7 +60,6 @@ export default function IndicatorCardInfo({ indicatorInfo }: IndicatorCardInfoPr
     const getIndicatorUnit = () => {
         const url = `/indicador/info/byId/${indicatorInfo.idIndicador}`
         Api.get(url).then((response) => {
-            console.log(response.data)
             setIndicatorUnit(response.data.unidade_medida);
         })
     }
@@ -76,7 +75,6 @@ export default function IndicatorCardInfo({ indicatorInfo }: IndicatorCardInfoPr
     const getColaboratorName = () => {
         const url = `/colaborador/${indicatorInfo.idColaborador}`
         Api.get(url).then((response) => {
-            console.log(response.data)
             setColaboratorName(response.data.nome);
         })
     }
@@ -107,10 +105,8 @@ export default function IndicatorCardInfo({ indicatorInfo }: IndicatorCardInfoPr
         indicatorInfo.resultado = valorInput
 
         Api.patch(url, { resultado: valorInput }, { headers }).then(response => {
-
             setNotaIndicador(response.data.updatedColaboradorIndicador.notaIndicador)
         });
-
         getProgressStyle()
         getIndicatorUnit()
     }
