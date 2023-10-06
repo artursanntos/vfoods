@@ -4,6 +4,7 @@ import { IndicatorContext } from '../contexts/IndicatorContext';
 import { useContext, useEffect, useState } from 'react';
 import { VfoodsContext } from "../contexts/VfoodsContext";
 import { colaboratorIndicatorType } from "../types";
+import { useNavigate } from "react-router-dom";
 
 
 type IndicadorCardGraphProps = {
@@ -25,6 +26,7 @@ export default function IndicadorCardGraph({ indicador }: IndicadorCardGraphProp
     const { allCollaborators } = useContext(VfoodsContext)
     const [ liberar, setLiberar] = useState(false)
     const [cat, setCat] = useState<[][]>([]);
+    const navigate = useNavigate();
 
     function open() {
         setCreateEdit(indicador.nome)
@@ -80,10 +82,6 @@ export default function IndicadorCardGraph({ indicador }: IndicadorCardGraphProp
         
       // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [liberar])
-
-    
-
-    
   
     useEffect(() => {
         
@@ -100,17 +98,20 @@ export default function IndicadorCardGraph({ indicador }: IndicadorCardGraphProp
       // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [])
 
+    const navegar = () => {
+        navigate(`/indicators/${indicador.id}`)
+    }
+
     return (
         <>
-            <button
-                onClick={() => { console.log('clicou') }}
-                className='border rounded-10 bg-white border-cinza-100 h-[23.125rem] w-[29.75rem]  hover:border-[#7D55EF] hover:border-2'>
+                              
+            <div className='border rounded-10 bg-white border-cinza-100 h-[23.125rem] w-[29.75rem]  hover:border-[#7D55EF] hover:border-2'>
 
                 <div className='flex flex-col'>
                     <div className="flex justify-between">
-                        <h4 className='text-2xl font-bold mt-4 ml-[1.75rem]'>
+                        <button onClick={navegar} className='text-2xl font-bold mt-4 ml-[1.75rem]'>
                             {indicador.nome}
-                        </h4>
+                        </button>
 
                         <button onClick={open} className="border border-cinza-400 rounded-10 h-[1.5rem] w-[5.75rem] mt-4 mr-[1.75rem] hover:border-[#7D55EF] hover:border-2">
                             Editar
@@ -123,8 +124,8 @@ export default function IndicadorCardGraph({ indicador }: IndicadorCardGraphProp
                     </div>
 
                 </div>
-            </button>
-
+            </div>
+            
         </>
     );
 }
