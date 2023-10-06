@@ -29,10 +29,6 @@ export default function DadosPage() {
         
     }
 
-    function clearIndicator() {
-        setIndicator({} as indicatorType)
-    }
-
     function getIndicator(){
         try {
             const url = 'indicador/' + manager.id + '/' + createEdit
@@ -94,8 +90,6 @@ export default function DadosPage() {
                 }
             }
             
-            
-            console.log('EIIIIIIIIIIII')
 
         } catch (error) {
             console.log(error)
@@ -106,7 +100,6 @@ export default function DadosPage() {
         if (createEdit != 'Criar') {
             setCollab([])
             addForEdit()
-            console.log('Cheguei useEffect')
             
         }
 
@@ -116,9 +109,9 @@ export default function DadosPage() {
     useEffect (() => {
         if (createEdit != 'Criar') {
             getIndicator()
-        } else {
-            clearIndicator()
         }
+
+    
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [createEdit])

@@ -3,7 +3,8 @@ import LineGraph from "./LineGraph";
 import { IndicatorContext } from '../contexts/IndicatorContext';
 import { useContext, useEffect, useState } from 'react';
 import { VfoodsContext } from "../contexts/VfoodsContext";
-import { colaboratorIndicatorType } from "../types";
+import { colaboratorIndicatorType, collaboratorType } from "../types";
+import { useNavigate } from "react-router-dom";
 
 
 type IndicadorCardGraphProps = {
@@ -21,14 +22,31 @@ type IndicadorCardGraphProps = {
 export default function IndicadorCardGraph({ indicador }: IndicadorCardGraphProps) {
     
     
-    const { setOpenModal, setCreateEdit, setAllColabInd, setCollab, collaborator, allCollabInd } = useContext(IndicatorContext);
+    const { setOpenModal, setCreateEdit, setAllColabInd, setCollab, setIndicator, collaborator, allCollabInd } = useContext(IndicatorContext);
     const { allCollaborators } = useContext(VfoodsContext)
     const [ liberar, setLiberar] = useState(false)
+    const [auxColabInd, setAuxColabInd] = useState<colaboratorIndicatorType[]>([])
+    const [auxColab, setAuxColab] = useState<collaboratorType[]>([])
     const [cat, setCat] = useState<[][]>([]);
+    const navigate = useNavigate();
 
     function open() {
         setCreateEdit(indicador.nome)
+        auxColab.map((collab) => {
+            setCollab(prevState => [...prevState, collab])
+        })
+        auxColabInd.map((collabInd) => {
+            setAllColabInd(prevState => [...prevState, collabInd])
+        })
+
+        
+        setLiberar(true)
+        
+    }
+
+    function setAux() {
         setCollab([])
+        setAllColabInd([])
 
         const year = new Date().getFullYear();
         const month = new Date().getMonth() + 1;
@@ -41,28 +59,25 @@ export default function IndicadorCardGraph({ indicador }: IndicadorCardGraphProp
                 const indCol = response.data.colaboradorIndicadores
                 indCol.map((adicionar: colaboratorIndicatorType) => {
                     console.log(adicionar)
-                    setAllColabInd(prevState => [...prevState, adicionar]);
+                    setAuxColabInd(prevState => [...prevState, adicionar]);
 
                 })
-                console.log(allCollabInd)
+                console.log(auxColabInd)
             });
 
             for (let x = 0; x < allCollaborators.length; x++) {
-                for (let i = 0; i < allCollabInd.length; i++) {
+                for (let i = 0; i < auxColabInd.length; i++) {
                     if (allCollaborators[x].id == allCollabInd[i].idColaborador) {
-                        setCollab(prevState => [...prevState, allCollaborators[x]]);
+                        setAuxColab(prevState => [...prevState, allCollaborators[x]]);
                         console.log('Cheguei aqui') 
                     }
                 }
             }
-            
-            
-            console.log('EIIIIIIIIIIII')
-            setLiberar(true)
 
         } catch (error) {
             console.log(error)
         }
+
     }
 
     function fluxo() {
@@ -77,13 +92,13 @@ export default function IndicadorCardGraph({ indicador }: IndicadorCardGraphProp
         if (liberar) {
             fluxo()
         }
-        
       // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [liberar])
 
-    
-
-    
+    useEffect (() => {
+        setAux()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
   
     useEffect(() => {
         
@@ -100,17 +115,32 @@ export default function IndicadorCardGraph({ indicador }: IndicadorCardGraphProp
       // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [])
 
+    const navegar = () => {
+        
+        const url = `/indicador/info/byId/${indicador.id}`
+        Api.get(url).then((response) => {
+            setIndicator(response.data);
+        })
+        
+        auxColab.map((collab) => {
+            setCollab(prevState => [...prevState, collab])
+        })
+        auxColabInd.map((collabInd) => {
+            setAllColabInd(prevState => [...prevState, collabInd])
+        })
+        navigate(`/indicators/${indicador.id}`)
+    }
+
     return (
         <>
-            <button
-                onClick={() => { console.log('clicou') }}
-                className='border rounded-10 bg-white border-cinza-100 h-[23.125rem] w-[29.75rem]  hover:border-[#7D55EF] hover:border-2'>
+                              
+            <div className='border rounded-10 bg-white border-cinza-100 h-[23.125rem] w-[29.75rem]  hover:border-[#7D55EF] hover:border-2'>
 
                 <div className='flex flex-col'>
                     <div className="flex justify-between">
-                        <h4 className='text-2xl font-bold mt-4 ml-[1.75rem]'>
+                        <button onClick={navegar} className='text-2xl font-bold mt-4 ml-[1.75rem]'>
                             {indicador.nome}
-                        </h4>
+                        </button>
 
                         <button onClick={open} className="border border-cinza-400 rounded-10 h-[1.5rem] w-[5.75rem] mt-4 mr-[1.75rem] hover:border-[#7D55EF] hover:border-2">
                             Editar
@@ -123,8 +153,8 @@ export default function IndicadorCardGraph({ indicador }: IndicadorCardGraphProp
                     </div>
 
                 </div>
-            </button>
-
+            </div>
+            
         </>
     );
 }

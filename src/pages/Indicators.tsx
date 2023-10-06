@@ -4,16 +4,18 @@ import { SideBar } from '../componets/SideBar/SideBar'
 import IndicatorModal from '../componets/Indicator/IndicatorModal';
 import IndicadorCardGraph from '../componets/IndicadorCardGraph';
 import { VfoodsContext } from '../contexts/VfoodsContext';
+import { indicatorType } from '../types';
 import { IndicatorContext } from '../contexts/IndicatorContext';
 
 
 export default function Indicators() {
 
-    const { setOpenModal, setCreateEdit } = useContext(IndicatorContext);
+    const { setOpenModal, setCreateEdit, setIndicator } = useContext(IndicatorContext);
     const { allIndicators } = useContext(VfoodsContext);
 
     function open() {
         setCreateEdit('Criar')
+        setIndicator({} as indicatorType)
         setOpenModal(true)
         console.log('chegou open')
 
