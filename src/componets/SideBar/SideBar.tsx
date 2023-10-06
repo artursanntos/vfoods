@@ -1,8 +1,18 @@
 import { ButtonSB } from './ButtonSB';
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContext';
 
 export function SideBar(){
+
+    const auth = useAuth();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        //console.log('logout');
+        auth.logout();
+        navigate('/login');
+    }
+
     return (
         <div className="flex flex-col items-center h-screen fixed overflow-y-auto z-50 w-[15rem] max-w-[15rem] bg-branco border-r border-azul-400">
             <div className="pt-16">
@@ -40,9 +50,9 @@ export function SideBar(){
                 <div className="flex flex-col mb-16">
                                   
                     <div className="SideBarItem">
-                        <Link to={"/login"}>
+                        <button onClick={() => handleLogout()}>
                             <ButtonSB pathIcon={"/src/componets/SideBar/assets/IconSair.png"} buttonText={'Sair'} />
-                        </Link>
+                        </button>
                     </div>
                     
                     

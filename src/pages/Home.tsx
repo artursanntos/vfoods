@@ -1,7 +1,7 @@
 import { Header } from '../componets/Header/Header'
 import { SideBar } from '../componets/SideBar/SideBar'
 import { VfoodsContext } from '../contexts/VfoodsContext'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { ToastContainer, toast } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
 import HomePageCardGraph from '../componets/HomePageGraph'
@@ -13,6 +13,7 @@ import { IndicatorContext } from '../contexts/IndicatorContext';
 import IndicatorModal from '../componets/Indicator/IndicatorModal';
 import CollabTable from '../componets/Homepage/CollabTable';
 import { CollaboratorContext } from '../contexts/ColaboratorContext'
+import Api from '../Api'
 
 
 export default function Home() {
@@ -20,6 +21,7 @@ export default function Home() {
     const {addModal, setAddModal, manager } = useContext(VfoodsContext)
     const { setOpenModal } = useContext(IndicatorContext);
     const { lastSeen, setLastSeen } = useContext(CollaboratorContext);
+    const [ progressValue, setProgressValue ] = useState(0);
     // const redirectTo = useNavigate();
 
     const getFirstName = () => {
@@ -31,17 +33,46 @@ export default function Home() {
         return '';
     }
 
+    const teamMessage = () => {
+        if (progressValue < 0.5) {
+            return 'Sua equipe está abaixo da média este mês, clique aqui para saber mais.'
+        } else if (progressValue < 0.8) {
+            return 'Sua equipe está indo bem este mês, clique aqui para saber mais.'
+        } else if  (progressValue < 1) {
+            return 'Sua equipe está indo muito bem este mês! Saiba mais clicando aqui.'
+        }
+        return 'Parabéns, todas as metas do mês foram batidas! Saiba mais clicando aqui.'
+    }
+
+    const getProgress = async ()  => {
+        try {
+            const year = new Date().getFullYear();
+            const month = new Date().getMonth() + 1;
+            const monthString = month < 10 ? `0${month}` : `${month}`;
+            const fullDate = year + '-' + monthString + `-01T00:00:00.000Z`;
+            const url = `/metas-mes-indicador/auxGraph/circularPB/FromHome/` + fullDate
+            await Api.get(url).then(res =>{
+                setProgressValue(res.data);
+            }) 
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    
+
     const getProgressCircle = () => {
         return (
             <div className="w-[10rem]">
-                <CircularProgressbar value={20}
+                <CircularProgressbar value={progressValue*100}
                 styles={buildStyles({
                     trailColor: 'transparent',
                     pathColor: '#5EE0F1',
                     textColor: '#FBFBFB',
+                    pathTransitionDuration: 1,
                 })}
                 
-                text="20%"
+                text={`${progressValue*100}%`}
                 strokeWidth={18}
                 />
             </div>
@@ -77,6 +108,7 @@ export default function Home() {
     }, [addModal])
 
     useEffect(() => {
+        getProgress();
         const lastSeenLocal = localStorage.getItem('lastSeen')
         if (lastSeenLocal) {
             setLastSeen(JSON.parse(lastSeenLocal))
@@ -114,7 +146,7 @@ export default function Home() {
                             <HomePageCardGraph collab={manager}/>
                             <div className='flex flex-col items-center justify-center gap-20'>
                                 <Link to="/collaborators">
-                                    <BlackButton title='Atenção!' helpText='Sua equipe está abaixo da média este mês,clique aqui para saber mais' icon={getProgressCircle()}/>
+                                    <BlackButton title='Atenção!' helpText={teamMessage()} icon={getProgressCircle()}/>
                                 </Link>
                                 <BlackButton title='Criar um indicador a partir de um template' helpText='Agora ficou mais fácil criar o indicador! Clique aqui para saber mais' icon={getIconElement()} onClickFunc={() => openIndicatorCreation()}/>                        
                             </div>
@@ -136,3 +168,4 @@ export default function Home() {
 
     )
 }
+

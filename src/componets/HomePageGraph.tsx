@@ -1,6 +1,8 @@
 import Api from "../Api";
+import { CollaboratorContext } from "../contexts/ColaboratorContext";
+import HomePageLineGraph from "./HomePageLineGraph";
 import LineGraph from "./LineGraph";
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 type HomePageCardGraphProps = {
     collab: {
@@ -25,23 +27,44 @@ export interface indicatorType {
 
 export default function HomePageCardGraph({ collab }: HomePageCardGraphProps) {
     
-    const [cat, setCat] = useState<[][]>([]);
+    const [data, setData] = useState<[][]>([]);
+    const { loadGraph, setLoadGraph } = useContext(CollaboratorContext);
 
-    /*useEffect(() => {
-        
+    const loadData = async () => {
         try{
-            Api.get('metas-mes-collab/'+collab.id).then(res =>{
+            const year = new Date().getFullYear();
+            const month = new Date().getMonth() + 1;
+            const monthString = month < 10 ? `0${month}` : `${month}`;
+            const fullDate = year + '-' + monthString + `-01T00:00:00.000Z`;
+            console.log(fullDate);
+            
+
+            const url = `/metas-mes-indicador/auxGraph/byInterval/` + fullDate + `/` + 6
+            await Api.get(url).then(res =>{
                 const aux = res.data;
-                setCat(aux); 
-                
+                setData(aux);
+                console.log(res.data);
             })
         } catch (error) {
             console.log(error)
         }
+    }
+
+    useEffect(() => {
+        const waitLoad = async () => {
+            await loadData();
+        }
         
-      }, [])*/
+        waitLoad();
+        setLoadGraph(false);
+        
+      }, [])
+      
+
+    useEffect(() => {
+    console.log(data);
     
-   
+    }, [loadGraph])
         
     
     
@@ -57,7 +80,7 @@ export default function HomePageCardGraph({ collab }: HomePageCardGraphProps) {
                     Desempenho geral
                 </h4>
                 <div className='mb-4'>
-                    <LineGraph mmsdInd={cat} />
+                    {data.length > 0 ? <HomePageLineGraph msdamInd={data} /> : <h1>Carregando</h1>}
                 </div>
             </div>
         </button>

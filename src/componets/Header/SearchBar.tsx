@@ -1,6 +1,5 @@
 import { useContext, useState, useEffect, useRef } from 'react';
 import { VfoodsContext } from '../../contexts/VfoodsContext';
-import iconSearch from './assets/IconSearch.png';
 import { collaboratorType, indicatorType } from '../../types';
 import { Link } from 'react-router-dom';
 
@@ -50,24 +49,17 @@ export function SearchBar() {
 
     return (
         <div className='w-[32.15rem] flex flex-col'>
-            <div className="border border-cinza-300 rounded-19 h-[3.5rem] w-[32.15rem]">
-                <input
-                    type="text"
-                    ref={searchInputRef}
-                    className="float-left bg-transparent pl-[2.25rem] pt-4 mr-[3rem] italic text-lg border-none w-[24rem] placeholder:text-cinza-300 focus:shadow-none outline-none"
-                    placeholder="Pesquise colaboradores e indicadores"
-                    value={searchValue}
-                    onChange={(e) => handleSearch(e.target.value)}
-                />
-                <img
-                    src={iconSearch}
-                    className="w-[2.75rem] pt-[0.3rem]"
-                    alt="Buscar"
-                />
-            </div>
+            <input
+                type="text"
+                ref={searchInputRef}
+                className="border border-cinza-300 rounded-19 h-[3.5rem] w-full bg-transparent px-6 text-lg placeholder:text-cinza-300 focus:shadow-none focus:outline-none outline-none focus:border-transparent"
+                placeholder="Pesquise colaboradores e indicadores"
+                value={searchValue}
+                onChange={(e) => handleSearch(e.target.value)}
+            />
 
             {showResults && (
-                <div className="bg-white border border-cinza-300 rounded-19 mt-[3.5rem] h-max w-[32.15rem] z-49 absolute">
+                <div className="bg-white border border-cinza-300 rounded-19 mt-[3.5rem] h-max w-[32.15rem] z-40 absolute">
                     <p className="text-gray-500 text-sm pt-2 pl-2">Colaboradores</p>
 
                     {filteredCollaborators.length === 0 &&
