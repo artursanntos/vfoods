@@ -3,7 +3,7 @@ import { Header } from "../componets/Header/Header";
 import { SideBar } from "../componets/SideBar/SideBar";
 import { useContext, useEffect, useState } from "react";
 import Api from "../Api";
-import { colaboratorIndicatorType, collaboratorType } from "../types";
+import { collaboratorType } from "../types";
 import CardGraphIndicator from "../componets/CardGraphIndicator";
 import { Link } from "react-router-dom";
 import { IndicatorContext } from "../contexts/IndicatorContext";
@@ -12,10 +12,9 @@ import { VfoodsContext } from "../contexts/VfoodsContext";
 export default function IndicatorPage() {
 
     const params = useParams();
-    const [monthData, setMonthData] = useState<colaboratorIndicatorType[]>([]);
     const [tableData, setTableData] = useState([] as { colaborador: collaboratorType, membro: string, status: number }[]);
     const {allCollaborators} = useContext(VfoodsContext)
-    const {indicator, allCollabInd, collaborator, setCollab, setAllColabInd} = useContext(IndicatorContext)
+    const {indicator, allCollabInd, collaborator, setCollab} = useContext(IndicatorContext)
     const [Page, setPage] = useState(0)
     const [open, setOpen] = useState(0)
     const collabId = params.id
