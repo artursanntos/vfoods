@@ -114,7 +114,7 @@ export default function Home() {
                             <HomePageCardGraph collab={manager}/>
                             <div className='flex flex-col items-center justify-center gap-20'>
                                 <Link to="/collaborators">
-                                    <BlackButton title='Atenção!' helpText='Sua equipe está abaixo da média este mês,clique aqui para saber mais' icon={getProgressCircle()}/>
+                                    <BlackButton title='Atenção!' helpText='Sua equipe está abaixo da média este mês! Clique aqui para saber mais' icon={getProgressCircle()}/>
                                 </Link>
                                 <BlackButton title='Criar um indicador a partir de um template' helpText='Agora ficou mais fácil criar o indicador! Clique aqui para saber mais' icon={getIconElement()} onClickFunc={() => openIndicatorCreation()}/>                        
                             </div>
