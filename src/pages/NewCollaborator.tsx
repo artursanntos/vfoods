@@ -11,6 +11,7 @@ export default function NewCollaborator() {
 
     const [indicatorModalIsOpen, setIndicatorModalIsOpen] = useState(false);
     const [imagemAdicionada, setimagemAdicionada] = useState(false);
+    const [mudou, setMudou] = useState(false)
     const {collaborator, setCollab} = useContext(CollaboratorContext)
     const {createCollab} = useContext(CollaboratorContext)
     const { setAddModal, setAllCollab, allCollaborators } = useContext(VfoodsContext)
@@ -21,6 +22,7 @@ export default function NewCollaborator() {
 
     const handleImage = (childData: string) => {
         setCollab({...collaborator, imagem: childData})
+        setMudou(true)
     }
 
     const handleEmail = (childData: string) => {
@@ -63,7 +65,9 @@ export default function NewCollaborator() {
 
     function closeModal() {
         setIndicatorModalIsOpen(false)
-        setimagemAdicionada(true)
+        if (mudou == true) {
+            setimagemAdicionada(true)
+        }
         checadorImagem()
     }
 
@@ -120,7 +124,7 @@ export default function NewCollaborator() {
                             <Textbox label="Email" type="email" parentCallback={handleEmail} />
                         </div>
 
-                        <div className="ml-[4rem] h-[3.5rem] w-[24.5rem]">
+                        <div className="ml-[4rem] h-[3.5rem] w-[24.5rem] ">
                             <Textbox label="Senha" type="password" parentCallback={handleSenha} /> 
                         </div>
 
