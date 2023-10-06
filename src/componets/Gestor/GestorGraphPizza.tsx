@@ -4,18 +4,21 @@ type GestorGraphPizzaProps = {
     meta: number;
     supermeta: number;
     desafio: number;
+    naoAtingiu: number;
 }
 
-export default function GestorGraphPizza({ meta, supermeta, desafio }: GestorGraphPizzaProps) {
+export default function GestorGraphPizza({ meta, supermeta, desafio, naoAtingiu }: GestorGraphPizzaProps) {
+    //console.log("PIZZA -- ", meta, supermeta, desafio, naoAtingiu)
+    
     var data = [
         {
-            values: [meta, supermeta, desafio],
-            labels: ['Meta', 'Supermeta', 'Desafio'],
+            values: [meta, supermeta, desafio, naoAtingiu],
+            labels: ['Meta', 'Supermeta', 'Desafio', 'Não atingiu a meta'],
             marker: {
-                colors: ['#5EE0F1', '#7D55EF', '#E51110']
+                colors: ['#5EE0F1', '#7D55EF', '#E51110', '#C4C4C4'],
             },
             type: "pie",
-            hoverinfo: 'label+percent',
+            hoverinfo: 'label+value',
         },
     ];
 
