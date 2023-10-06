@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { indicatorType } from "../types";
 import Api from "../Api";
-import IndicadorCardGraph from "../componets/Indicator/IndicadorCardGraph";
 import IndicadorPageCardGraph from "../componets/Indicator/IndicadorPageCardGraph";
 import IndicadorCardPizza from "../componets/Indicator/IndicadorCardPizza";
 
@@ -30,6 +29,7 @@ export default function IndicatorPage2() {
 
     useEffect(() => {
         handleGetIndicator();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {

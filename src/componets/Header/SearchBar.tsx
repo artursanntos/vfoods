@@ -2,6 +2,9 @@ import { useContext, useState, useEffect, useRef } from 'react';
 import { VfoodsContext } from '../../contexts/VfoodsContext';
 import { collaboratorType, indicatorType } from '../../types';
 import { Link } from 'react-router-dom';
+import { IndicatorContext } from '../../contexts/IndicatorContext';
+import { colaboratorIndicatorType } from '../../types';
+import Api from '../../Api';
 
 export function SearchBar() {
     const { allCollaborators, allIndicators } = useContext(VfoodsContext);
@@ -10,6 +13,7 @@ export function SearchBar() {
     const [filteredIndicators, setFilteredIndicators] = useState([] as indicatorType[]);
     const [showResults, setShowResults] = useState(false);
     const [searchValue, setSearchValue] = useState('');
+    const {setAllColabInd, setCollab, setIndicator, allCollabInd} = useContext(IndicatorContext)
 
     const filterItems = (items: any, search: string) => {
         return items
@@ -46,6 +50,45 @@ export function SearchBar() {
             document.removeEventListener('click', handleClickOutside);
         };
     }, []);
+
+    const searchChanges = async (id: string) => {
+
+        const url = '/indicador/info/byId/' + id;
+        const response = await Api.get(url);
+        setIndicator(response.data);
+
+        setCollab([])
+        const year = new Date().getFullYear();
+        const month = new Date().getMonth() + 1;
+        const monthString = month < 10 ? `0${month}` : `${month}`;
+        const url2 = 'colaborador-indicador/findAllOfIndicatorByMonth/' + id + '/' + year + '-' + monthString + '-01T00:00:00.000Z'
+        
+        try {
+
+            Api.get(url2).then(response => {
+                const indCol = response.data.colaboradorIndicadores
+                indCol.map((adicionar: colaboratorIndicatorType) => {
+                    console.log(adicionar)
+                    setAllColabInd(prevState => [...prevState, adicionar]);
+
+                })
+                console.log(allCollabInd)
+            });
+
+            for (let x = 0; x < allCollaborators.length; x++) {
+                for (let i = 0; i < allCollabInd.length; i++) {
+                    if (allCollaborators[x].id == allCollabInd[i].idColaborador) {
+                        setCollab(prevState => [...prevState, allCollaborators[x]]);
+                        console.log('Cheguei aqui') 
+                    }
+                }
+            }
+            
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return (
         <div className='w-[32.15rem] flex flex-col'>
@@ -93,7 +136,7 @@ export function SearchBar() {
                     <ul className="divide-y divide-cinza-300 max-h-[50%] overflow-y-scroll p-2">
                         {filteredIndicators.map((indicator) => (
                             <li key={indicator.id} className='h-[3rem] hover:bg-azul hover:round hover:rounded-3xl items-center'>
-                                <Link to={`/indicators/${indicator.id}`}>
+                                <Link onClick={() => searchChanges(indicator.id)} to={`/indicators/${indicator.id}`}>
                                     <p className="ml-2 p-2 items-center">
                                         {indicator.nome}
                                     </p>

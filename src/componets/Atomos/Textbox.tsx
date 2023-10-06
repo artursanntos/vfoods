@@ -38,7 +38,7 @@ export default function Textbox({ label, type, parentCallback, currentValue }: T
                 <input placeholder={label}
                     type={type}
                     ref={inputRef}
-                    className="w-[22.5rem] h-[2.75] px-5 py-3 border-hidden outline-none outline-0 rounded-17 placeholder:text-cinza-500 placeholder:font-bold"
+                    className="w-[22.5rem] h-[2.75] px-5 py-3 border-hidden focus:outline-none outline-none outline-0 rounded-17 placeholder:text-cinza-500 placeholder:font-bold"
                     onChange={(e) => parentCallback(e.target.value)}
                     value={currentValue}
                 />
