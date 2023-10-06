@@ -4,7 +4,7 @@ import DropdownList from "../Atomos/DropdownList";
 import { IndicatorContext } from "../../contexts/IndicatorContext";
 import { VfoodsContext } from "../../contexts/VfoodsContext";
 import Api from "../../Api";
-import { colaboratorIndicatorType } from "../../types";
+import { indicatorType, colaboratorIndicatorType } from "../../types";
 
 export default function DadosPage() {
 
