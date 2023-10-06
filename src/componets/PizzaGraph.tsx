@@ -1,13 +1,13 @@
 import Plot from "react-plotly.js"
 
-type GestorGraphPizzaProps = {
+type PizzaGraphProps = {
     meta: number;
     supermeta: number;
     desafio: number;
     naoAtingiu: number;
 }
 
-export default function GestorGraphPizza({ meta, supermeta, desafio, naoAtingiu }: GestorGraphPizzaProps) {
+export default function PizzaGraph({ meta, supermeta, desafio, naoAtingiu }: PizzaGraphProps) {
     //console.log("PIZZA -- ", meta, supermeta, desafio, naoAtingiu)
     
     var data = [

@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from "react"
-import GestorGraphPizza from "./GestorGraphPizza"
+import PizzaGraph from "../PizzaGraph"
 import { VfoodsContext } from "../../contexts/VfoodsContext"
 import Api from "../../Api"
 
@@ -48,7 +48,7 @@ export default function CardPizza() {
                     <p className="mt-1 text-gray-500">Status de diferentes indicadores e de todos os colaboradores</p>
                 </div>
                 <div className='flex justify-center items-center'>
-                    <GestorGraphPizza meta={meta - supermeta} supermeta={supermeta - desafio} desafio={desafio} naoAtingiu={(total - meta) > 0 ? (total - meta) : 0} />
+                    <PizzaGraph meta={meta - supermeta} supermeta={supermeta - desafio} desafio={desafio} naoAtingiu={(total - meta) > 0 ? (total - meta) : 0} />
                 </div>
             </div>
         </div>
