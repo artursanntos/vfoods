@@ -51,7 +51,7 @@ export function IndicatorProvider({ children }: IndicatorProviderProps) {
                 setIndicator(response.data)
                 getIndicators(manager)
                 //É necessário que isto seja feito aqui pois é preciso o id do indicador, que só é obtido quando se faz o post
-                createColaboradorIndicador(response.data.id)
+                createColaboradorIndicador(response.data)
 
             });
         } catch (error) {
@@ -59,9 +59,9 @@ export function IndicatorProvider({ children }: IndicatorProviderProps) {
         }
     }
 
-    const createColaboradorIndicador = async (idIndicador:string) => {
+    const createColaboradorIndicador = async (indicador: indicatorType) => {
 
-        const url = 'colaborador-indicador/'
+        const url = 'colaborador-indicador/createMany/' + indicador.data_deadline
     
         const headers = {
                     'Content-Type': 'application/json'
@@ -69,8 +69,8 @@ export function IndicatorProvider({ children }: IndicatorProviderProps) {
         //Enviar uma requisicao para cada colaborador adiconado ao indicador
         allCollabInd.forEach(colabIndic => {
             try {
-    
-                Api.post(url, {...colabIndic, idIndicador: idIndicador}, { headers }).then(response => {
+                
+                Api.post(url, {...colabIndic, idIndicador: indicador.id}, { headers }).then(response => {
                     console.log(response)
                 });
     
@@ -97,7 +97,8 @@ export function IndicatorProvider({ children }: IndicatorProviderProps) {
             console.log(indicator);
             console.log(id)
 
-            Api.put(url, {...indicator}, { headers }).then(response => {
+            Api.put(url, {id: indicator.id, nome: indicator.nome, unidade_medida: indicator.unidade_medida, 
+                data_deadline: indicator.data_deadline, descricao: indicator.descricao, idGestor: indicator.idGestor}, { headers }).then(response => {
                 console.log(response)
             });
 
@@ -117,15 +118,15 @@ export function IndicatorProvider({ children }: IndicatorProviderProps) {
         allCollabInd.forEach(colabIndic => {
             try {
                 const url = 'colaborador-indicador/' + colabIndic.id
-                console.log(url)
     
-                Api.patch(url, {...colabIndic}, { headers }).then(response => {
+                Api.patch(url, {mes_ano: colabIndic.mes_ano, meta: colabIndic.meta, superMeta: colabIndic.superMeta, desafio: colabIndic.desafio, peso: colabIndic.peso, 
+                    resultado: colabIndic.resultado, notaIndicador: colabIndic.notaIndicador, idColaborador: colabIndic.idColaborador, idIndicador: colabIndic.idIndicador}, { headers }).then(response => {
                     console.log(response)
                 });
     
             } catch (error) {
                 console.log(error)
-                createColaboradorIndicador(indicator.id)
+                createColaboradorIndicador(indicator)
             }
         });
 
