@@ -7,8 +7,8 @@ import Api from '../Api';
 interface IndicatorContextType {
     collaborator: collaboratorType[];
     setCollab: Dispatch<SetStateAction<collaboratorType[]>>
-    colabInd: colaboratorIndicatorType[];
-    setColabInd: Dispatch<SetStateAction<colaboratorIndicatorType[]>>
+    colabInd: colaboratorIndicatorType;
+    setColabInd: Dispatch<SetStateAction<colaboratorIndicatorType>>
     allCollabInd: colaboratorIndicatorType[];//lista de colaboradores-indicadores
     setAllColabInd: Dispatch<SetStateAction<colaboratorIndicatorType[]>>
     indicator: indicatorType;
@@ -31,7 +31,7 @@ export const IndicatorContext = createContext({} as IndicatorContextType);
 
 export function IndicatorProvider({ children }: IndicatorProviderProps) {
     const [collaborator, setCollab] = useState<collaboratorType[]>([])
-    const [colabInd, setColabInd] = useState<colaboratorIndicatorType[]>([])
+    const [colabInd, setColabInd] = useState<colaboratorIndicatorType>({} as colaboratorIndicatorType)
     const [allCollabInd, setAllColabInd] = useState<colaboratorIndicatorType[]>([])
     const [indicator, setIndicator] = useState<indicatorType>({} as indicatorType)
     const [openModal, setOpenModal] = useState<boolean>(false)
