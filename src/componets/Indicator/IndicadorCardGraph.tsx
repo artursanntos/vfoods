@@ -2,8 +2,8 @@ import Api from "../../Api";
 import LineGraph from "../LineGraph";
 import { IndicatorContext } from '../../contexts/IndicatorContext';
 import { useContext, useEffect, useState } from 'react';
-import { VfoodsContext } from "../contexts/VfoodsContext";
-import { colaboratorIndicatorType, collaboratorType } from "../types";
+import { VfoodsContext } from "../../contexts/VfoodsContext";
+import { colaboratorIndicatorType, collaboratorType } from "../../types";
 import { useNavigate } from "react-router-dom";
 
 
