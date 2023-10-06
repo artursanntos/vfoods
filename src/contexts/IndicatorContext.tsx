@@ -152,7 +152,9 @@ export function IndicatorProvider({ children }: IndicatorProviderProps) {
             console.log('colab indicador')
             console.log(allCollabInd)
 
-            Api.patch(url, { ...allCollabInd }, { headers }).then(response => {
+
+            //o erro tá dando aqui nessa requisição
+            Api.patch(url, { ...colabInd }, { headers }).then(response => {
                 console.log(response)
             });
 
