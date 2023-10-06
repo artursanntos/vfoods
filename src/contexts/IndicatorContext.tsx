@@ -125,7 +125,7 @@ export function IndicatorProvider({ children }: IndicatorProviderProps) {
     
             } catch (error) {
                 console.log(error)
-                createColaboradorIndicador(indicator.id)
+                createColaboradorIndicador(indicator)
             }
         });
 
