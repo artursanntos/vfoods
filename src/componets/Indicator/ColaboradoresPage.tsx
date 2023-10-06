@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 export default function ColaboradoresPage() {
     
     const { allCollaborators } = useContext(VfoodsContext);
-    const { collaborator, setCollab, all_colab_ind, setAllColabInd } = useContext(IndicatorContext);
+    const { collaborator, setCollab, allCollabInd, setAllColabInd } = useContext(IndicatorContext);
     const [filteredCollab, setFilteredCollab] = useState(allCollaborators);
     const iconStyles = ["h-6 w-6 text-vermelho", "h-6 w-6 text-vermelho rotate-[-45deg] ease-in-out duration-500"];
 
@@ -43,13 +43,17 @@ export default function ColaboradoresPage() {
             }
         })
 
+        const year = new Date().getFullYear();
+        const month = new Date().getMonth() + 1;
+        const monthString = month < 10 ? `0${month}` : `${month}`;
+
         //Cria um colab-indic padrão
         const colabInd: colaboratorIndicatorType = {
-            mes_ano: "default",
-            meta: -1,
-            superMeta: -1,
-            desafio: -1,
-            peso: -1,
+            mes_ano: year + '-' + monthString + '-01T00:00:00.000Z',
+            meta: 0,
+            superMeta: 0,
+            desafio: 0,
+            peso: 1,
             resultado: -1,
             notaIndicador: -1,
             idColaborador: collabToBeAdded[0].id,
@@ -60,7 +64,7 @@ export default function ColaboradoresPage() {
         if (collaborator.filter((collab) => collab.email === collabToBeAdded[0].email).length === 0) {
             setCollab([...collaborator, collabToBeAdded[0]]);
             collabAdd()
-            setAllColabInd([...all_colab_ind, colabInd]);
+            setAllColabInd([...allCollabInd, colabInd]);
           
         }
 
@@ -68,7 +72,7 @@ export default function ColaboradoresPage() {
         else {
             setCollab(collaborator.filter((collab) => collab.email !== collabToBeAdded[0].email));
             collabRemove()
-            setAllColabInd(all_colab_ind.filter((colInd) => colInd.idColaborador !== colabInd.idColaborador))
+            setAllColabInd(allCollabInd.filter((colInd) => colInd.idColaborador !== colabInd.idColaborador))
            
         }
     }
