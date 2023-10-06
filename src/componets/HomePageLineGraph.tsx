@@ -54,9 +54,9 @@ export default function HomePageLineGraph({ msdamInd }: HomePageLineGraphProps) 
 
 
     useEffect(() => {
-        console.log(msdamInd[0]);
+        //console.log(msdamInd[0]);
         
-        console.log(sortByDatesAndReorder(msdamInd[0], msdamInd[1]));
+        //console.log(sortByDatesAndReorder(msdamInd[0], msdamInd[1]));
         setArrayDates(parseDates(sortByDatesAndReorder(msdamInd[0], msdamInd[1])[0]));
         setArrayMetas(sortByDatesAndReorder(msdamInd[0], msdamInd[1])[1]);
         setArraySuperMetas(sortByDatesAndReorder(msdamInd[0], msdamInd[2])[1]);

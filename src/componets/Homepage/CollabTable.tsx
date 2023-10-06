@@ -12,20 +12,20 @@ export default function CollabTable() {
     const [ arrayNotas, setArrayNotas ] = useState<{ colaborador: collaboratorType, nota: number }[]>([] as { colaborador: collaboratorType, nota: number }[]);
 
     const getLastSeenInfo = async () => {
-        console.log(lastSeen);
+        //console.log(lastSeen);
         for (let i = 0; i < lastSeen.length; i++) {
-            console.log(i);
+            //console.log(i);
             
             await Api.get(`colaborador/${lastSeen[i]}`)
             .then((response) => {
-                console.log(response.data);
+                //console.log(response.data);
                 tempLastSeen.push(response.data)
             })
             .catch((error) => {
                 console.log(error)
             })
         }
-        console.log(tempLastSeen);
+        //console.log(tempLastSeen);
 
         setLastSeenCollab(tempLastSeen);
     }
