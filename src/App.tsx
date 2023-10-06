@@ -36,8 +36,6 @@ function App() {
                         <Route path="/collaborators" element={<Collaborators/>}/>
                         <Route path="/collaborators/:id" element={<Collaborator/>}/>
                     </Route>
-                    
-
                 </Routes>
             </CollaboratorProvider>
             </IndicatorProvider>

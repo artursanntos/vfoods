@@ -40,7 +40,7 @@ export function EditIndicator({ colaborador, colabInd }: EditIndicatorProps) {
             <div className='flex flex-col min-h-max'>
                 <div className='flex flex-row justify-between items-center space-x-4'>
                     <div className="flex-shrink-0">
-                        <img className="w-14 h-14 rounded-full" src={colaborador.imagem} alt="Foto do colaborador" />
+                        <img className="w-14 h-14 rounded-full object-cover" src={colaborador.imagem} alt="Foto do colaborador" />
                     </div>
                     <div className='flex-1 flex-col'>
                         <p className='font-bold'>

@@ -102,4 +102,5 @@ export default function IndicatorPage2() {
             </div>
         </>
     )
+
 }
