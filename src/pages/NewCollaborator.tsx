@@ -121,7 +121,7 @@ export default function NewCollaborator() {
                         </div>
 
                         <div className="ml-[4rem] h-[3.5rem] w-[24.5rem]">
-                            <Textbox label="Senha" type="senha" parentCallback={handleSenha} />
+                            <Textbox label="Senha" type="password" parentCallback={handleSenha} /> 
                         </div>
 
                         <div className='flex justify-end w-[38rem] pb-6'>

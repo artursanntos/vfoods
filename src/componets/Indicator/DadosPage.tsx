@@ -4,7 +4,7 @@ import DropdownList from "../Atomos/DropdownList";
 import { IndicatorContext } from "../../contexts/IndicatorContext";
 import { VfoodsContext } from "../../contexts/VfoodsContext";
 import Api from "../../Api";
-import { indicatorType, colaboratorIndicatorType } from "../../types";
+import { colaboratorIndicatorType } from "../../types";
 
 export default function DadosPage() {
 
@@ -27,10 +27,6 @@ export default function DadosPage() {
         return resultDate;
         
         
-    }
-
-    function clearIndicator() {
-        setIndicator({} as indicatorType)
     }
 
     function getIndicator(){
@@ -94,8 +90,6 @@ export default function DadosPage() {
                 }
             }
             
-            
-            console.log('EIIIIIIIIIIII')
 
         } catch (error) {
             console.log(error)
@@ -106,7 +100,6 @@ export default function DadosPage() {
         if (createEdit != 'Criar') {
             setCollab([])
             addForEdit()
-            console.log('Cheguei useEffect')
             
         }
 
@@ -116,9 +109,9 @@ export default function DadosPage() {
     useEffect (() => {
         if (createEdit != 'Criar') {
             getIndicator()
-        } else {
-            clearIndicator()
         }
+
+    
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [createEdit])
