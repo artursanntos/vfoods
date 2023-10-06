@@ -1,157 +1,60 @@
-import { useParams } from "react-router-dom";
-import { Header } from "../componets/Header/Header";
 import { SideBar } from "../componets/SideBar/SideBar";
-import { useContext, useEffect, useState } from "react";
+import { Header } from "../componets/Header/Header";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { indicatorType } from "../types";
 import Api from "../Api";
-import { collaboratorType } from "../types";
-import CardGraphIndicator from "../componets/CardGraphIndicator";
-import { Link } from "react-router-dom";
-import { IndicatorContext } from "../contexts/IndicatorContext";
-import { VfoodsContext } from "../contexts/VfoodsContext";
+import IndicadorCardGraph from "../componets/Indicator/IndicadorCardGraph";
+import IndicadorPageCardGraph from "../componets/Indicator/IndicadorPageCardGraph";
+import IndicadorCardPizza from "../componets/Indicator/IndicadorCardPizza";
 
-export default function IndicatorPage() {
 
-    const params = useParams();
-    const [tableData, setTableData] = useState([] as { colaborador: collaboratorType, membro: string, status: number }[]);
-    const {allCollaborators} = useContext(VfoodsContext)
-    const {indicator, allCollabInd, collaborator, setCollab} = useContext(IndicatorContext)
+export default function IndicatorPage2() {
+
     const [Page, setPage] = useState(0)
-    const [open, setOpen] = useState(0)
-    const collabId = params.id
-    let arrayNotas = [] as { colaborador: collaboratorType, nota: number }[];
+    const { id } = useParams<{ id: string }>();
+    const [indicator, setIndicator] = useState<indicatorType>({} as indicatorType);
+    const [hasGraphData, setHasGraphData] = useState(false);
 
+    const handleSwitchPage = (e: React.MouseEvent<HTMLButtonElement>, page: number) => {
+        e.preventDefault();
+        setPage(page)
+    }
 
-    const loadTableData = () => {
-        const newData = collaborator.map((collaborator) => {
-            const year = new Date(collaborator.data_admissao).getFullYear();
-            const status = arrayNotas.find((nota) => nota.colaborador.id === collaborator.id)?.nota;
-            if (status === undefined)
-                return {
-                    colaborador: collaborator,
-                    membro: `desde ${year}`,
-                    status: -1
-                };
-            else
-                return {
-                    colaborador: collaborator,
-                    membro: `desde ${year}`,
-                    status: status
-                };
-        });
-
-        newData.sort((a, b) => b.status - a.status);
-
-        setTableData(newData);
-    };
-
-    async function loadNotas(colaboradores: collaboratorType[]): Promise<any> {
-        arrayNotas = [] as { colaborador: collaboratorType, nota: number }[];
-
-        for (let i = 0; i < colaboradores.length; i++) {
-            const currMonth = new Date().getMonth() + 1;
-            const currYear = new Date().getFullYear();
-            const currMonthString = currMonth < 10 ? `0${currMonth}` : `${currMonth}`;
-            const url = `nota-mensal/${colaboradores[i].id}/${currMonthString}/${currYear}`;
-
-            try {
-                const response = await Api.get(url);
-                const data = response.data;
-
-                arrayNotas.push({ colaborador: colaboradores[i], nota: data.notaMensal });
-            } catch (error) {
-                console.error(`Ocorreu um erro ao carregar a nota para o colaborador ${colaboradores[i].id}`);
-            }
-        }
+    const handleGetIndicator = async () => {
+        const url = '/indicador/info/byId/' + id;
+        const response = await Api.get(url);
+        setIndicator(response.data);
+        console.log(response.data);
     }
 
     useEffect(() => {
-        const loadData = async () => {
-            await loadNotas(collaborator);
-            loadTableData();
+        handleGetIndicator();
+    }, [])
+
+    useEffect(() => {
+        if (indicator.id) {
+            setHasGraphData(true);
         }
+    }, [indicator])
 
-        loadData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [Page]);
-
-    const handleChangePage = (event: React.MouseEvent<HTMLButtonElement>, page: number) => {
-        event.preventDefault();
-
-        setPage(page);
-        setOpen(open+1)
-    }
-
+    // aqui vai o grafico normal e o de pizza
     const mediaGeral = () => {
-        return(
-            <CardGraphIndicator indicador={indicator}/>
-        )
-
-    }
-
-    const colaboradores = () => {
-        return(
-            <div className='flex flex-col justify-center items-center w-[85%] h-full mx-10'>
-                <div className='bg-vermelho w-full h-[2.75rem] flex flex-row items-center justify-around rounded-xl'>
-                    <p className='text-white font-bold w-[20%] text-center'>Colaborador</p>
-                    <p className='text-white font-bold w-[20%] text-center'>Colocação</p>
-                    <p className='text-white font-bold w-[20%] text-center'>Membro</p>
-                    <p className='text-white font-bold w-[20%] text-center'>Status</p>
+        return (
+            <>
+                {hasGraphData ? 
+                <div className="flex flew-row gap-8">
+                    <IndicadorCardPizza indicador={indicator}/>
+                    <IndicadorPageCardGraph indicador={indicator}/>
 
                 </div>
-
-                {tableData.length > 0 ? (
-                    <ul className='w-full flex flex-col divide-y divide-gray-200 h-[90%] rounded-xl overflow-y-scroll'>
-                        {tableData.map((colaborador, index) => (
-                            <li key={index} className='flex flex-row items-center justify-around w-full h-min my-2'>
-                                <div className='flex flex-row items-center mt-2 ml-2 w-[20%]'>
-                                    <img src={colaborador.colaborador.imagem} alt="Foto do colaborador" className='w-[2.5rem] h-[2.5rem] rounded-full mr-2 object-cover' />
-                                    <div className='flex flex-col items-start justify-center'>
-                                        <p className='font-bold'>{colaborador.colaborador.nome}</p>
-                                        <p className='text-sm text-gray-500'>{colaborador.colaborador.email}</p>
-                                    </div>
-                                </div>
-
-                                <p className='text-gray-500 w-[20%] text-center'>#{index + 1}</p>
-                                <p className='text-gray-500 w-[20%] text-center'>{colaborador.membro}</p>
-                                
-
-                                <Link to={`/collaborators/${colaborador.colaborador.id}`} className="flex justify-end pr-[5%] items-center w-[18%]">
-                                    <button className='text-vermelho text-sm border-2 border-vermelho rounded-xl px-4 py-1 hover:bg-vermelho hover:text-white transition duration-300 ease-in-out'>
-                                        Ver Perfil
-                                    </button>
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
-                ) : (
-                    <p className='my-2 text-gray-500 text-2xl font-bold text-center'>Carregando...</p>
-                )}
-            </div>
+                
+                
+                : <div>Carregando...</div>}
+            </>
+            
         )
     }
-
-    function addForEdit() {
-
-        for (let x = 0; x < allCollaborators.length; x++) {
-            for (let i = 0; i < allCollabInd.length; i++) {
-                if (allCollaborators[x].id == allCollabInd[i].idColaborador) {
-                    setCollab(prevState => [...prevState, allCollaborators[x]]);
-                    console.log('Cheguei aqui') 
-                }
-            }
-        }  
-    }
-
-    useEffect(() => {
-        if (open == 1) {
-            setCollab([])
-            addForEdit()
-            console.log('Cheguei useEffect')
-        }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [open])
-
-    
 
     return (
         <>
@@ -176,33 +79,26 @@ export default function IndicatorPage() {
 
                         <div className="flex flex-row gap-8 text-xl">
 
-                            <button onClick={(event) => handleChangePage(event, 0)}>
+                            <button onClick={(event) => handleSwitchPage(event, 0)}>
                                 <div className={Page == 0 ? 'border-b-2 border-vermelho pb-2' : 'text-cinza-300 pb-2'}>
                                     Média Geral
                                 </div>
                             </button>
 
-                            <button onClick={(event) => handleChangePage(event, 1)}>
+                            <button onClick={(event) => handleSwitchPage(event, 1)}>
                                 <div className={Page == 1 ? 'border-b-2 border-vermelho pb-2' : 'text-cinza-300 pb-2'}>
                                     Colaboradores
                                 </div>
                             </button>
                         </div>
 
-                        <div className='px-14'>
+                        <div className='px-8'>
                                 {Page == 0 && mediaGeral()}
-                                {Page == 1 && colaboradores()}
+                                {Page == 1 /*&& colaboradores()*/}
                         </div>
 
                     </div>
-
-                    
-
-                    
-
                 </div>
-                
-   
             </div>
         </>
     )
