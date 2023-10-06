@@ -18,14 +18,8 @@ export default function InfoCard() {
         const prevMonthString = prevMonth < 10 ? `0${prevMonth}` : `${prevMonth}`;
 
         try {
-            //const currResponse = await Api.get(`metas-mes-indicador/${id}/${monthString}/${year}`);
             const prevResponse = await Api.get(`metas-mes-indicador/${id}/${prevMonthString}/${prevYear}`);
-
-            //const currData = currResponse.data;
             const prevData = prevResponse.data;
-
-            //currMetaValue += currData.totalColabBateramMeta;
-            //currTotalValue += currData.totalColab;
 
             prevMetaValue += prevData.totalColabBateramMeta;
             prevTotalValue += prevData.totalColab;
@@ -35,16 +29,10 @@ export default function InfoCard() {
 
         try {
             const currResponse = await Api.get(`metas-mes-indicador/${id}/${monthString}/${year}`);
-            //const prevResponse = await Api.get(`metas-mes-indicador/${id}/${prevMonthString}/${prevYear}`);
-
             const currData = currResponse.data;
-            //const prevData = prevResponse.data;
 
             currMetaValue += currData.totalColabBateramMeta;
             currTotalValue += currData.totalColab;
-
-            //prevMetaValue += prevData.totalColabBateramMeta;
-            //prevTotalValue += prevData.totalColab;
         } catch (error) {
             console.error(`Ocorreu um erro ao carregar o MMI para o indicador ${id}`);
         }
