@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { colaboratorIndicatorType } from "../../types";
 import { CustomFlowbiteTheme, Flowbite, Progress } from 'flowbite-react';
 import Api from "../../Api";
+import { IndicatorContext } from "../../contexts/IndicatorContext";
+import ButtonAttResult from "../Atomos/ButtonAttResult";
 
 interface IndicatorCardInfoProps {
     indicatorInfo: colaboratorIndicatorType;
@@ -16,6 +18,8 @@ export default function IndicatorCardInfo({ indicatorInfo }: IndicatorCardInfoPr
 
     const indicador = { meta: 0, supermeta: 0, desafio: 0, peso: 1 }
     const [valorResultado, setValorResultado] = useState(indicador);
+
+    const { updateColaboratorIndicatorResult } = useContext(IndicatorContext);
 
     const getProgressColor = () => {
         const resultado = indicatorInfo.resultado;
@@ -41,7 +45,7 @@ export default function IndicatorCardInfo({ indicatorInfo }: IndicatorCardInfoPr
             setProgressText(' atingiu a supermeta e foi um sucesso!')
         } else {
             setProgressState('Desafio')
-            setProgressText(' atingiu o desafio e foi um  sucesso!')
+            setProgressText(' atingiu o desafio e foi um sucesso!')
         }
     }
 
@@ -88,6 +92,11 @@ export default function IndicatorCardInfo({ indicatorInfo }: IndicatorCardInfoPr
         const newValue = parseInt(value);
         setValorResultado({ ...valorResultado, meta: newValue });
         indicatorInfo.resultado = newValue;
+        updateResult()
+    }
+
+    function updateResult() {
+        updateColaboratorIndicatorResult(indicatorInfo.id);
     }
 
     useEffect(() => {
@@ -98,79 +107,89 @@ export default function IndicatorCardInfo({ indicatorInfo }: IndicatorCardInfoPr
 
     if (indicatorInfo.resultado == -1) {
         return (
-            <section className="w-[325px]
+            <div className="flex flex-col gap-5 align-middle">
+                <section className="w-[325px]
             bg-slate-50
-             rounded-17 drop-shadow-md
-             align-middle">
-                <div className="px-7 py-5" >
-                    <p className="font-semibold text-xl text-cinza-400">Meta</p>
-                    <p className="text-cinza-400"> &gt;unidade de medida: {indicatorUnit} </p>
-                    <p className="text-cinza-700"> {colaboratorName} atingiu...</p>
-                    <div className="flex flex-row justify-evenly py-4">
-                        <div className="flex flex-col flex-1 w-1/3 items-center">
-                            <label className="font-semibold">
-                                Resultado
-                            </label>
-                            <input className="w-2/3 h-1/2 bg-slate-200" type='text' width={10} defaultValue={indicatorInfo.resultado} onChange={(e) => handleResultChanges(e.target.value)}></input>
-                        </div>
+            rounded-17 drop-shadow-md
+            align-middle">
+                    <div className="px-7 py-5" >
+                        <p className="font-semibold text-xl text-cinza-400">Meta</p>
+                        <p className="text-cinza-400"> &gt;unidade de medida: {indicatorUnit} </p>
+                        <p className="text-cinza-700"> {colaboratorName} atingiu...</p>
+                        <div className="flex flex-row justify-evenly py-4">
+                            <div className="flex flex-col flex-1 w-1/3 items-center">
+                                <label className="font-semibold">
+                                    Resultado
+                                </label>
+                                <input className="w-2/3 h-1/2 bg-slate-200" type='text' width={10} onChange={(e) => handleResultChanges(e.target.value)}></input>
+                            </div>
 
-                        <div className="flex-1 w-1/3 text-center">
-                            <label className="font-semibold">
-                                Peso
-                            </label>
-                            <p className="font-light">{indicatorInfo.peso}</p>
-                        </div>
+                            <div className="flex-1 w-1/3 text-center">
+                                <label className="font-semibold">
+                                    Peso
+                                </label>
+                                <p className="font-light">{indicatorInfo.peso}</p>
+                            </div>
 
-                        <div className="flex-1 w-1/3 text-center">
-                            <label className="font-semibold">
-                                Nota
-                            </label>
-                            <p>--</p>
+                            <div className="flex-1 w-1/3 text-center">
+                                <label className="font-semibold">
+                                    Nota
+                                </label>
+                                <p>--</p>
+                            </div>
                         </div>
+                        <Flowbite theme={{ theme: customTheme }} >
+                            <Progress labelProgress size="lg" progress={getProgressValue()} color={getProgressColor()} />
+                        </Flowbite>
                     </div>
-                    <Flowbite theme={{ theme: customTheme }} >
-                        <Progress labelProgress size="lg" progress={getProgressValue()} color={getProgressColor()} />
-                    </Flowbite>
-                </div>
-            </section>
+                </section>
+                <button onClick={updateResult}>
+                    <ButtonAttResult label="Atualizar resultado" />
+                </button>
+            </div>
         )
     } else {
         return (
-            <section className="w-[325px]
+            <div className="flex flex-col gap-5 align-middle">
+                <section className="w-[325px]
             bg-slate-50
-             rounded-17 drop-shadow-md
-             align-middle">
-                <div className="px-7 py-5" >
-                    <p className="font-semibold text-xl">{progressState}</p>
-                    <p className="text-cinza-400"> &gt;unidade de medida: {indicatorUnit} </p>
-                    <p className="text-cinza-700"> {colaboratorName} {progressText}</p>
-                    <div className="flex flex-row justify-evenly py-4">
-                        <div className="flex flex-col flex-1 w-1/3 items-center">
-                            <label className="font-semibold">
-                                Resultado
-                            </label>
-                            <input className="w-2/3 h-1/2 bg-slate-200" type='text' width={10} defaultValue={indicatorInfo.resultado} onChange={(e) => handleResultChanges(e.target.value)}></input>
-                        </div>
+            rounded-17 drop-shadow-md
+            align-middle">
+                    <div className="px-7 py-5" >
+                        <p className="font-semibold text-xl">{progressState}</p>
+                        <p className="text-cinza-400"> &gt;unidade de medida: {indicatorUnit} </p>
+                        <p className="text-cinza-700"> {colaboratorName} {progressText}</p>
+                        <div className="flex flex-row justify-evenly py-4">
+                            <div className="flex flex-col flex-1 w-1/3 items-center">
+                                <label className="font-semibold">
+                                    Resultado
+                                </label>
+                                <input className="w-2/3 h-1/2 bg-slate-200" type='text' width={10} defaultValue={indicatorInfo.resultado} onChange={(e) => handleResultChanges(e.target.value)}></input>
+                            </div>
 
-                        <div className="flex-1 w-1/3 text-center">
-                            <label className="font-semibold">
-                                Peso
-                            </label>
-                            <p className="font-light">{indicatorInfo.peso}</p>
-                        </div>
+                            <div className="flex-1 w-1/3 text-center">
+                                <label className="font-semibold">
+                                    Peso
+                                </label>
+                                <p className="font-light">{indicatorInfo.peso}</p>
+                            </div>
 
-                        <div className="flex-1 w-1/3 text-center">
-                            <label className="font-semibold">
-                                Nota
-                            </label>
-                            <p>{indicatorInfo.notaIndicador}</p>
+                            <div className="flex-1 w-1/3 text-center">
+                                <label className="font-semibold">
+                                    Nota
+                                </label>
+                                <p>{indicatorInfo.notaIndicador}</p>
+                            </div>
                         </div>
+                        <Flowbite theme={{ theme: customTheme }} >
+                            <Progress labelProgress size="lg" progress={getProgressValue()} color={getProgressColor()} />
+                        </Flowbite>
                     </div>
-                    <Flowbite theme={{ theme: customTheme }} >
-                        <Progress labelProgress size="lg" progress={getProgressValue()} color={getProgressColor()} />
-                    </Flowbite>
-                </div>
-            </section>
+                </section>
+                <button onClick={updateResult}>
+                    <ButtonAttResult label="Atualizar resultado" />
+                </button>
+            </div>
         )
     }
 }
