@@ -1,8 +1,7 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { colaboratorIndicatorType } from "../../types";
 import { CustomFlowbiteTheme, Flowbite, Progress } from 'flowbite-react';
 import Api from "../../Api";
-import { IndicatorContext } from "../../contexts/IndicatorContext";
 import ButtonAttResult from "../Atomos/ButtonAttResult";
 
 interface IndicatorCardInfoProps {
@@ -16,10 +15,8 @@ export default function IndicatorCardInfo({ indicatorInfo }: IndicatorCardInfoPr
     const [progressState, setProgressState] = useState<string>('');
     const [progressText, setProgressText] = useState<string>('');
 
-    const indicador = { meta: 0, supermeta: 0, desafio: 0, peso: 1 }
-    const [valorResultado, setValorResultado] = useState(indicador);
-
-    const { updateColaboratorIndicatorResult } = useContext(IndicatorContext);
+    const [valorInput, setValorInput] = useState(0);
+    const [notaIndicador, setNotaIndicador] = useState(0);
 
     const getProgressColor = () => {
         const resultado = indicatorInfo.resultado;
@@ -63,10 +60,18 @@ export default function IndicatorCardInfo({ indicatorInfo }: IndicatorCardInfoPr
     const getIndicatorUnit = () => {
         const url = `/indicador/info/byId/${indicatorInfo.idIndicador}`
         Api.get(url).then((response) => {
+            console.log(response.data)
             setIndicatorUnit(response.data.unidade_medida);
         })
     }
 
+    const getIndicatorNote = () => {
+        const url = 'colaborador-indicador/' + indicatorInfo.id
+        Api.get(url).then((response) => {
+            setNotaIndicador(response.data.colaboradorIndicador.notaIndicador);
+        })
+
+    }
 
     const getColaboratorName = () => {
         const url = `/colaborador/${indicatorInfo.idColaborador}`
@@ -90,19 +95,31 @@ export default function IndicatorCardInfo({ indicatorInfo }: IndicatorCardInfoPr
 
     function handleResultChanges(value: string) {
         const newValue = parseInt(value);
-        setValorResultado({ ...valorResultado, meta: newValue });
-        indicatorInfo.resultado = newValue;
-        updateResult()
+        setValorInput(newValue);
     }
 
     function updateResult() {
-        updateColaboratorIndicatorResult(indicatorInfo.id);
+        const url = 'colaborador-indicador/' + indicatorInfo.id
+
+        const headers = {
+            'Content-Type': 'application/json'
+        }
+        indicatorInfo.resultado = valorInput
+
+        Api.patch(url, { resultado: valorInput }, { headers }).then(response => {
+
+            setNotaIndicador(response.data.updatedColaboradorIndicador.notaIndicador)
+        });
+
+        getProgressStyle()
+        getIndicatorUnit()
     }
 
     useEffect(() => {
         getIndicatorUnit();
         getColaboratorName();
         getProgressStyle();
+        getIndicatorNote();
     }, [])
 
     if (indicatorInfo.resultado == -1) {
@@ -178,7 +195,7 @@ export default function IndicatorCardInfo({ indicatorInfo }: IndicatorCardInfoPr
                                 <label className="font-semibold">
                                     Nota
                                 </label>
-                                <p>{indicatorInfo.notaIndicador}</p>
+                                <p>{notaIndicador}</p>
                             </div>
                         </div>
                         <Flowbite theme={{ theme: customTheme }} >

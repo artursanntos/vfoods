@@ -7,8 +7,6 @@ import Api from '../Api';
 interface IndicatorContextType {
     collaborator: collaboratorType[];
     setCollab: Dispatch<SetStateAction<collaboratorType[]>>
-    colabInd: colaboratorIndicatorType;
-    setColabInd: Dispatch<SetStateAction<colaboratorIndicatorType>>
     allCollabInd: colaboratorIndicatorType[];//lista de colaboradores-indicadores
     setAllColabInd: Dispatch<SetStateAction<colaboratorIndicatorType[]>>
     indicator: indicatorType;
@@ -20,7 +18,6 @@ interface IndicatorContextType {
     createIndicator: () => Promise<void>;
     updateIndicator: (nome: string) => Promise<void>;
     getAllColaboradorIndicador: (idIndicador: string) => void;
-    updateColaboratorIndicatorResult: (idColabIndicator: string) => void;
 }
 
 interface IndicatorProviderProps {
@@ -31,7 +28,6 @@ export const IndicatorContext = createContext({} as IndicatorContextType);
 
 export function IndicatorProvider({ children }: IndicatorProviderProps) {
     const [collaborator, setCollab] = useState<collaboratorType[]>([])
-    const [colabInd, setColabInd] = useState<colaboratorIndicatorType>({} as colaboratorIndicatorType)
     const [allCollabInd, setAllColabInd] = useState<colaboratorIndicatorType[]>([])
     const [indicator, setIndicator] = useState<indicatorType>({} as indicatorType)
     const [openModal, setOpenModal] = useState<boolean>(false)
@@ -140,31 +136,6 @@ export function IndicatorProvider({ children }: IndicatorProviderProps) {
         setCreateEdit('')
     }
 
-    const updateColaboratorIndicatorResult = async (idColabIndicator: string) => {
-        try {
-            const url = 'colaborador-indicador/' + idColabIndicator
-
-            const headers = {
-                'Content-Type': 'application/json'
-            }
-            console.log('id do colaborador indicador:')
-            console.log(idColabIndicator)
-            console.log('colab indicador')
-            console.log(allCollabInd)
-
-
-            //o erro tá dando aqui nessa requisição
-            Api.patch(url, { ...colabInd }, { headers }).then(response => {
-                console.log(response)
-            });
-
-            updateCollaboratorIndicator()
-
-        } catch (error) {
-            console.log(error)
-            console.log('entrou aqui AAAAAA')
-        }
-    }
 
     const getAllColaboradorIndicador = async (idIndicador: string) => {
 
@@ -189,7 +160,7 @@ export function IndicatorProvider({ children }: IndicatorProviderProps) {
     }
 
     return (
-        <IndicatorContext.Provider value={{ collaborator, setCollab, colabInd, setColabInd, indicator, setIndicator, createIndicator, openModal, setOpenModal, createEdit, setCreateEdit, updateIndicator, allCollabInd, setAllColabInd, getAllColaboradorIndicador, updateColaboratorIndicatorResult }}>
+        <IndicatorContext.Provider value={{ collaborator, setCollab, indicator, setIndicator, createIndicator, openModal, setOpenModal, createEdit, setCreateEdit, updateIndicator, allCollabInd, setAllColabInd, getAllColaboradorIndicador }}>
             {children}
         </IndicatorContext.Provider>
     )

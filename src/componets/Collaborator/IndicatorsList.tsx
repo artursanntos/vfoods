@@ -3,7 +3,6 @@ import Api from "../../Api"
 import { colaboratorIndicatorType } from "../../types"
 import IndicatorItem from "./IndicatorItem";
 import IndicatorCardInfo from "./IndicatorCardInfo";
-
 interface IndicatorListProps {
     id: string | undefined;
 }
