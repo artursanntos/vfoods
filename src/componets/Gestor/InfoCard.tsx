@@ -36,8 +36,6 @@ export default function InfoCard() {
         } catch (error) {
             console.error(`Ocorreu um erro ao carregar o MMI para o indicador ${id}`);
         }
-
-        console.log(currMetaValue, currTotalValue, prevMetaValue, prevTotalValue);
     }
 
     async function calcData() {
