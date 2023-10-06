@@ -6,10 +6,9 @@ import { Link } from "react-router-dom";
 
 export default function CollabTable() {
 
-    const { lastSeen, setLastSeen } = useContext(CollaboratorContext);
+    const { lastSeen } = useContext(CollaboratorContext);
     const [ lastSeenCollab, setLastSeenCollab ] = useState<collaboratorType[]>([] as collaboratorType[]);
-    let tempLastSeen = [] as collaboratorType[];
-    const [ arrayNotas, setArrayNotas ] = useState<{ colaborador: collaboratorType, nota: number }[]>([] as { colaborador: collaboratorType, nota: number }[]);
+    const tempLastSeen = [] as collaboratorType[];
 
     const getLastSeenInfo = async () => {
         //console.log(lastSeen);
@@ -34,6 +33,7 @@ export default function CollabTable() {
         getLastSeenInfo();
         //console.log(lastSeenCollab);
         
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[lastSeen])
 
    

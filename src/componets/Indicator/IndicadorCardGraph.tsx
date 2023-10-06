@@ -22,7 +22,7 @@ type IndicadorCardGraphProps = {
 export default function IndicadorCardGraph({ indicador }: IndicadorCardGraphProps) {
     
     
-    const { setOpenModal, setCreateEdit, setAllColabInd, setCollab, setIndicator, collaborator, allCollabInd } = useContext(IndicatorContext);
+    const { setOpenModal, setCreateEdit, setAllColabInd, setCollab, collaborator, allCollabInd } = useContext(IndicatorContext);
     const { allCollaborators } = useContext(VfoodsContext)
     const [ liberar, setLiberar] = useState(false)
     const [auxColabInd, setAuxColabInd] = useState<colaboratorIndicatorType[]>([])
@@ -74,8 +74,6 @@ export default function IndicadorCardGraph({ indicador }: IndicadorCardGraphProp
                 }
             }
 
-            setLiberar(true)
-
         } catch (error) {
             console.log(error)
         }
@@ -118,11 +116,6 @@ export default function IndicadorCardGraph({ indicador }: IndicadorCardGraphProp
       }, [])
 
     const navegar = () => {
-        
-        const url = `/indicador/info/byId/${indicador.id}`
-        Api.get(url).then((response) => {
-            setIndicator(response.data);
-        })
         
         auxColab.map((collab) => {
             setCollab(prevState => [...prevState, collab])
