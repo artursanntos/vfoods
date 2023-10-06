@@ -32,7 +32,6 @@ export default function CollabCardGraph({ id }: CollabCardGraphProps) {
         }
       }, [])
     
-    
     return (
         
         <button
