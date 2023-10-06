@@ -97,7 +97,8 @@ export function IndicatorProvider({ children }: IndicatorProviderProps) {
             console.log(indicator);
             console.log(id)
 
-            Api.put(url, {...indicator}, { headers }).then(response => {
+            Api.put(url, {id: indicator.id, nome: indicator.nome, unidade_medida: indicator.unidade_medida, 
+                data_deadline: indicator.data_deadline, descricao: indicator.descricao, idGestor: indicator.idGestor}, { headers }).then(response => {
                 console.log(response)
             });
 
@@ -117,9 +118,9 @@ export function IndicatorProvider({ children }: IndicatorProviderProps) {
         allCollabInd.forEach(colabIndic => {
             try {
                 const url = 'colaborador-indicador/' + colabIndic.id
-                console.log(url)
     
-                Api.patch(url, {...colabIndic}, { headers }).then(response => {
+                Api.patch(url, {mes_ano: colabIndic.mes_ano, meta: colabIndic.meta, superMeta: colabIndic.superMeta, desafio: colabIndic.desafio, peso: colabIndic.peso, 
+                    resultado: colabIndic.resultado, notaIndicador: colabIndic.notaIndicador, idColaborador: colabIndic.idColaborador, idIndicador: colabIndic.idIndicador}, { headers }).then(response => {
                     console.log(response)
                 });
     
