@@ -72,7 +72,7 @@ export default function Home() {
                     pathTransitionDuration: 1,
                 })}
                 
-                text={`${progressValue*100}%`}
+                text={`${(progressValue*100).toFixed(1)}%`}
                 strokeWidth={18}
                 />
             </div>

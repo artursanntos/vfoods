@@ -6,6 +6,7 @@ import { indicatorType } from "../types";
 import Api from "../Api";
 import IndicadorCardGraph from "../componets/Indicator/IndicadorCardGraph";
 import IndicadorPageCardGraph from "../componets/Indicator/IndicadorPageCardGraph";
+import IndicadorCardPizza from "../componets/Indicator/IndicadorCardPizza";
 
 
 export default function IndicatorPage2() {
@@ -42,7 +43,8 @@ export default function IndicatorPage2() {
         return (
             <>
                 {hasGraphData ? 
-                <div className="flex justify-center">
+                <div className="flex flew-row gap-8">
+                    <IndicadorCardPizza indicador={indicator}/>
                     <IndicadorPageCardGraph indicador={indicator}/>
 
                 </div>
@@ -90,7 +92,7 @@ export default function IndicatorPage2() {
                             </button>
                         </div>
 
-                        <div className='px-14'>
+                        <div className='px-8'>
                                 {Page == 0 && mediaGeral()}
                                 {Page == 1 /*&& colaboradores()*/}
                         </div>
