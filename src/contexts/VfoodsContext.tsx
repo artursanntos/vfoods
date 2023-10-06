@@ -34,8 +34,8 @@ export function VfoodsProvider({ children }: VfoodsProviderProps) {
   const [addModal, setAddModal] = useState<boolean>(false)
 
   const getCurrentManager = async () => {
-    //  TODO: get manager id from backend
-    const tempId = 'artur@gmail.com'
+    
+    const tempId = 'ricardo.pereira@gmail.com'
     try {
 
       const url = 'gestor/' + tempId
