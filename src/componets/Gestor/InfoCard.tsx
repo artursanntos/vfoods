@@ -67,7 +67,7 @@ export default function InfoCard() {
                     <div className='flex flex-row justify-center items-center'>
                         <div className='flex flex-col'>
                             <p className="text-4xl font-bold mt-4">{totalPercent.toFixed(1)}%</p>
-                            <p className="text-lg mt-1 text-gray-500">concluídos</p>
+                            <p className="text-lg mt-1 text-gray-500">concluídas</p>
                         </div>
                         <div className='ml-4 px-4 py-1 bg-azul rounded-md items-center'>
                             <p className="mt-1 text-gray-500">
