@@ -53,6 +53,9 @@ export default {
             dropShadow: {
                 'modal': '0 2px 1px rgba(0, 0, 0, 0.8)'
             },
+            backgroundImage: {
+                'loginBG': 'url(/src/assets/bg2.png)',
+            },
         },
     },
     plugins: [require('flowbite/plugin')],
