@@ -29,10 +29,8 @@ function App() {
                     <Route path="/indicators/:id"  element={<IndicatorPage/>}/>
                     <Route path="/profile" element={<Profile/>}/>
                     <Route path="/new_collaborator" element={<NewCollaborator/>}/>
-                    <Route path="/profile/pdf"/>
                     <Route path="/collaborators" element={<Collaborators/>}/>
                     <Route path="/collaborators/:id" element={<Collaborator/>}/>
-                    <Route path="/collabotarors/:id/pdf"/>
 
                 </Routes>
             </CollaboratorProvider>

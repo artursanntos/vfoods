@@ -94,8 +94,6 @@ export default function DadosPage() {
                 }
             }
             
-            
-            console.log('EIIIIIIIIIIII')
 
         } catch (error) {
             console.log(error)
