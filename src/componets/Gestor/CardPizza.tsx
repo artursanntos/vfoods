@@ -41,14 +41,14 @@ export default function CardPizza() {
     }, [])
 
     return (
-        <div className='bg-white border rounded-10 border-cinza-100 h-min w-[37rem] p-2'>
+        <div className='bg-white border rounded-10 border-cinza-100 h-min w-[39rem] p-2'>
             <div className='mt-8 ml-8'>
                 <div className='flex flex-col'>
                     <p className="text-2xl font-bold">Status de metas</p>
                     <p className="mt-1 text-gray-500">Status de diferentes indicadores e de todos os colaboradores</p>
                 </div>
-                <div className='items-center'>
-                    <GestorGraphPizza meta={meta / total} supermeta={supermeta / total} desafio={desafio / total} />
+                <div className='flex justify-center items-center'>
+                    <GestorGraphPizza meta={meta - supermeta} supermeta={supermeta - desafio} desafio={desafio} naoAtingiu={(total - meta) > 0 ? (total - meta) : 0} />
                 </div>
             </div>
         </div>
