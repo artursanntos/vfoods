@@ -45,6 +45,7 @@ export default function HomePageLineGraph({ msdamInd }: HomePageLineGraphProps) 
 
     // a function that gets a list of months and calls parseDate on each of them
     const parseDates = (dates: string[]): number[] => {
+
         let parsedDates: number[] = [];
         for (let i = 0; i < dates.length; i++) {
             parsedDates.push(parseDate(dates[i]));
@@ -72,7 +73,7 @@ export default function HomePageLineGraph({ msdamInd }: HomePageLineGraphProps) 
                 data={[
                     
                     {
-                        x: [1,2,3,4,5,6,76,],      //mese_ano
+                        x: arrayDates,      //mese_ano
                         y: arrayMetas,      //metas
                         type: 'scatter',
                         mode: 'lines+markers',
@@ -81,7 +82,7 @@ export default function HomePageLineGraph({ msdamInd }: HomePageLineGraphProps) 
                         name: "Meta",
                     },
                     {
-                        x: [1,2,3,4,5,6,76,],      //mese_ano
+                        x: arrayDates,      //mese_ano
                         y: arraySuperMetas,      //super-metas
                         type: 'scatter',
                         mode: 'lines+markers',
@@ -90,7 +91,7 @@ export default function HomePageLineGraph({ msdamInd }: HomePageLineGraphProps) 
                         name: "Supermeta",
                     },
                     {
-                        x: [1,2,3,4,5,6,76,],      //mese_ano
+                        x: arrayDates,      //mese_ano
                         y: arrayDesafios,      //desafios
                         type: 'scatter',
                         mode: 'lines+markers',
