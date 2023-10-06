@@ -41,9 +41,9 @@ export default function CardPizza() {
     }, [])
 
     return (
-        <div className='bg-white border rounded-10 border-cinza-100 h-min w-[29.75rem] p-2'>
+        <div className='bg-white border rounded-10 border-cinza-100 h-min w-[37rem] p-2'>
             <div className='mt-8 ml-8'>
-                <div className='flex justify-between'>
+                <div className='flex flex-col'>
                     <p className="text-2xl font-bold">Status de metas</p>
                     <p className="mt-1 text-gray-500">Status de diferentes indicadores e de todos os colaboradores</p>
                 </div>

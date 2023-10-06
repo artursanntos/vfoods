@@ -11,7 +11,7 @@ export default function GestorCard({ nome, area, imagem, email}: GestorCardProps
 
     return (
         <>
-            <div className="h-[13rem] flex bg-white max-w-[33.875rem] w-[33.875rem] pr-6 pl-6 pt-[0.75rem] pb-[1.75rem] gap-7 rounded-17 border border-cinza-300 overflow-x-hidden">
+            <div className="h-[13rem] flex bg-white max-w-[33.875rem] w-[33.875rem] pr-6 pl-6 pt-[0.75rem] pb-[1.75rem] gap-7 rounded-17 border border-cinza-100 overflow-x-hidden">
                 <img src={imagem} alt="Foto de perfil" className="w-36 h-36 object-cover rounded-full"/>
                 <div className="w-full">
                     <div className="mb-6">
