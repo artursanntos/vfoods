@@ -1,9 +1,9 @@
-import Api from "../Api";
-import LineGraph from "./LineGraph";
-import { IndicatorContext } from '../contexts/IndicatorContext';
+import Api from "../../Api";
+import LineGraph from "../LineGraph";
+import { IndicatorContext } from '../../contexts/IndicatorContext';
 import { useContext, useEffect, useState } from 'react';
-import { VfoodsContext } from "../contexts/VfoodsContext";
-import { colaboratorIndicatorType } from "../types";
+import { VfoodsContext } from "../../contexts/VfoodsContext";
+import { colaboratorIndicatorType } from "../../types";
 
 
 type IndicadorCardGraphProps = {
@@ -55,9 +55,7 @@ export default function IndicadorCardGraph({ indicador }: IndicadorCardGraphProp
                     }
                 }
             }
-            
-            
-            console.log('EIIIIIIIIIIII')
+
             setLiberar(true)
 
         } catch (error) {

@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { Header } from '../componets/Header/Header'
 import { SideBar } from '../componets/SideBar/SideBar'
 import IndicatorModal from '../componets/Indicator/IndicatorModal';
-import IndicadorCardGraph from '../componets/IndicadorCardGraph';
+import IndicadorCardGraph from '../componets/Indicator/IndicadorCardGraph';
 import { VfoodsContext } from '../contexts/VfoodsContext';
 import { IndicatorContext } from '../contexts/IndicatorContext';
 
@@ -46,9 +46,9 @@ export default function Indicators() {
 
                         </button>
 
-                        {allIndicators.map((indicator) => (
+                        {allIndicators.map((indicator, index) => (
                             
-                            <IndicadorCardGraph indicador={indicator}/>
+                            <IndicadorCardGraph indicador={indicator} key={index}/>
                         ))}
 
 
