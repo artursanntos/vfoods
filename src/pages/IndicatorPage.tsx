@@ -6,6 +6,7 @@ import { indicatorType } from "../types";
 import Api from "../Api";
 import IndicadorPageCardGraph from "../componets/Indicator/IndicadorPageCardGraph";
 import IndicadorCardPizza from "../componets/Indicator/IndicadorCardPizza";
+import CollaboratorsTable from "../componets/Indicator/CollaboratorsTable";
 
 
 export default function IndicatorPage2() {
@@ -42,31 +43,41 @@ export default function IndicatorPage2() {
     const mediaGeral = () => {
         return (
             <>
-                {hasGraphData ? 
-                <div className="flex flew-row gap-8">
-                    <IndicadorCardPizza indicador={indicator}/>
-                    <IndicadorPageCardGraph indicador={indicator}/>
+                {hasGraphData ?
+                    <div className="flex flew-row gap-8">
+                        <IndicadorCardPizza indicador={indicator} />
+                        <IndicadorPageCardGraph indicador={indicator} />
 
-                </div>
-                
-                
-                : <div>Carregando...</div>}
+                    </div>
+
+
+                    : <div>Carregando...</div>}
             </>
-            
+
+        )
+    }
+
+    const colaboradores = () => {
+        return (
+            <>
+                {hasGraphData ?
+                    < CollaboratorsTable indicador={indicator} />
+                    : <div>Carregando...</div>}
+            </>
         )
     }
 
     return (
         <>
             <div className='flex h-full'>
-                
-                <SideBar/>
-                
+
+                <SideBar />
+
                 <div className='flex flex-col pt-12 ml-[15rem] gap-16 w-full h-full'>
-                    
+
                     <div className='flex flex-col items-center pb-16'>
 
-                        <Header/>
+                        <Header />
 
                     </div>
 
@@ -74,7 +85,7 @@ export default function IndicatorPage2() {
 
                         <div className=" font-semibold text-2xl">
                             {indicator.nome}
-                            
+
                         </div>
 
                         <div className="flex flex-row gap-8 text-xl">
@@ -93,8 +104,8 @@ export default function IndicatorPage2() {
                         </div>
 
                         <div className='px-8'>
-                                {Page == 0 && mediaGeral()}
-                                {Page == 1 /*&& colaboradores()*/}
+                            {Page == 0 && mediaGeral()}
+                            {Page == 1 && colaboradores()}
                         </div>
 
                     </div>
