@@ -34,7 +34,6 @@ export default function IndicatorModal() {
 
     function create() {  
         createIndicator();
-        setCreateEdit('')
         setIndicatorModalIsOpen(false);
         setOpenModal(false);
         setModalPage(0);
@@ -44,7 +43,6 @@ export default function IndicatorModal() {
         updateIndicator(createEdit)
         setIndicatorModalIsOpen(false);
         setOpenModal(false);
-        setCreateEdit('')
         setModalPage(0);
     }
 
