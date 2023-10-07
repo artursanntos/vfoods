@@ -96,7 +96,7 @@ export default function IndicatorCardInfo({ indicatorInfo }: IndicatorCardInfoPr
         setValorInput(newValue);
     }
 
-    function updateResult() {
+    async function updateResult() {
         const url = 'colaborador-indicador/' + indicatorInfo.id
 
         const headers = {
@@ -104,9 +104,13 @@ export default function IndicatorCardInfo({ indicatorInfo }: IndicatorCardInfoPr
         }
         indicatorInfo.resultado = valorInput
 
-        Api.patch(url, { resultado: valorInput }, { headers }).then(response => {
-            setNotaIndicador(response.data.updatedColaboradorIndicador.notaIndicador)
-        });
+        try {
+            const response = await Api.patch(url, { resultado: valorInput }, { headers });
+            setNotaIndicador(response.data.updatedColaboradorIndicador.notaIndicador);
+        } catch (error) {
+            console.log(error);
+        }
+
         getProgressStyle()
         getIndicatorUnit()
     }
