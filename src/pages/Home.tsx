@@ -35,13 +35,25 @@ export default function Home() {
 
     const teamMessage = () => {
         if (progressValue < 0.5) {
-            return 'Sua equipe está abaixo da média este mês, clique aqui para saber mais.'
+            return 'Menos da metade das metas foram batidas este mês, clique aqui para saber mais.'
         } else if (progressValue < 0.8) {
-            return 'Sua equipe está indo bem este mês, clique aqui para saber mais.'
+            return 'Boa parte das metas foram batidas este mês! Saiba mais clicando aqui.'
         } else if  (progressValue < 1) {
-            return 'Sua equipe está indo muito bem este mês! Saiba mais clicando aqui.'
+            return 'Quase todas as metas foram batidas pela sua equipe este mês! Saiba mais.'
         }
         return 'Parabéns, todas as metas do mês foram batidas! Saiba mais clicando aqui.'
+    }
+
+    const cardTitle = () => {
+        if (progressValue < 0.5) {
+            return 'Atenção!'
+        } else if (progressValue < 0.8) {
+            return 'Bom trabalho!'
+        } else if  (progressValue < 1) {
+            return 'Ótimo trabalho!'
+        } else {
+            return 'Parabéns!'
+        }
     }
 
     const getProgress = async ()  => {
@@ -146,7 +158,7 @@ export default function Home() {
                             <HomePageCardGraph collab={manager}/>
                             <div className='flex flex-col items-center justify-center gap-20'>
                                 <Link to="/collaborators">
-                                    <BlackButton title='Atenção!' helpText={teamMessage()} icon={getProgressCircle()}/>
+                                    <BlackButton title={cardTitle()} helpText={teamMessage()} icon={getProgressCircle()}/>
                                 </Link>
                                 <BlackButton title='Criar um indicador a partir de um template' helpText='Agora ficou mais fácil criar o indicador! Clique aqui para saber mais' icon={getIconElement()} onClickFunc={() => openIndicatorCreation()}/>                        
                             </div>
