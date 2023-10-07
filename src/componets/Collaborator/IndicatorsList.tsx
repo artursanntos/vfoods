@@ -1,10 +1,8 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Api from "../../Api"
 import { colaboratorIndicatorType } from "../../types"
 import IndicatorItem from "./IndicatorItem";
 import IndicatorCardInfo from "./IndicatorCardInfo";
-import ButtonAttResult from "../Atomos/ButtonAttResult";
-
 interface IndicatorListProps {
     id: string | undefined;
 }
@@ -13,6 +11,8 @@ export default function IndicatorsList({ id }: IndicatorListProps) {
 
     const [indicatorList, setIndicatorList] = useState<colaboratorIndicatorType[]>([] as colaboratorIndicatorType[]);
     const [styleIndex, setStyleIndex] = useState<number[]>([] as number[]);
+
+
 
     const handleToggleIndicator = (newIndex: number) => {
         if (styleIndex.includes(newIndex)) {
@@ -59,7 +59,6 @@ export default function IndicatorsList({ id }: IndicatorListProps) {
                         <div className="flex justify-center py-3">
                             <div className={styleIndex.includes(index) ? "duration-300 ease-in-out z-0  flex flex-col items-center gap-3" : "hidden -top-8"}>
                                 <IndicatorCardInfo indicatorInfo={item} />
-                                <ButtonAttResult label="Atualizar resultado" />
                             </div>
                         </div>
                     </div>
