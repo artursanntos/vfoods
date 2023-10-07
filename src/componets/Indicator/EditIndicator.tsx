@@ -68,7 +68,7 @@ export function EditIndicator({ colaborador, colabInd }: EditIndicatorProps) {
                             Vamos editar o indicador:
                         </p>
 
-                        <p className="text-left text-sm font-thin my-0.5 mx-8">
+                        <p className="text-left text-sm font-extralight my-0.5 mx-8">
                             Preencha os dados para criar uma nova atividade para {colaborador.nome.split(' ')[0]}!
                         </p>
 
