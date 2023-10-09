@@ -119,4 +119,16 @@ Para uma experiência melhor, é recomendado rodar o servidor backend. Para isso
 
 ## Screenshots
 
-to do
+| Login                    | Home           |
+|:----------------------------:|:---------------------------------:|
+| ![](/screenshots/login.png)        | ![](/screenshots/home.png)       |
+| Perfil do gestor       | Perfil do colaborador            |
+| ![](/screenshots/gestor.png)   | ![](/screenshots/colaborador.png)      |
+| Colaboradores          | Cadastro de colaborador                   |
+| ![](/screenshots/colaboradores.png)   | ![](/screenshots/cadastro-colaborador.png)     |
+| Indicadores                   | Indicador                   |
+| ![](/screenshots/indicadores.png)     | ![](/screenshots/indicador.png)     |
+| Search bar          | Criação de indicador #1                   |
+| ![](/screenshots/search-bar.png)   | ![](/screenshots/criacao-indicador-1.png)     |
+| Criação de indicador #2          | Criação de indicador #3                   |
+| ![](/screenshots/criacao-indicador-2.png)   | ![](/screenshots/criacao-indicador-3.png)     |
